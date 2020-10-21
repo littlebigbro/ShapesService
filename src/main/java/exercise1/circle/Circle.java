@@ -1,7 +1,6 @@
 package exercise1.circle;
 
 import exercise1.*;
-
 import java.util.List;
 
 public class Circle extends Shape implements IShapeStateFactory {
@@ -23,5 +22,10 @@ public class Circle extends Shape implements IShapeStateFactory {
     @Override
     public IRollable setRoll() {
         return new Roll();
+    }
+
+    @Override
+    protected double calculateArea() {
+        return Math.PI * radius * radius;
     }
 }
