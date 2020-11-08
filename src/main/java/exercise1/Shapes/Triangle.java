@@ -9,6 +9,8 @@ import java.util.List;
 public class Triangle extends Shape {
 
     public Triangle(List<Double> params) {
+        this.name = ShapeTypes.TRIANGLE.toString();
+        this.ruName = ShapeTypes.TRIANGLE.getRuName();
         points = Utils.toPoints(params);
         center = Utils.calculateCenter(points);
         Collections.sort(points, new ClockwiseComparator(center));

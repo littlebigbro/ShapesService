@@ -1,6 +1,6 @@
 package exercise1;
 
-import exercise1.Menu.MainMenu;
+import exercise1.Menu.Menu;
 
 /*
 Задание№1
@@ -19,6 +19,6 @@ import exercise1.Menu.MainMenu;
 **/
 public class Main {
     public static void main(String[] args) {
-        MainMenu.start();
+        Menu.start();
     }
 }

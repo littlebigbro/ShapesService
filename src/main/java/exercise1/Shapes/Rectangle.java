@@ -9,10 +9,11 @@ import java.util.List;
 public class Rectangle extends Shape {
 
     public Rectangle(List<Double> params) {
+        this.name = ShapeTypes.RECTANGLE.toString();
+        this.ruName = ShapeTypes.RECTANGLE.getRuName();
         points = Utils.toPoints(params);
         center = Utils.calculateCenter(points);
         Collections.sort(points, new ClockwiseComparator(center));
-        System.out.println(points);
     }
 
     @Override
@@ -34,7 +35,6 @@ public class Rectangle extends Shape {
             point.setY(center.getY() + (point.getY() - center.getY()) * Math.cos(angle) + (point.getX() - center.getX()) * Math.sin(angle));
 
         }
-//        System.out.println("Прямоугольник крутится лавэха мутится");
     }
 
     @Override

@@ -1,12 +1,17 @@
 package exercise1.Shapes;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Circle extends Shape {
 
     public Circle(List<Double> params) {
+        this.name = ShapeTypes.CIRCLE.toString();
+        this.ruName = ShapeTypes.CIRCLE.getRuName();
         this.center.setX(params.get(0));
         this.center.setY(params.get(1));
+        points = new ArrayList<>();
+        points.add(center);
         this.radius = params.get(2);
     }
 

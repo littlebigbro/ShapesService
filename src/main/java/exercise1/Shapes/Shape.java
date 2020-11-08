@@ -3,24 +3,34 @@ package exercise1.Shapes;
 import exercise1.IActions.IMovable;
 import exercise1.IActions.IRollable;
 import exercise1.IActions.IScalebale;
-import exercise1.Utils.ClockwiseComparator;
 
-import java.util.Collections;
 import java.util.List;
 
 public abstract class Shape implements IMovable, IScalebale, IRollable {
+    protected String name;
+    protected String ruName;
     protected List<Point> points;
     protected Point center = new Point();
     protected double radius = 0;
+
+    public String getName() {
+        return name;
+    }
+
+    public String getRuName() {
+        return ruName;
+    }
+
+    public Point getCenter() {
+        return center;
+    }
 
     public double getRadius() {
         return radius;
     }
 
-    public void getPoints() {
-        for (Point point : points) {
-            System.out.println("X - " + point.getX() + ", Y - " + point.getY());
-        }
+    public List<Point> getPoints() {
+        return points;
     }
 
     public double calculateArea() {

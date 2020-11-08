@@ -5,6 +5,7 @@ import exercise1.Factories.IShapeFactory;
 import exercise1.Factories.RectangleFactory;
 import exercise1.Factories.TriangleFactory;
 import exercise1.Shapes.Shape;
+import exercise1.Shapes.ShapeTypes;
 import exercise1.Utils.FileAction;
 
 import java.io.InputStream;
@@ -38,14 +39,14 @@ public class FigureHandler {
     }
 
     public static IShapeFactory createShapeFactory(String factoryName) {
-        if ("circle".equalsIgnoreCase(factoryName)) {
+        if (ShapeTypes.CIRCLE.toString().equalsIgnoreCase(factoryName)) {
             return new CircleFactory();
-        } else if ("triangle".equalsIgnoreCase(factoryName)) {
+        } else if (ShapeTypes.TRIANGLE.toString().equalsIgnoreCase(factoryName)) {
             return new TriangleFactory();
-        } else if ("rectangle".equalsIgnoreCase(factoryName)) {
+        } else if (ShapeTypes.RECTANGLE.toString().equalsIgnoreCase(factoryName)) {
             return new RectangleFactory();
         } else {
-            throw new RuntimeException(factoryName + " is unknown figure");
+            throw new RuntimeException(factoryName + " неизвестная фигура");
         }
     }
 

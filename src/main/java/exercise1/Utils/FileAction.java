@@ -22,19 +22,16 @@ public class FileAction {
             reader = new BufferedReader(inputStreamReader);
             Stream<String> stream = reader.lines();
             readFile = stream.collect(Collectors.toList());
-        }
-        catch (IOException ioException) {
+        } catch (IOException ioException) {
             ioException.printStackTrace();
             throw ioException;
-        }
-        finally {
+        } finally {
             if (reader != null) {
                 try {
                     reader.close();
                     inputStreamReader.close();
                     fileInputStream.close();
-                }
-                catch (Exception exception) {
+                } catch (Exception exception) {
                     exception.printStackTrace();
                 }
             }
@@ -53,19 +50,16 @@ public class FileAction {
             reader = new BufferedReader(inputStreamReader);
             Stream<String> stream = reader.lines();
             readFile = stream.collect(Collectors.toList());
-        }
-        catch (Exception exception) {
+        } catch (Exception exception) {
             exception.printStackTrace();
             throw exception;
-        }
-        finally {
+        } finally {
             if (reader != null) {
                 try {
                     reader.close();
                     inputStreamReader.close();
                     fileInputStream.close();
-                }
-                catch (Exception exception) {
+                } catch (Exception exception) {
                     exception.printStackTrace();
                 }
             }
@@ -73,23 +67,23 @@ public class FileAction {
         return readFile;
     }
 
-/**
- * Метод генерирует новое имя для файла в формате "fileName(i).format", 
- * если по предоставленному пути filepath есть файл с именем defaultName.
- * */
+    /**
+     * Метод генерирует новое имя для файла в формате "fileName(i).format",
+     * если по предоставленному пути filepath есть файл с именем defaultName.
+     */
     public static String newFileNameGenerator(File filePath, String defaultName) {
         File[] filesList;
         if (filePath == null || filePath.getAbsolutePath().isEmpty()) {
             return "ERROR";
         } else {
-            filesList= filePath.listFiles();
+            filesList = filePath.listFiles();
         }
         if (defaultName == null || defaultName.isEmpty()) {
             defaultName = "default_name.txt";
         }
 
         if (filesList != null && filesList.length != 0) {
-            List <String> fileNames = new ArrayList<>();
+            List<String> fileNames = new ArrayList<>();
             for (File file : filesList) {
                 //обрезает путь до последнего сепаратора, поэтому чтобы он был добавляется "+ 1"
                 fileNames.add(file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf(File.separator) + 1));
@@ -100,7 +94,7 @@ public class FileAction {
                 char dot = '.';
                 String name = defaultName.substring(0, defaultName.indexOf(dot));
                 String format = defaultName.substring(defaultName.indexOf(dot));
-                Pattern nextCreationPattern = Pattern.compile("(" + name + "[(])(\\d)([)]" + format +")");
+                Pattern nextCreationPattern = Pattern.compile("(" + name + "[(])(\\d)([)]" + format + ")");
                 Matcher matcher;
                 int numberOfFile = 1;
                 for (String fileName : fileNames) {
@@ -117,39 +111,29 @@ public class FileAction {
         }
     }
 
-    public static String writeToNewFile(List<String> fileInList, List<Integer> transitionBegin, List<Integer> transitionEnd, File newFileName) throws IOException {
-        String alert = "ERROR";
-        if (fileInList == null || transitionBegin == null ||
-                transitionEnd == null || newFileName == null ||
-                newFileName.getAbsolutePath().isEmpty()) {
-            return alert;
-        }
+    public static String writeToNewFile(List<String> fileInList, File fileName) throws IOException {
+        String alert;
         BufferedWriter writer = null;
         FileOutputStream fileOutputStream = null;
         OutputStreamWriter outputStreamWriter = null;
         try {
-            fileOutputStream = new FileOutputStream(newFileName);
+            fileOutputStream = new FileOutputStream(fileName);
             outputStreamWriter = new OutputStreamWriter(fileOutputStream, StandardCharsets.UTF_8);
             writer = new BufferedWriter(outputStreamWriter);
-            for (int i = 0; i < transitionBegin.size(); i++) {
-                for (int j = transitionBegin.get(i); j <= transitionEnd.get(i); j++){
-                    writer.write(fileInList.get(j) + "\n");
-                }
+            for (int i = 0; i < fileInList.size(); i++) {
+                writer.write(fileInList.get(i) + "\n");
             }
             alert = "SUCCESS";
-        }
-        catch (IOException ioException) {
+        } catch (IOException ioException) {
             ioException.printStackTrace();
             throw ioException;
-        }
-        finally {
+        } finally {
             if (writer != null) {
                 try {
                     writer.close();
                     outputStreamWriter.close();
                     fileOutputStream.close();
-                }
-                catch (Exception exception) {
+                } catch (Exception exception) {
                     exception.printStackTrace();
                 }
             }
