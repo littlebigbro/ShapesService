@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface IShapeFactory {
     Shape createFigure(List<Double> params);
+
+    Shape createFigure(int id, List<Double> params);
 }

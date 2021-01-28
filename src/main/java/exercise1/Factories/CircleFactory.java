@@ -11,4 +11,9 @@ public class CircleFactory implements IShapeFactory {
     public Shape createFigure(List<Double> params) {
         return new Circle(params);
     }
+
+    @Override
+    public Shape createFigure(int id, List<Double> params) {
+        return new Circle(id, params);
+    }
 }

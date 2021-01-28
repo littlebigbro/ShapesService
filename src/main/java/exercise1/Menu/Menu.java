@@ -1,5 +1,6 @@
 package exercise1.Menu;
 
+import exercise1.DBLayer.MongoDB;
 import exercise1.FigureHandler;
 import exercise1.Shapes.*;
 import exercise1.Utils.FileAction;
@@ -16,6 +17,13 @@ public class Menu {
     private static Scanner in;
     private static boolean isShown;
     public static void start() {
+//        Разбить меню на контроллер и вью
+
+//        System.out.println("Введите пароль для базы данных:");
+//        in = new Scanner(System.in);
+//        String pass = in.nextLine();
+//        MongoDB db = new MongoDB(pass);
+//        db.establishDefaultConnection();
         fh = new FigureHandler();
         fh.handle("/test.txt");
         if (fh != null && !fh.getFigureList().isEmpty()) {

@@ -9,6 +9,16 @@ import java.util.List;
 public class Triangle extends Shape {
 
     public Triangle(List<Double> params) {
+        super(params);
+        init();
+    }
+
+    public Triangle(int id, List<Double> params) {
+        super(id, params);
+        init();
+    }
+
+    private void init() {
         this.name = ShapeTypes.TRIANGLE.toString();
         this.ruName = ShapeTypes.TRIANGLE.getRuName();
         points = Utils.toPoints(params);

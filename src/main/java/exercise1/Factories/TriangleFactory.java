@@ -10,4 +10,9 @@ public class TriangleFactory implements IShapeFactory{
     public Shape createFigure(List<Double> params) {
         return new Triangle(params);
     }
+
+    @Override
+    public Shape createFigure(int id, List<Double> params) {
+        return new Triangle(id, params);
+    }
 }

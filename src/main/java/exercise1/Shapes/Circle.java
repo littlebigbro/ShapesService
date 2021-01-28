@@ -6,6 +6,16 @@ import java.util.List;
 public class Circle extends Shape {
 
     public Circle(List<Double> params) {
+        super(params);
+        init();
+    }
+
+    public Circle(int id, List<Double> params) {
+        super(id, params);
+        init();
+    }
+
+    private void init() {
         this.name = ShapeTypes.CIRCLE.toString();
         this.ruName = ShapeTypes.CIRCLE.getRuName();
         this.center.setX(params.get(0));

@@ -53,4 +53,8 @@ public class FigureHandler {
     public List<Shape> getFigureList() {
         return figureList;
     }
+
+    public void setFigureList(List<Shape> figureList) {
+        this.figureList = figureList;
+    }
 }

@@ -9,6 +9,16 @@ import java.util.List;
 public class Rectangle extends Shape {
 
     public Rectangle(List<Double> params) {
+        super(params);
+        init();
+    }
+
+    public Rectangle(int id, List<Double> params) {
+        super(id,params);
+        init();
+    }
+
+    private void init() {
         this.name = ShapeTypes.RECTANGLE.toString();
         this.ruName = ShapeTypes.RECTANGLE.getRuName();
         points = Utils.toPoints(params);

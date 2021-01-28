@@ -10,4 +10,9 @@ public class RectangleFactory implements IShapeFactory{
     public Shape createFigure(List<Double> params) {
         return new Rectangle(params);
     }
+
+    @Override
+    public Shape createFigure(int id, List<Double> params) {
+        return new Rectangle(id, params);
+    }
 }

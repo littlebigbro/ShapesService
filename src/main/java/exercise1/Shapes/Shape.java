@@ -10,8 +10,38 @@ public abstract class Shape implements IMovable, IScalebale, IRollable {
     protected String name;
     protected String ruName;
     protected List<Point> points;
+    protected List<Double> params;
     protected Point center = new Point();
     protected double radius = 0;
+    protected int id;
+
+    protected Shape() { }
+
+    protected Shape(List<Double> params) {
+        this.params = params;
+    }
+
+    protected Shape(int id, List<Double> params) {
+        this.id = id;
+        this.params = params;
+    }
+
+    public double calculateArea() {
+        //Формула площади Гаусса
+        double a = 0;
+        double b = points.get(points.size() - 1).getX() * points.get(0).getY();
+        double c = 0;
+        double d = points.get(0).getX() * points.get(points.size() - 1).getY();
+
+        for (int i = 0; i < points.size() - 1; i++) {
+            a += (points.get(i).getX() * points.get(i + 1).getY());
+        }
+
+        for (int i = 0; i < points.size() - 1; i++) {
+            c += (points.get(i + 1).getX() * points.get(i).getY());
+        }
+        return Math.abs((a + b - c - d) / 2);
+    }
 
     public String getName() {
         return name;
@@ -33,21 +63,11 @@ public abstract class Shape implements IMovable, IScalebale, IRollable {
         return points;
     }
 
-    public double calculateArea() {
-        //Формула площади Гаусса
-        double a = 0;
-        double b = points.get(points.size() - 1).getX() * points.get(0).getY();
-        double c = 0;
-        double d = points.get(0).getX() * points.get(points.size() - 1).getY();
-
-        for (int i = 0; i < points.size() - 1; i++) {
-            a += (points.get(i).getX() * points.get(i + 1).getY());
-        }
-
-        for (int i = 0; i < points.size() - 1; i++) {
-            c += (points.get(i + 1).getX() * points.get(i).getY());
-        }
-        return Math.abs((a + b - c - d) / 2);
+    public int getId() {
+        return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
 }
