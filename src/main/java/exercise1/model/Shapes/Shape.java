@@ -5,7 +5,7 @@ import exercise1.model.IActions.IRollable;
 import exercise1.model.IActions.IScalebale;
 
 import java.util.List;
-//TODO: Добавить генерацию ID;
+
 public abstract class Shape implements IMovable, IScalebale, IRollable {
     protected String name;
     protected String ruName;
