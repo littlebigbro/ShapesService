@@ -1,4 +1,4 @@
-package exercise1.model.DBLayer;
+package exercise1.Model.DBLayer;
 
 import com.mongodb.*;
 import com.mongodb.client.MongoCollection;

@@ -1,10 +1,10 @@
-package exercise1.model.DBLayer;
+package exercise1.Model.DBLayer;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import exercise1.IMVC.IModel;
-import exercise1.model.Shapes.Circle;
-import exercise1.model.Shapes.Shape;
+import exercise1.Model.Shapes.Circle;
+import exercise1.Model.Shapes.Shape;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 
@@ -31,6 +31,7 @@ public class MongoDBRepository implements IModel {
         db = new MongoDB(password);
         passwordIsCorrect = db.checkConnection();
     }
+
     public void insert(Shape shape) {
         Document document = Converter.ShapeToDocument(shape);
         db.establishDefaultConnection();
@@ -86,7 +87,7 @@ public class MongoDBRepository implements IModel {
         return shapesList;
     }
 
-    public void updateId (int id, Shape shape) {
+    public void updateId(int id, Shape shape) {
         int oldId = shape.getId();
         shape.setId(id);
         Document document = Converter.ShapeToDocument(shape);
@@ -138,6 +139,6 @@ public class MongoDBRepository implements IModel {
 
     public Shape createShape(String shapeName, List<Double> params) {
         int id = documentCount();
-        return Converter.createShapeFactory(shapeName).createFigure(++id , params);
+        return Converter.createShapeFactory(shapeName).createFigure(++id, params);
     }
 }

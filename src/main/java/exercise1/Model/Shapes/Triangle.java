@@ -1,24 +1,24 @@
-package exercise1.model.Shapes;
+package exercise1.Model.Shapes;
 
-import exercise1.model.Utils.ClockwiseComparator;
-import exercise1.model.Utils.Utils;
+import exercise1.Model.Utils.ClockwiseComparator;
+import exercise1.Model.Utils.Utils;
 import java.util.List;
 
-public class Rectangle extends Shape {
+public class Triangle extends Shape {
 
-    public Rectangle(List<Double> params) {
+    public Triangle(List<Double> params) {
         super(params);
         init();
     }
 
-    public Rectangle(int id, List<Double> params) {
-        super(id,params);
+    public Triangle(int id, List<Double> params) {
+        super(id, params);
         init();
     }
 
     private void init() {
-        this.name = ShapeTypes.RECTANGLE.toString();
-        this.ruName = ShapeTypes.RECTANGLE.getRuName();
+        this.name = ShapeTypes.TRIANGLE.toString();
+        this.ruName = ShapeTypes.TRIANGLE.getRuName();
         points = Utils.toPoints(params);
         center = Utils.calculateCenter(points);
         points.sort(new ClockwiseComparator(center));
@@ -38,6 +38,9 @@ public class Rectangle extends Shape {
 
     @Override
     public void roll(double angle) {
+//        X = x0 + (x - x0) * cos(a) - (y - y0) * sin(a);
+//        Y = y0 + (y - y0) * cos(a) + (x - x0) * sin(a);
+//          где, (x0, y0) — центр, точка вокруг которой нужно вращать
         for (Point point : points) {
             point.setX(center.getX() + (point.getX() - center.getX()) * Math.cos(angle) - (point.getY() - center.getY()) * Math.sin(angle));
             point.setY(center.getY() + (point.getY() - center.getY()) * Math.cos(angle) + (point.getX() - center.getX()) * Math.sin(angle));

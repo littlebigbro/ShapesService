@@ -1,4 +1,4 @@
-package exercise1.model.Shapes;
+package exercise1.Model.Shapes;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -2,9 +2,9 @@ package exercise1;
 
 import exercise1.IMVC.IController;
 import exercise1.Controllers.DBController;
-import exercise1.model.DBLayer.MongoDBRepository;
+import exercise1.Model.DBLayer.MongoDBRepository;
 import exercise1.IMVC.IModel;
-import exercise1.View.ConsoleIView;
+import exercise1.View.ConsoleView;
 import exercise1.IMVC.IView;
 
 /*
@@ -26,7 +26,7 @@ public class Main {
     public static void main(String[] args) {
         IModel model = new MongoDBRepository();
         IController controller = new DBController(model);
-        IView view = new ConsoleIView(controller);
+        IView view = new ConsoleView(controller);
         view.init();
 //        Menu.start();
     }

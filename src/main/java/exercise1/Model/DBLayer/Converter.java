@@ -1,15 +1,15 @@
-package exercise1.model.DBLayer;
+package exercise1.Model.DBLayer;
 
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
-import exercise1.model.Factories.CircleFactory;
-import exercise1.model.Factories.IShapeFactory;
-import exercise1.model.Factories.RectangleFactory;
-import exercise1.model.Factories.TriangleFactory;
-import exercise1.model.Shapes.Point;
-import exercise1.model.Shapes.Shape;
-import exercise1.model.Shapes.ShapeTypes;
+import exercise1.Model.Factories.CircleFactory;
+import exercise1.Model.Factories.IShapeFactory;
+import exercise1.Model.Factories.RectangleFactory;
+import exercise1.Model.Factories.TriangleFactory;
+import exercise1.Model.Shapes.Point;
+import exercise1.Model.Shapes.Shape;
+import exercise1.Model.Shapes.ShapeTypes;
 import org.bson.Document;
 
 import java.util.ArrayList;

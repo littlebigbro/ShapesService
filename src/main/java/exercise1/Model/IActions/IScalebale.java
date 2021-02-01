@@ -1,4 +1,4 @@
-package exercise1.model.IActions;
+package exercise1.Model.IActions;
 
 public interface IScalebale {
     default void changeSize(double scaleFactor) {

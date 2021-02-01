@@ -1,6 +1,6 @@
-package exercise1.model.Factories;
+package exercise1.Model.Factories;
 
-import exercise1.model.Shapes.Shape;
+import exercise1.Model.Shapes.Shape;
 
 import java.util.List;
 

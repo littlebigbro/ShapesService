@@ -1,8 +1,8 @@
-package exercise1.model.Shapes;
+package exercise1.Model.Shapes;
 
-import exercise1.model.IActions.IMovable;
-import exercise1.model.IActions.IRollable;
-import exercise1.model.IActions.IScalebale;
+import exercise1.Model.IActions.IMovable;
+import exercise1.Model.IActions.IRollable;
+import exercise1.Model.IActions.IScalebale;
 
 import java.util.List;
 
