@@ -1,4 +1,4 @@
-package exercise1.Shapes;
+package exercise1.Model.Shapes;
 
 public enum ShapeTypes {
 

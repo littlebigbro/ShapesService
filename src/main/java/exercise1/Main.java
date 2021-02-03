@@ -1,6 +1,11 @@
 package exercise1;
 
-import exercise1.Menu.Menu;
+import exercise1.IMVC.IController;
+import exercise1.Controllers.DBController;
+import exercise1.Model.DBLayer.MongoDBRepository;
+import exercise1.IMVC.IModel;
+import exercise1.View.ConsoleView;
+import exercise1.IMVC.IView;
 
 /*
 Задание№1
@@ -19,6 +24,10 @@ import exercise1.Menu.Menu;
 **/
 public class Main {
     public static void main(String[] args) {
-        Menu.start();
+        IModel model = new MongoDBRepository();
+        IController controller = new DBController(model);
+        IView view = new ConsoleView(controller);
+        view.init();
+//        Menu.start();
     }
 }

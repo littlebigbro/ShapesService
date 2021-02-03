@@ -1,4 +1,4 @@
-package exercise1.Utils;
+package exercise1.Model.Utils;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;

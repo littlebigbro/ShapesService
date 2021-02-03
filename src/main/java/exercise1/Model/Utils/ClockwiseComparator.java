@@ -1,6 +1,6 @@
-package exercise1.Utils;
+package exercise1.Model.Utils;
 
-import exercise1.Shapes.Point;
+import exercise1.Model.Shapes.Point;
 
 import java.util.Comparator;
 
