@@ -65,9 +65,9 @@ public class ConsoleView implements IView {
                             System.out.println(numRow + ") " + "Id = " + figure.getId() + ", " + figure.getRuName() + " " + Utils.getPointsAsString(figure.getPoints()));
                         }
                         System.out.println("");
-                        String test = Converter.shapesToJSON(shapes);
-                        System.out.println(test);
-                        Converter.JSONtoShapes(test);
+//                        String test = Converter.shapesToJSON(shapes);
+//                        System.out.println(test);
+//                        Converter.JSONtoShapes(test);
                         break;
                     }
                     case 2: {
@@ -154,7 +154,6 @@ public class ConsoleView implements IView {
                     params = addParams(1);
                     System.out.print("Укажите радиус круга - ");
                     params.add(in.nextDouble());
-                    ;
                     break;
                 }
                 case 3: {

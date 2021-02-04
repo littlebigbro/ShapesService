@@ -16,6 +16,7 @@ import org.bson.Document;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Converter {
@@ -70,52 +71,32 @@ public class Converter {
     public static String shapesToJSON(List<Shape> shapes) {
         StringWriter writer = new StringWriter();
         ObjectMapper mapper = new ObjectMapper();
-        for (Shape shape : shapes) {
+        writer.append("[");
+        for (int i = 0; i < shapes.size(); i++) {
             try {
-                mapper.writeValue(writer, shape);
+                mapper.writeValue(writer, shapes.get(i));
+                if (i + 1 < shapes.size()) {
+                    writer.append(", ");
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        String result = writer.toString();
-        return result;
+        writer.append("]");
+        return writer.toString();
     }
 
     public static List<Shape> JSONtoShapes(String JSONvalues) {
         List<Shape> shapes = new ArrayList<>();
         ObjectMapper mapper = new ObjectMapper();
-        List<String> JSONList = JSONvaluesToList(JSONvalues);
         try {
-            for (String json : JSONList) {
-                shapes.add(mapper.readValue(json, Shape.class));
-            }
+            shapes = Arrays.asList(mapper.readValue(JSONvalues, Shape[].class));
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        for (Shape shape : shapes) {
-            System.out.println(shape.toString());
-        }
+//        for (Shape shape : shapes) {
+//            System.out.println(shape.toString());
+//        }
         return shapes;
-    }
-
-    private static List<String> JSONvaluesToList(String JSONvalues) {
-        List<String> JSONList = new ArrayList<>();
-        String regEx = "}\\{";
-        String[] sub = JSONvalues.split(regEx);
-        for (int i = 0; i < sub.length; i++) {
-            StringBuilder builder = new StringBuilder();
-            if (!sub[i].startsWith("{")) {
-                builder.append("{");
-                if (sub[i].endsWith("}")) {
-                    builder.append(sub[i]);
-                }
-            }
-            if (!sub[i].endsWith("}")) {
-                builder.append(sub[i]).append("}");
-            }
-            JSONList.add(i, builder.toString());
-        }
-        return JSONList;
     }
 }
