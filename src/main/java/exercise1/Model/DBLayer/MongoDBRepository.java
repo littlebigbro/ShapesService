@@ -3,6 +3,7 @@ package exercise1.Model.DBLayer;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import exercise1.IMVC.IModel;
+import exercise1.Model.Utils.Converter;
 import exercise1.Model.Shapes.Circle;
 import exercise1.Model.Shapes.Shape;
 import org.bson.Document;

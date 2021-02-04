@@ -1,11 +1,21 @@
 package exercise1.Model.Shapes;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import exercise1.Model.IActions.IMovable;
 import exercise1.Model.IActions.IRollable;
 import exercise1.Model.IActions.IScalebale;
 
 import java.util.List;
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = Triangle.class, name = "Triangle"),
+        @JsonSubTypes.Type(value = Circle.class, name = "Circle"),
+        @JsonSubTypes.Type(value = Rectangle.class, name = "Rectangle"),
+})
 
+@JsonAutoDetect
 public abstract class Shape implements IMovable, IScalebale, IRollable {
     protected String name;
     protected String ruName;
@@ -75,5 +85,17 @@ public abstract class Shape implements IMovable, IScalebale, IRollable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getRuName()).append(" c id = ").append(getId()).append(", и точками: ");
+        for (int i = 0; i < points.size(); i++) {
+            sb.append("x = ").append(points.get(i).getX()).append(", y = ").append(points.get(i).getY());
+            if (i + 1 != points.size()){
+                sb.append(";");
+            }
+        }
+        return sb.toString();
     }
 }

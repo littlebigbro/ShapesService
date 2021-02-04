@@ -5,6 +5,9 @@ import java.util.List;
 
 public class Circle extends Shape {
 
+    public Circle() {
+    }
+
     public Circle(List<Double> params) {
         super(params);
         init();
@@ -42,5 +45,6 @@ public class Circle extends Shape {
     }
 
     @Override
-    public void roll(double angle) { }
+    public void roll(double angle) {
+    }
 }

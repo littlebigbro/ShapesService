@@ -1,5 +1,6 @@
-package exercise1.Model.DBLayer;
+package exercise1.Model.Utils;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
@@ -12,6 +13,8 @@ import exercise1.Model.Shapes.Shape;
 import exercise1.Model.Shapes.ShapeTypes;
 import org.bson.Document;
 
+import java.io.IOException;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +28,7 @@ public class Converter {
             dbObject.put("radius", shape.getRadius());
         }
         BasicDBList pointsList = new BasicDBList();
-        for(Point point : shape.getPoints()) {
+        for (Point point : shape.getPoints()) {
             DBObject dbPoint = new BasicDBObject();
             dbPoint.put("x", point.getX());
             dbPoint.put("y", point.getY());
@@ -46,7 +49,7 @@ public class Converter {
             shapeParams.add(pointDBObject.getDouble("x"));
             shapeParams.add(pointDBObject.getDouble("y"));
         }
-        if (shapeType.equalsIgnoreCase(ShapeTypes.CIRCLE.toString())){
+        if (shapeType.equalsIgnoreCase(ShapeTypes.CIRCLE.toString())) {
             shapeParams.add(shapeDBObject.getDouble("radius"));
         }
         return createShapeFactory(shapeType).createFigure(shapeId, shapeParams);
@@ -62,5 +65,57 @@ public class Converter {
         } else {
             throw new RuntimeException(factoryName + " неизвестная фигура");
         }
+    }
+
+    public static String shapesToJSON(List<Shape> shapes) {
+        StringWriter writer = new StringWriter();
+        ObjectMapper mapper = new ObjectMapper();
+        for (Shape shape : shapes) {
+            try {
+                mapper.writeValue(writer, shape);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        String result = writer.toString();
+        return result;
+    }
+
+    public static List<Shape> JSONtoShapes(String JSONvalues) {
+        List<Shape> shapes = new ArrayList<>();
+        ObjectMapper mapper = new ObjectMapper();
+        List<String> JSONList = JSONvaluesToList(JSONvalues);
+        try {
+            for (String json : JSONList) {
+                shapes.add(mapper.readValue(json, Shape.class));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        for (Shape shape : shapes) {
+            System.out.println(shape.toString());
+        }
+        return shapes;
+    }
+
+    private static List<String> JSONvaluesToList(String JSONvalues) {
+        List<String> JSONList = new ArrayList<>();
+        String regEx = "}\\{";
+        String[] sub = JSONvalues.split(regEx);
+        for (int i = 0; i < sub.length; i++) {
+            StringBuilder builder = new StringBuilder();
+            if (!sub[i].startsWith("{")) {
+                builder.append("{");
+                if (sub[i].endsWith("}")) {
+                    builder.append(sub[i]);
+                }
+            }
+            if (!sub[i].endsWith("}")) {
+                builder.append(sub[i]).append("}");
+            }
+            JSONList.add(i, builder.toString());
+        }
+        return JSONList;
     }
 }

@@ -28,6 +28,5 @@ public class Main {
         IController controller = new DBController(model);
         IView view = new ConsoleView(controller);
         view.init();
-//        Menu.start();
     }
 }

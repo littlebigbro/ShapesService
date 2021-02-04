@@ -2,9 +2,13 @@ package exercise1.Model.Shapes;
 
 import exercise1.Model.Utils.ClockwiseComparator;
 import exercise1.Model.Utils.Utils;
+
 import java.util.List;
 
 public class Rectangle extends Shape {
+
+    public Rectangle() {
+    }
 
     public Rectangle(List<Double> params) {
         super(params);
@@ -12,7 +16,7 @@ public class Rectangle extends Shape {
     }
 
     public Rectangle(int id, List<Double> params) {
-        super(id,params);
+        super(id, params);
         init();
     }
 

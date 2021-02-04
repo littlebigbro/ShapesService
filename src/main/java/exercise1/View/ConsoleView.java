@@ -5,6 +5,7 @@ import exercise1.IMVC.IController;
 import exercise1.IMVC.IView;
 import exercise1.Model.Shapes.Shape;
 import exercise1.Model.Shapes.ShapeTypes;
+import exercise1.Model.Utils.Converter;
 import exercise1.Model.Utils.Utils;
 
 import java.io.File;
@@ -57,12 +58,16 @@ public class ConsoleView implements IView {
                 int menuNumber = Integer.parseInt(userChoice);
                 switch (menuNumber) {
                     case 1: {
+                        List<Shape> shapes = controller.getFigureList();
                         int numRow = 0;
-                        for (Shape figure : controller.getFigureList()) {
+                        for (Shape figure : shapes) {
                             numRow++;
                             System.out.println(numRow + ") " + "Id = " + figure.getId() + ", " + figure.getRuName() + " " + Utils.getPointsAsString(figure.getPoints()));
                         }
                         System.out.println("");
+                        String test = Converter.shapesToJSON(shapes);
+                        System.out.println(test);
+                        Converter.JSONtoShapes(test);
                         break;
                     }
                     case 2: {
@@ -115,9 +120,6 @@ public class ConsoleView implements IView {
                 isShown = false;
                 subMenu = new ConsoleSubMenu(controller, shapes.get(0));
                 subMenu.init();
-//                while (subMenu.isActive()) {
-//
-//                }
                 isShown = true;
             } else {
                 System.out.println("Некорректный ввод");
