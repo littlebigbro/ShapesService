@@ -1,11 +1,9 @@
 package exercise1;
 
-import exercise1.IMVC.IController;
-import exercise1.Controllers.DBController;
-import exercise1.Model.DBLayer.MongoDBRepository;
-import exercise1.IMVC.IModel;
-import exercise1.View.ConsoleView;
-import exercise1.IMVC.IView;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 
 /*
 Задание№1
@@ -22,11 +20,10 @@ import exercise1.IMVC.IView;
 По Вашему усмотрению программа может быть с выводом графическим ( консоль, графическое приложение, веб-проект), либо без (таким образом на вход файл - результат тоже файл)
 
 **/
+@SpringBootApplication
+@EnableAutoConfiguration(exclude={MongoAutoConfiguration.class})
 public class Main {
     public static void main(String[] args) {
-        IModel model = new MongoDBRepository();
-        IController controller = new DBController(model);
-        IView view = new ConsoleView(controller);
-        view.init();
+        SpringApplication.run(Main.class, args);
     }
 }

@@ -23,17 +23,81 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="55684e01-777e-45ea-b8d7-d7bc6936f6a9" name="Ex1.D7. Сделал конвертер в/из JSON" comment="Ex1.D7. Сделал конвертер в/из JSON">
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__ch_qos_logback_logback_classic_1_2_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__ch_qos_logback_logback_core_1_2_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jdk8_2_11_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jsr310_2_11_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_module_jackson_module_parameter_names_2_11_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_jayway_jsonpath_json_path_2_4_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__jakarta_annotation_jakarta_annotation_api_1_3_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_minidev_accessors_smart_1_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_minidev_json_smart_2_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_logging_log4j_log4j_api_2_13_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_logging_log4j_log4j_to_slf4j_2_13_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_core_9_0_39.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_websocket_9_0_39.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_atteo_evo_inflector_1_2_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_glassfish_jakarta_el_3_0_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_ow2_asm_asm_5_0_4.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_jul_to_slf4j_1_7_30.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_30.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_2_4_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_autoconfigure_2_4_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_2_4_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_data_rest_2_4_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_json_2_4_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_logging_2_4_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_tomcat_2_4_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_web_2_4_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_commons_2_4_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_rest_core_3_4_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_rest_webmvc_3_4_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_hateoas_spring_hateoas_1_2_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_plugin_spring_plugin_core_2_0_0_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_aop_5_3_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_beans_5_3_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_context_5_3_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_core_5_3_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_expression_5_3_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_jcl_5_3_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_tx_5_3_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_web_5_3_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_webmvc_5_3_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_yaml_snakeyaml_1_27.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/exercise1/model/DBLayer/MongoDBRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_11_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_11_3.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_11_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_11_3.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/homework.iml" beforeDir="false" afterPath="$PROJECT_DIR$/homework.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/exercise1/Controllers/DBController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/exercise1/Controllers/ZKController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exercise1/controller/ZKController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/exercise1/IMVC/IController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exercise1/IMVC/IController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/exercise1/IMVC/IModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exercise1/IMVC/IModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/exercise1/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exercise1/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/exercise1/Model/DBLayer/Converter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exercise1/Model/Utils/Converter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/exercise1/Model/DBLayer/MongoDBRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exercise1/Model/DBLayer/MongoDBRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/exercise1/Model/Shapes/Circle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exercise1/Model/Shapes/Circle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/exercise1/Model/Shapes/Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exercise1/Model/Shapes/Point.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/exercise1/Model/Shapes/Rectangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exercise1/Model/Shapes/Rectangle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/exercise1/Model/Shapes/Shape.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exercise1/Model/Shapes/Shape.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/exercise1/Model/Shapes/Triangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exercise1/Model/Shapes/Triangle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/exercise1/View/ConsoleView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exercise1/View/ConsoleView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/exercise1/Model/DBLayer/MongoDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exercise1/model/DBLayer/MongoDB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/exercise1/Model/DBLayer/MongoDBRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/exercise1/Model/Factories/CircleFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exercise1/model/Factories/CircleFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/exercise1/Model/Factories/IShapeFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exercise1/model/Factories/IShapeFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/exercise1/Model/Factories/RectangleFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exercise1/model/Factories/RectangleFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/exercise1/Model/Factories/TriangleFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exercise1/model/Factories/TriangleFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/exercise1/Model/IActions/IMovable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exercise1/model/IActions/IMovable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/exercise1/Model/IActions/IRollable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exercise1/model/IActions/IRollable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/exercise1/Model/IActions/IScalebale.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exercise1/model/IActions/IScalebale.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/exercise1/Model/Shapes/Circle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exercise1/model/Shapes/Circle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/exercise1/Model/Shapes/Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exercise1/model/Shapes/Point.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/exercise1/Model/Shapes/Rectangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exercise1/model/Shapes/Rectangle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/exercise1/Model/Shapes/Shape.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exercise1/model/Shapes/Shape.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/exercise1/Model/Shapes/ShapeTypes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exercise1/model/Shapes/ShapeTypes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/exercise1/Model/Shapes/Triangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exercise1/model/Shapes/Triangle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/exercise1/Model/Utils/ClockwiseComparator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exercise1/model/Utils/ClockwiseComparator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/exercise1/Model/Utils/Converter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exercise1/model/Utils/Converter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/exercise1/Model/Utils/FileAction.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/exercise1/Model/Utils/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exercise1/model/Utils/Utils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/exercise1/View/ConsoleSubMenu.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/exercise1/View/ConsoleView.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,7 +157,7 @@
       <module name="homework" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="exercise1.Model.Shapes.*" />
+          <option name="PATTERN" value="exercise1.model.Shapes.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -202,25 +266,25 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="440" y="94" key="#Project_Structure/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1604492256558" />
-    <state x="765" y="226" key="#com.intellij.ide.util.MemberChooser" timestamp="1612130537358">
+    <state x="765" y="226" key="#com.intellij.ide.util.MemberChooser" timestamp="1612648532696">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="765" y="226" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1604844220115" />
-    <state x="765" y="226" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1612130537358" />
-    <state x="474" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1612123602517">
+    <state x="765" y="226" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1612648532696" />
+    <state x="474" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1612727637347">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="794" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1604848130788" />
-    <state x="474" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1612123602517" />
-    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1603834774883">
+    <state x="474" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1612727637347" />
+    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1612694956201">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1603834774883" />
-    <state x="490" y="428" width="834" height="594" key="#xdebugger.evaluate" timestamp="1612395545633">
+    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1612694956201" />
+    <state x="671" y="406" width="834" height="594" key="#xdebugger.evaluate" timestamp="1612730613349">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="1076" y="449" width="490" height="591" key="#xdebugger.evaluate/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1604778069429" />
-    <state x="490" y="428" width="834" height="594" key="#xdebugger.evaluate/0.0.1920.1040@0.0.1920.1040" timestamp="1612395545633" />
+    <state x="671" y="406" width="834" height="594" key="#xdebugger.evaluate/0.0.1920.1040@0.0.1920.1040" timestamp="1612730613349" />
     <state x="707" y="364" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1604833756213">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -234,46 +298,46 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="92" y="92" width="1736" height="856" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1612396895319" />
-    <state width="1877" height="358" key="GridCell.Tab.0.bottom" timestamp="1612396761751">
+    <state width="1877" height="141" key="GridCell.Tab.0.bottom" timestamp="1612732341155">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="210" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1604848816866" />
-    <state width="1877" height="358" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1612396761751" />
-    <state width="1877" height="358" key="GridCell.Tab.0.center" timestamp="1612396761751">
+    <state width="1877" height="141" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1612732341155" />
+    <state width="1877" height="141" key="GridCell.Tab.0.center" timestamp="1612732341155">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="210" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1604848816866" />
-    <state width="1877" height="358" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1612396761751" />
-    <state width="1877" height="358" key="GridCell.Tab.0.left" timestamp="1612396761751">
+    <state width="1877" height="141" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1612732341155" />
+    <state width="1877" height="141" key="GridCell.Tab.0.left" timestamp="1612732341155">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="210" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1604848816865" />
-    <state width="1877" height="358" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1612396761751" />
-    <state width="1877" height="358" key="GridCell.Tab.0.right" timestamp="1612396761751">
+    <state width="1877" height="141" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1612732341155" />
+    <state width="1877" height="141" key="GridCell.Tab.0.right" timestamp="1612732341155">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="210" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1604848816866" />
-    <state width="1877" height="358" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1612396761751" />
-    <state width="1877" height="344" key="GridCell.Tab.1.bottom" timestamp="1612395824226">
+    <state width="1877" height="141" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1612732341155" />
+    <state width="1877" height="243" key="GridCell.Tab.1.bottom" timestamp="1612732277825">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1604847500017" />
-    <state width="1877" height="344" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1612395824226" />
-    <state width="1877" height="344" key="GridCell.Tab.1.center" timestamp="1612395824226">
+    <state width="1877" height="243" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1612732277825" />
+    <state width="1877" height="243" key="GridCell.Tab.1.center" timestamp="1612732277825">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="348" key="GridCell.Tab.1.center/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1604847500017" />
-    <state width="1877" height="344" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1612395824226" />
-    <state width="1877" height="344" key="GridCell.Tab.1.left" timestamp="1612395824226">
+    <state width="1877" height="243" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1612732277825" />
+    <state width="1877" height="243" key="GridCell.Tab.1.left" timestamp="1612732277825">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="348" key="GridCell.Tab.1.left/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1604847500016" />
-    <state width="1877" height="344" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1612395824226" />
-    <state width="1877" height="344" key="GridCell.Tab.1.right" timestamp="1612395824226">
+    <state width="1877" height="243" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1612732277825" />
+    <state width="1877" height="243" key="GridCell.Tab.1.right" timestamp="1612732277825">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="348" key="GridCell.Tab.1.right/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1604847500017" />
-    <state width="1877" height="344" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1612395824226" />
+    <state width="1877" height="243" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1612732277825" />
     <state x="490" y="175" key="Maven.ArtifactSearchDialog" timestamp="1612389892206">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -301,15 +365,19 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="777" y="209" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1611690944244" />
-    <state x="777" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1612384519162">
+    <state x="777" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1612642398855">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="777" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1612384519162" />
-    <state x="496" y="256" width="928" height="629" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1612217161265">
+    <state x="777" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1612642398855" />
+    <state x="496" y="256" width="928" height="629" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1612730957549">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="496" y="256" width="928" height="629" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1604777924913" />
-    <state x="496" y="256" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1920.1040@0.0.1920.1040" timestamp="1612217161265" />
+    <state x="496" y="256" width="928" height="629" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1920.1040@0.0.1920.1040" timestamp="1612730957549" />
+    <state x="0" y="0" width="1549" height="858" key="dock-window-1" timestamp="1612694835182">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="0" y="0" width="1549" height="858" key="dock-window-1/0.0.1920.1040@0.0.1920.1040" timestamp="1612694835182" />
     <state x="667" y="119" width="585" height="801" key="find.popup" timestamp="1604790139768">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -322,10 +390,6 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="774" y="414" key="git4idea.ui.GitResetDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1612134805909" />
-    <state x="736" y="278" key="refactoring.ChangeSignatureDialog" timestamp="1603835618806">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="736" y="278" key="refactoring.ChangeSignatureDialog/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1603835618806" />
     <state x="616" y="240" key="run.anything.popup" timestamp="1604358820714">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -338,11 +402,20 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <breakpoint enabled="true" type="java-exception">
+        <breakpoint type="java-exception">
           <properties class="java.util.NoSuchElementException" package="java.util" />
           <option name="timeStamp" value="2" />
         </breakpoint>
+        <breakpoint type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="6" />
+        </breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="shape" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>
