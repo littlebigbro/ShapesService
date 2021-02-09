@@ -1,5 +1,7 @@
 package exercise1.model.Shapes;
 
+import exercise1.model.Utils.Utils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +32,7 @@ public class Circle extends Shape {
 
     @Override
     public double calculateArea() {
-        return Math.PI * radius * radius;
+        return Utils.roundDouble(Math.PI * radius * radius);
     }
 
     @Override

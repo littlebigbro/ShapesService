@@ -99,11 +99,11 @@ public class Converter {
         return writer.toString();
     }
 
-    public static List<Shape> JSONtoShapes(String JSONvalues) {
+    public static List<Shape> jsonToShapes(String json) {
         List<Shape> shapes = new ArrayList<>();
         ObjectMapper mapper = new ObjectMapper();
         try {
-            shapes = Arrays.asList(mapper.readValue(JSONvalues, Shape[].class));
+            shapes = Arrays.asList(mapper.readValue(json, Shape[].class));
         } catch (IOException e) {
             e.printStackTrace();
         }

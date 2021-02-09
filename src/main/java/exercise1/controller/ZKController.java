@@ -49,12 +49,12 @@ public class ZKController implements IController {
 
     @RequestMapping(value = "insertShape", method = RequestMethod.PUT)
     public void insertShape(@RequestParam String json) {
-        mongoDBRepository.insert(Converter.JSONtoShapes(json).get(0));
+        mongoDBRepository.insert(Converter.jsonToShapes(json).get(0));
     }
 
     @RequestMapping(value = "updateShape", method = RequestMethod.POST)
     public void updateShape(@RequestParam String json) {
-        mongoDBRepository.updateShape(Converter.JSONtoShapes(json).get(0));
+        mongoDBRepository.updateShape(Converter.jsonToShapes(json).get(0));
     }
 
     @RequestMapping(value = "calcShapeArea", method = RequestMethod.POST)

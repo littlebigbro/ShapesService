@@ -2,6 +2,7 @@ package exercise1.model.Utils;
 
 import exercise1.model.Shapes.Point;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,5 +33,14 @@ public class Utils {
             pointCoords.append("(").append(point.getX()).append(", ").append(point.getY()).append(") ");
         }
         return pointCoords.toString().trim();
+    }
+
+    /**
+     * Возвращает округленное число типа double в формате #.##
+     */
+    public static double roundDouble(double param) {
+        return BigDecimal.valueOf(param)
+                .setScale(2, BigDecimal.ROUND_HALF_UP)
+                .doubleValue();
     }
 }

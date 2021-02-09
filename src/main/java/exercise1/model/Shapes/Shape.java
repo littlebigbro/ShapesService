@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import exercise1.model.IActions.IMovable;
 import exercise1.model.IActions.IRollable;
 import exercise1.model.IActions.IScalebale;
+import exercise1.model.Utils.Utils;
 
 import java.util.List;
 
@@ -29,6 +30,7 @@ public abstract class Shape implements IMovable, IScalebale, IRollable {
     protected int id;
     private static int IDCounter;
 
+    //TODO: добавить запись _id из Монго в поле dbId, поправить генерацию поля id
     protected Shape() {
     }
 
@@ -56,7 +58,7 @@ public abstract class Shape implements IMovable, IScalebale, IRollable {
         for (int i = 0; i < points.size() - 1; i++) {
             c += (points.get(i + 1).getX() * points.get(i).getY());
         }
-        return Math.abs((a + b - c - d) / 2);
+        return Utils.roundDouble(Math.abs((a + b - c - d) / 2));
     }
 
     protected int generateID() {

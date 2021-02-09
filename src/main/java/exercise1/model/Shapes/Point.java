@@ -1,6 +1,7 @@
 package exercise1.model.Shapes;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import exercise1.model.Utils.Utils;
 
 @JsonAutoDetect
 public class Point {
@@ -11,8 +12,8 @@ public class Point {
     }
 
     public Point(double x, double y) {
-        this.x = x;
-        this.y = y;
+        this.x = Utils.roundDouble(x);
+        this.y = Utils.roundDouble(y);
     }
 
     public double getX() {
@@ -20,7 +21,7 @@ public class Point {
     }
 
     public void setX(double x) {
-        this.x = x;
+        this.x = Utils.roundDouble(x);
     }
 
     public double getY() {
@@ -28,6 +29,6 @@ public class Point {
     }
 
     public void setY(double y) {
-        this.y = y;
+        this.y = Utils.roundDouble(y);
     }
 }

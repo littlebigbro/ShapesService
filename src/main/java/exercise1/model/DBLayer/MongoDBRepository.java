@@ -3,9 +3,7 @@ package exercise1.model.DBLayer;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import exercise1.IMVC.IModel;
-import exercise1.model.DBLayer.MongoDB;
 import exercise1.model.Utils.Converter;
-import exercise1.model.Shapes.Circle;
 import exercise1.model.Shapes.Shape;
 import org.bson.Document;
 import org.bson.conversions.Bson;
@@ -15,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.mongodb.client.model.Updates.set;
-
+//TODO: findQ.put("id", id) заменить "id" на "_id" из Монго;
 @Repository
 public class MongoDBRepository implements IModel {
     private boolean passwordIsCorrect = false;
@@ -59,7 +57,6 @@ public class MongoDBRepository implements IModel {
 
     public void deleteById(int id) {
         if (passwordIsCorrect) {
-            List<Shape> shapesList = new ArrayList<>();
             BasicDBObject findQ = new BasicDBObject();
             findQ.put("id", id);
             db.establishDefaultConnection(password);
@@ -126,64 +123,64 @@ public class MongoDBRepository implements IModel {
             db.closeConnection();
         }
     }
-
-    public void updateId(int id, Shape shape) {
-        int oldId = shape.getId();
-        shape.setId(id);
-        Document document = Converter.ShapeToDocument(shape);
-        Bson updateQ = set("id", document.getInteger("id"));
-        db.establishDefaultConnection(password);
-        db.getCollection().updateOne(new Document("id", oldId), updateQ);
-        db.closeConnection();
-    }
-
-    public void updateShapeType(Shape shape) {
-        int id = shape.getId();
-        Document document = Converter.ShapeToDocument(shape);
-        Bson updateQ = set("shapeType", document.getString("shapeType"));
-        db.establishDefaultConnection(password);
-        db.getCollection().updateOne(new Document("id", id), updateQ);
-        db.closeConnection();
-    }
-
-
-    public void updateRadius(Circle circle) {
-        int id = circle.getId();
-        Document document = Converter.ShapeToDocument(circle);
-        Bson updateQ = set("radius", document.getDouble("radius"));
-        db.establishDefaultConnection(password);
-        db.getCollection().updateOne(new Document("id", id), updateQ);
-        db.closeConnection();
-    }
-
-    public void updatePoints(Shape shape) {
-        int id = shape.getId();
-        Document document = Converter.ShapeToDocument(shape);
-        Bson updateQ = set("points", document.get("points"));
-        db.establishDefaultConnection(password);
-        db.getCollection().updateOne(new Document("id", id), updateQ);
-        db.closeConnection();
-    }
+//    Не уверен в необходимости
+//    public void updateId(int id, Shape shape) {
+//        int oldId = shape.getId();
+//        shape.setId(id);
+//        Document document = Converter.ShapeToDocument(shape);
+//        Bson updateQ = set("id", document.getInteger("id"));
+//        db.establishDefaultConnection(password);
+//        db.getCollection().updateOne(new Document("id", oldId), updateQ);
+//        db.closeConnection();
+//    }
+//
+//    public void updateShapeType(Shape shape) {
+//        int id = shape.getId();
+//        Document document = Converter.ShapeToDocument(shape);
+//        Bson updateQ = set("shapeType", document.getString("shapeType"));
+//        db.establishDefaultConnection(password);
+//        db.getCollection().updateOne(new Document("id", id), updateQ);
+//        db.closeConnection();
+//    }
+//
+//
+//    public void updateRadius(Circle circle) {
+//        int id = circle.getId();
+//        Document document = Converter.ShapeToDocument(circle);
+//        Bson updateQ = set("radius", document.getDouble("radius"));
+//        db.establishDefaultConnection(password);
+//        db.getCollection().updateOne(new Document("id", id), updateQ);
+//        db.closeConnection();
+//    }
+//
+//    public void updatePoints(Shape shape) {
+//        int id = shape.getId();
+//        Document document = Converter.ShapeToDocument(shape);
+//        Bson updateQ = set("points", document.get("points"));
+//        db.establishDefaultConnection(password);
+//        db.getCollection().updateOne(new Document("id", id), updateQ);
+//        db.closeConnection();
+//    }
 
     public double calculateArea(String json) {
-        Shape shape = Converter.JSONtoShapes(json).get(0);
+        Shape shape = Converter.jsonToShapes(json).get(0);
         return shape.calculateArea();
     }
 
     public Shape resizeShape(String json, double scale) {
-        Shape shape = Converter.JSONtoShapes(json).get(0);
+        Shape shape = Converter.jsonToShapes(json).get(0);
         shape.changeSize(scale);
         return shape;
     }
 
     public Shape moveShape(String json, double x, double y) {
-        Shape shape = Converter.JSONtoShapes(json).get(0);
+        Shape shape = Converter.jsonToShapes(json).get(0);
         shape.move(x, y);
         return shape;
     }
 
     public Shape rollShape(String json, double angle) {
-        Shape shape = Converter.JSONtoShapes(json).get(0);
+        Shape shape = Converter.jsonToShapes(json).get(0);
         shape.roll(angle);
         return shape;
     }
