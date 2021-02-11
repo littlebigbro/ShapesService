@@ -38,13 +38,13 @@ public class ZKController implements IController {
     }
 
     @RequestMapping(value = "getById", method = RequestMethod.GET)
-    public String getById(@RequestParam int i) {
-        return Converter.shapesListToJSON(mongoDBRepository.findById(i));
+    public String getById(@RequestParam String _id) {
+        return Converter.shapesListToJSON(mongoDBRepository.findById(_id));
     }
 
     @RequestMapping(value = "deleteById", method = RequestMethod.DELETE)
-    public void deleteById(@RequestParam int id) {
-        mongoDBRepository.deleteById(id);
+    public void deleteById(@RequestParam String _id) {
+        mongoDBRepository.deleteById(_id);
     }
 
     @RequestMapping(value = "insertShape", method = RequestMethod.PUT)

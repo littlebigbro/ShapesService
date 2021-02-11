@@ -1,6 +1,7 @@
 package exercise1.model.Shapes;
 
 import exercise1.model.Utils.Utils;
+import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +16,7 @@ public class Circle extends Shape {
         init();
     }
 
-    public Circle(int id, List<Double> params) {
+    public Circle(String id, List<Double> params) {
         super(id, params);
         init();
     }

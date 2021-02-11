@@ -22,15 +22,19 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="55684e01-777e-45ea-b8d7-d7bc6936f6a9" name="Ex1.D10. Небольшой рефакторинг " comment="Ex1.D10. Небольшой рефакторинг">
+    <list default="true" id="23abdb2f-4e05-4488-877b-771f7b742dd8" name="Test" comment="Test">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/exercise1/controller/ZKController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exercise1/controller/ZKController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/exercise1/model/DBLayer/MongoDBRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exercise1/model/DBLayer/MongoDBRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/exercise1/model/Factories/CircleFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exercise1/model/Factories/CircleFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/exercise1/model/Factories/IShapeFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exercise1/model/Factories/IShapeFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/exercise1/model/Factories/RectangleFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exercise1/model/Factories/RectangleFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/exercise1/model/Factories/TriangleFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exercise1/model/Factories/TriangleFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/exercise1/model/Shapes/Circle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exercise1/model/Shapes/Circle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/exercise1/model/Shapes/Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exercise1/model/Shapes/Point.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/exercise1/model/Shapes/Rectangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exercise1/model/Shapes/Rectangle.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/exercise1/model/Shapes/Shape.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exercise1/model/Shapes/Shape.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/exercise1/model/Shapes/Triangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exercise1/model/Shapes/Triangle.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/exercise1/model/Utils/Converter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exercise1/model/Utils/Converter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/exercise1/model/Utils/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/exercise1/model/Utils/Utils.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,6 +67,9 @@
     </option>
   </component>
   <component name="ProjectId" id="1jA96KxgzoCBfBe9nKSrL5y8mJV" />
+  <component name="ProjectLevelVcsManager">
+    <OptionsSetting value="false" id="Update" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -84,6 +91,18 @@
       <recent name="exercise1" />
     </key>
   </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="exercise1.Main" />
@@ -104,7 +123,7 @@
       </list>
     </recent_temporary>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -187,12 +206,13 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Ex1.D3. Переделал АФ, реализовал методы для фигур." />

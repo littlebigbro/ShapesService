@@ -2,6 +2,7 @@ package exercise1.model.Factories;
 
 import exercise1.model.Shapes.Shape;
 import exercise1.model.Shapes.Triangle;
+import org.bson.types.ObjectId;
 
 import java.util.List;
 
@@ -12,7 +13,7 @@ public class TriangleFactory implements IShapeFactory{
     }
 
     @Override
-    public Shape createFigure(int id, List<Double> params) {
+    public Shape createFigure(String id, List<Double> params) {
         return new Triangle(id, params);
     }
 }

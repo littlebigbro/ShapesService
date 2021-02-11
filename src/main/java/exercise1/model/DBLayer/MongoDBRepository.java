@@ -7,18 +7,20 @@ import exercise1.model.Utils.Converter;
 import exercise1.model.Shapes.Shape;
 import org.bson.Document;
 import org.bson.conversions.Bson;
+import org.bson.types.ObjectId;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.mongodb.client.model.Updates.set;
-//TODO: findQ.put("id", id) заменить "id" на "_id" из Монго;
+
 @Repository
 public class MongoDBRepository implements IModel {
     private boolean passwordIsCorrect = false;
     private MongoDB db;
     private String password;
+    private BasicDBObject findQ;
 
     public MongoDBRepository() {
         db = new MongoDB();
@@ -41,11 +43,6 @@ public class MongoDBRepository implements IModel {
         }
     }
 
-    public Shape createShape(String shapeName, List<Double> params) {
-        int id = documentCount();
-        return Converter.createShapeFactory(shapeName).createFigure(++id, params);
-    }
-
     public int documentCount() {
         if (passwordIsCorrect) {
             db.establishDefaultConnection(password);
@@ -55,10 +52,9 @@ public class MongoDBRepository implements IModel {
         } else return 0;
     }
 
-    public void deleteById(int id) {
+    public void deleteById(String _id) {
         if (passwordIsCorrect) {
-            BasicDBObject findQ = new BasicDBObject();
-            findQ.put("id", id);
+            findQ = new BasicDBObject("_id", new ObjectId(_id));
             db.establishDefaultConnection(password);
             db.getCollection().findOneAndDelete(findQ);
             db.closeConnection();
@@ -70,6 +66,7 @@ public class MongoDBRepository implements IModel {
         if (passwordIsCorrect) {
             db.establishDefaultConnection(password);
             ArrayList<Document> docList = db.getCollection().find().into(new ArrayList<>());
+            db.closeConnection();
             if (!docList.isEmpty()) {
                 for (Document document : docList) {
                     DBObject dbObject = BasicDBObject.parse(document.toJson());
@@ -77,16 +74,14 @@ public class MongoDBRepository implements IModel {
                     shapesList.add(shape);
                 }
             }
-            db.closeConnection();
         }
         return shapesList;
     }
 
-    public List<Shape> findById(int id) {
+    public List<Shape> findById(String _id) {
         List<Shape> shapesList = new ArrayList<>();
         if (passwordIsCorrect) {
-            BasicDBObject findQ = new BasicDBObject();
-            findQ.put("id", id);
+            findQ = new BasicDBObject("_id", new ObjectId(_id));
             db.establishDefaultConnection(password);
             ArrayList<Document> docList = db.getCollection().find(findQ).into(new ArrayList<>());
             if (!docList.isEmpty()) {
@@ -103,7 +98,6 @@ public class MongoDBRepository implements IModel {
 
     public void updateShape(Shape shape) {
         if (passwordIsCorrect) {
-            int id = shape.getId();
             Document document = Converter.ShapeToDocument(shape);
             List<Bson> updatedParams = new ArrayList<>();
             if (document.containsKey("id")) {
@@ -119,48 +113,29 @@ public class MongoDBRepository implements IModel {
                 updatedParams.add(set("points", document.get("points")));
             }
             db.establishDefaultConnection(password);
-            db.getCollection().updateOne(new Document("id", id), updatedParams);
+            findQ = new BasicDBObject("_id", document.get("_id"));
+            db.getCollection().updateOne(findQ, updatedParams);
             db.closeConnection();
         }
     }
-//    Не уверен в необходимости
-//    public void updateId(int id, Shape shape) {
-//        int oldId = shape.getId();
-//        shape.setId(id);
-//        Document document = Converter.ShapeToDocument(shape);
-//        Bson updateQ = set("id", document.getInteger("id"));
-//        db.establishDefaultConnection(password);
-//        db.getCollection().updateOne(new Document("id", oldId), updateQ);
-//        db.closeConnection();
-//    }
-//
-//    public void updateShapeType(Shape shape) {
-//        int id = shape.getId();
-//        Document document = Converter.ShapeToDocument(shape);
-//        Bson updateQ = set("shapeType", document.getString("shapeType"));
-//        db.establishDefaultConnection(password);
-//        db.getCollection().updateOne(new Document("id", id), updateQ);
-//        db.closeConnection();
-//    }
-//
-//
-//    public void updateRadius(Circle circle) {
-//        int id = circle.getId();
-//        Document document = Converter.ShapeToDocument(circle);
-//        Bson updateQ = set("radius", document.getDouble("radius"));
-//        db.establishDefaultConnection(password);
-//        db.getCollection().updateOne(new Document("id", id), updateQ);
-//        db.closeConnection();
-//    }
-//
-//    public void updatePoints(Shape shape) {
-//        int id = shape.getId();
-//        Document document = Converter.ShapeToDocument(shape);
-//        Bson updateQ = set("points", document.get("points"));
-//        db.establishDefaultConnection(password);
-//        db.getCollection().updateOne(new Document("id", id), updateQ);
-//        db.closeConnection();
-//    }
+
+    public int generateID() {
+        int id = 0;
+        if(passwordIsCorrect) {
+            Bson sortQ = set("_id", -1);
+            db.establishDefaultConnection(password);
+            ArrayList<Document> docList = db.getCollection().find().limit(1).sort(sortQ).into(new ArrayList<>());
+            db.closeConnection();
+            if (!docList.isEmpty()) {
+                for (Document document : docList) {
+                    DBObject dbObject = BasicDBObject.parse(document.toJson());
+                    Shape shape = Converter.DBObjectToShape(dbObject);
+                    id = shape.getId();
+                }
+            }
+        }
+        return ++id;
+    }
 
     public double calculateArea(String json) {
         Shape shape = Converter.jsonToShapes(json).get(0);

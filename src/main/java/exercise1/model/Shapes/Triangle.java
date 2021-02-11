@@ -2,6 +2,7 @@ package exercise1.model.Shapes;
 
 import exercise1.model.Utils.ClockwiseComparator;
 import exercise1.model.Utils.Utils;
+import org.bson.types.ObjectId;
 
 import java.util.List;
 
@@ -15,7 +16,7 @@ public class Triangle extends Shape {
         init();
     }
 
-    public Triangle(int id, List<Double> params) {
+    public Triangle(String id, List<Double> params) {
         super(id, params);
         init();
     }

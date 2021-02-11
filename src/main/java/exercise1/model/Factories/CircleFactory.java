@@ -2,6 +2,7 @@ package exercise1.model.Factories;
 
 import exercise1.model.Shapes.Circle;
 import exercise1.model.Shapes.Shape;
+import org.bson.types.ObjectId;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ public class CircleFactory implements IShapeFactory {
     }
 
     @Override
-    public Shape createFigure(int id, List<Double> params) {
+    public Shape createFigure(String id, List<Double> params) {
         return new Circle(id, params);
     }
 }

@@ -12,6 +12,7 @@ import exercise1.model.Shapes.Point;
 import exercise1.model.Shapes.Shape;
 import exercise1.model.Shapes.ShapeTypes;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 
 import java.io.IOException;
 import java.io.StringWriter;
@@ -41,7 +42,7 @@ public class Converter {
 
     public static Shape DBObjectToShape(DBObject dbObject) {
         BasicDBObject shapeDBObject = (BasicDBObject) dbObject;
-        int shapeId = shapeDBObject.getInt("id");
+        ObjectId _id = (ObjectId) shapeDBObject.get("_id");
         String shapeType = shapeDBObject.getString("shapeType");
         List<Double> shapeParams = new ArrayList<>();
         BasicDBList shapePointsList = (BasicDBList) shapeDBObject.get("points");
@@ -53,7 +54,7 @@ public class Converter {
         if (shapeType.equalsIgnoreCase(ShapeTypes.CIRCLE.toString())) {
             shapeParams.add(shapeDBObject.getDouble("radius"));
         }
-        return createShapeFactory(shapeType).createFigure(shapeId, shapeParams);
+        return createShapeFactory(shapeType).createFigure(_id.toString(), shapeParams);
     }
 
     public static IShapeFactory createShapeFactory(String factoryName) {

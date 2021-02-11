@@ -8,6 +8,7 @@ import exercise1.model.IActions.IMovable;
 import exercise1.model.IActions.IRollable;
 import exercise1.model.IActions.IScalebale;
 import exercise1.model.Utils.Utils;
+import org.bson.types.ObjectId;
 
 import java.util.List;
 
@@ -20,6 +21,7 @@ import java.util.List;
 
 @JsonAutoDetect
 public abstract class Shape implements IMovable, IScalebale, IRollable {
+    private static final long serialVersionUID = 1L;
     @JsonProperty("shapeType")
     protected String name;
     protected String ruName;
@@ -27,6 +29,7 @@ public abstract class Shape implements IMovable, IScalebale, IRollable {
     protected List<Double> params;
     protected Point center = new Point();
     protected double radius = 0;
+    protected String _id;
     protected int id;
     private static int IDCounter;
 
@@ -39,8 +42,9 @@ public abstract class Shape implements IMovable, IScalebale, IRollable {
         this.params = params;
     }
 
-    protected Shape(int id, List<Double> params) {
-        this.id = id;
+    protected Shape(String _id, List<Double> params) {
+        this._id = _id;
+        this.id = generateID();
         this.params = params;
     }
 
@@ -65,6 +69,9 @@ public abstract class Shape implements IMovable, IScalebale, IRollable {
         return ++IDCounter;
     }
 
+    protected int generateID(int _id) {
+        return ++IDCounter;
+    }
     public String getName() {
         return name;
     }
