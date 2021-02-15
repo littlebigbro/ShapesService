@@ -14,7 +14,7 @@ public class CircleFactory implements IShapeFactory {
     }
 
     @Override
-    public Shape createFigure(String id, List<Double> params) {
-        return new Circle(id, params);
+    public Shape createFigure(String _id, int id, List<Double> params) {
+        return new Circle(_id, id, params);
     }
 }

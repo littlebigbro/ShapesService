@@ -16,8 +16,8 @@ public class Circle extends Shape {
         init();
     }
 
-    public Circle(String id, List<Double> params) {
-        super(id, params);
+    public Circle(String _id, int id, List<Double> params) {
+        super(_id, id, params);
         init();
     }
 

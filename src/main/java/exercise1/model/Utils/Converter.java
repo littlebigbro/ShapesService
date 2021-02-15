@@ -43,6 +43,7 @@ public class Converter {
     public static Shape DBObjectToShape(DBObject dbObject) {
         BasicDBObject shapeDBObject = (BasicDBObject) dbObject;
         ObjectId _id = (ObjectId) shapeDBObject.get("_id");
+        int id = shapeDBObject.getInt("id");
         String shapeType = shapeDBObject.getString("shapeType");
         List<Double> shapeParams = new ArrayList<>();
         BasicDBList shapePointsList = (BasicDBList) shapeDBObject.get("points");
@@ -54,7 +55,7 @@ public class Converter {
         if (shapeType.equalsIgnoreCase(ShapeTypes.CIRCLE.toString())) {
             shapeParams.add(shapeDBObject.getDouble("radius"));
         }
-        return createShapeFactory(shapeType).createFigure(_id.toString(), shapeParams);
+        return createShapeFactory(shapeType).createFigure(_id.toString(), id,shapeParams);
     }
 
     public static IShapeFactory createShapeFactory(String factoryName) {

@@ -13,7 +13,7 @@ public class TriangleFactory implements IShapeFactory{
     }
 
     @Override
-    public Shape createFigure(String id, List<Double> params) {
-        return new Triangle(id, params);
+    public Shape createFigure(String _id, int id, List<Double> params) {
+        return new Triangle(_id, id, params);
     }
 }

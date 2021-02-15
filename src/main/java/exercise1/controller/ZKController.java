@@ -6,14 +6,16 @@ import exercise1.model.DBLayer.MongoDBRepository;
 import exercise1.model.Shapes.Shape;
 import exercise1.model.Utils.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.nio.charset.StandardCharsets;
 
 @RestController
 public class ZKController implements IController {
-
+    //TODO: Перенастроить взаимодействие с фронтом аналогично методу tryLogin
     @Autowired
     private MongoDBRepository mongoDBRepository;
 
@@ -21,10 +23,17 @@ public class ZKController implements IController {
         this.mongoDBRepository = (MongoDBRepository) model;
     }
 
+    //TODO: Переписать под логин/пароль
     @Override
     @RequestMapping(value = "auth", method = RequestMethod.POST)
-    public boolean enterPassword(@RequestParam String password) {
-        return mongoDBRepository.enterPassword(password);
+    public boolean tryLogin(@RequestBody byte[] bytes) {
+        String password = new String(bytes, StandardCharsets.UTF_8);
+        return mongoDBRepository.login(password);
+    }
+
+    @RequestMapping(value = "logout", method = RequestMethod.GET)
+    public void logout() {
+        mongoDBRepository.logout();
     }
 
     @RequestMapping(value = "getAll", method = RequestMethod.GET)
@@ -38,30 +47,35 @@ public class ZKController implements IController {
     }
 
     @RequestMapping(value = "getById", method = RequestMethod.GET)
-    public String getById(@RequestParam String _id) {
+    public String getById(@RequestBody byte[] bytes) {
+        String _id = new String(bytes, StandardCharsets.UTF_8);
         return Converter.shapesListToJSON(mongoDBRepository.findById(_id));
     }
 
     @RequestMapping(value = "deleteById", method = RequestMethod.DELETE)
-    public void deleteById(@RequestParam String _id) {
-        mongoDBRepository.deleteById(_id);
+    public boolean deleteById(@RequestBody byte[] bytes) {
+        String _id = new String(bytes, StandardCharsets.UTF_8);
+        return mongoDBRepository.deleteById(_id);
     }
 
     @RequestMapping(value = "insertShape", method = RequestMethod.PUT)
-    public void insertShape(@RequestParam String json) {
-        mongoDBRepository.insert(Converter.jsonToShapes(json).get(0));
+    public boolean insertShape(@RequestBody byte[] bytes) {
+        String json = new String(bytes, StandardCharsets.UTF_8);
+        return mongoDBRepository.insert(Converter.jsonToShapes(json).get(0));
     }
 
     @RequestMapping(value = "updateShape", method = RequestMethod.POST)
-    public void updateShape(@RequestParam String json) {
-        mongoDBRepository.updateShape(Converter.jsonToShapes(json).get(0));
+    public boolean updateShape(@RequestBody byte[] bytes) {
+        String json = new String(bytes, StandardCharsets.UTF_8);
+        return mongoDBRepository.updateShape(Converter.jsonToShapes(json).get(0));
     }
 
     @RequestMapping(value = "calcShapeArea", method = RequestMethod.POST)
-    public double calculateArea(@RequestParam String json) {
+    public double calculateArea(@RequestBody byte[] bytes) {
+        String json = new String(bytes, StandardCharsets.UTF_8);
         return mongoDBRepository.calculateArea(json);
     }
-
+    //TODO: Сделать маппер bytes[] -> map
     @RequestMapping(value = "resizeShape", method = RequestMethod.POST)
     public String resizeShape(@RequestParam String json, @RequestParam double scale) {
         Shape shape = mongoDBRepository.resizeShape(json, scale);

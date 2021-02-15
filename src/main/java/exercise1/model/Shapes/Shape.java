@@ -29,6 +29,7 @@ public abstract class Shape implements IMovable, IScalebale, IRollable {
     protected List<Double> params;
     protected Point center = new Point();
     protected double radius = 0;
+
     protected String _id;
     protected int id;
     private static int IDCounter;
@@ -42,9 +43,9 @@ public abstract class Shape implements IMovable, IScalebale, IRollable {
         this.params = params;
     }
 
-    protected Shape(String _id, List<Double> params) {
+    protected Shape(String _id, int id, List<Double> params) {
         this._id = _id;
-        this.id = generateID();
+        this.id = id;
         this.params = params;
     }
 
@@ -98,6 +99,10 @@ public abstract class Shape implements IMovable, IScalebale, IRollable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String get_id() {
+        return _id;
     }
 
     public String toString() {

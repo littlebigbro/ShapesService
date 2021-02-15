@@ -16,8 +16,8 @@ public class Triangle extends Shape {
         init();
     }
 
-    public Triangle(String id, List<Double> params) {
-        super(id, params);
+    public Triangle(String _id, int id, List<Double> params) {
+        super(_id, id, params);
         init();
     }
 

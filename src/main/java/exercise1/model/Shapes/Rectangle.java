@@ -16,8 +16,8 @@ public class Rectangle extends Shape {
         init();
     }
 
-    public Rectangle(String id, List<Double> params) {
-        super(id, params);
+    public Rectangle(String _id, int id, List<Double> params) {
+        super(_id, id, params);
         init();
     }
 

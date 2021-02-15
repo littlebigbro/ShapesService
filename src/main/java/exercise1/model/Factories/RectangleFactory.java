@@ -13,7 +13,7 @@ public class RectangleFactory implements IShapeFactory{
     }
 
     @Override
-    public Shape createFigure(String id, List<Double> params) {
-        return new Rectangle(id, params);
+    public Shape createFigure(String _id, int id, List<Double> params) {
+        return new Rectangle(_id, id, params);
     }
 }

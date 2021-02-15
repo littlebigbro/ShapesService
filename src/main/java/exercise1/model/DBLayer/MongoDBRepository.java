@@ -2,6 +2,7 @@ package exercise1.model.DBLayer;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
+import com.mongodb.client.result.DeleteResult;
 import exercise1.IMVC.IModel;
 import exercise1.model.Utils.Converter;
 import exercise1.model.Shapes.Shape;
@@ -26,21 +27,30 @@ public class MongoDBRepository implements IModel {
         db = new MongoDB();
     }
 
-    public boolean enterPassword(String password) {
+    public boolean login(String password) {
         if (db.checkConnection(password)) {
             this.password = password;
             passwordIsCorrect = true;
+        } else {
+            passwordIsCorrect = false;
         }
         return passwordIsCorrect;
     }
 
-    public void insert(Shape shape) {
+    public void logout() {
+        passwordIsCorrect = false;
+        password = "";
+    }
+
+    public boolean insert(Shape shape) {
         if (passwordIsCorrect) {
             Document document = Converter.ShapeToDocument(shape);
             db.establishDefaultConnection(password);
             db.getCollection().insertOne(document);
             db.closeConnection();
+            return true;
         }
+        return false;
     }
 
     public int documentCount() {
@@ -52,13 +62,15 @@ public class MongoDBRepository implements IModel {
         } else return 0;
     }
 
-    public void deleteById(String _id) {
+    public boolean deleteById(String _id) {
+        long deletedCount = 0;
         if (passwordIsCorrect) {
             findQ = new BasicDBObject("_id", new ObjectId(_id));
             db.establishDefaultConnection(password);
-            db.getCollection().findOneAndDelete(findQ);
+            deletedCount = db.getCollection().deleteOne(findQ).getDeletedCount();
             db.closeConnection();
         }
+        return deletedCount > 0;
     }
 
     public List<Shape> findAll() {
@@ -96,7 +108,7 @@ public class MongoDBRepository implements IModel {
         return shapesList;
     }
 
-    public void updateShape(Shape shape) {
+    public boolean updateShape(Shape shape) {
         if (passwordIsCorrect) {
             Document document = Converter.ShapeToDocument(shape);
             List<Bson> updatedParams = new ArrayList<>();
@@ -116,7 +128,9 @@ public class MongoDBRepository implements IModel {
             findQ = new BasicDBObject("_id", document.get("_id"));
             db.getCollection().updateOne(findQ, updatedParams);
             db.closeConnection();
+            return true;
         }
+        return false;
     }
 
     public int generateID() {
