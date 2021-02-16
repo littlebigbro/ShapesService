@@ -12,10 +12,11 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.Map;
 
 @RestController
 public class ZKController implements IController {
-    //TODO: Перенастроить взаимодействие с фронтом аналогично методу tryLogin
+
     @Autowired
     private MongoDBRepository mongoDBRepository;
 
@@ -23,12 +24,10 @@ public class ZKController implements IController {
         this.mongoDBRepository = (MongoDBRepository) model;
     }
 
-    //TODO: Переписать под логин/пароль
     @Override
     @RequestMapping(value = "auth", method = RequestMethod.POST)
     public boolean tryLogin(@RequestBody byte[] bytes) {
-        String password = new String(bytes, StandardCharsets.UTF_8);
-        return mongoDBRepository.login(password);
+        return mongoDBRepository.login(Converter.bytesToMap(bytes));
     }
 
     @RequestMapping(value = "logout", method = RequestMethod.GET)
@@ -75,20 +74,19 @@ public class ZKController implements IController {
         String json = new String(bytes, StandardCharsets.UTF_8);
         return mongoDBRepository.calculateArea(json);
     }
-    //TODO: Сделать маппер bytes[] -> map
+
     @RequestMapping(value = "resizeShape", method = RequestMethod.POST)
-    public String resizeShape(@RequestParam String json, @RequestParam double scale) {
-        Shape shape = mongoDBRepository.resizeShape(json, scale);
-        return Converter.shapeToJSON(shape);
+    public String resizeShape(@RequestBody byte[] bytes) {
+        return Converter.shapeToJSON(mongoDBRepository.resizeShape(Converter.bytesToMap(bytes)));
     }
 
     @RequestMapping(value = "moveShape", method = RequestMethod.POST)
-    public String moveShape(@RequestParam String json, @RequestParam double x, @RequestParam double y) {
-        return Converter.shapeToJSON(mongoDBRepository.moveShape(json, x, y));
+    public String moveShape(@RequestBody byte[] bytes) {
+        return Converter.shapeToJSON(mongoDBRepository.moveShape(Converter.bytesToMap(bytes)));
     }
 
     @RequestMapping(value = "rollShape", method = RequestMethod.POST)
-    public String rollShape(@RequestParam String json, @RequestParam double angle) {
-        return Converter.shapeToJSON(mongoDBRepository.rollShape(json, angle));
+    public String rollShape(@RequestBody byte[] bytes) {
+        return Converter.shapeToJSON(mongoDBRepository.rollShape(Converter.bytesToMap(bytes)));
     }
 }

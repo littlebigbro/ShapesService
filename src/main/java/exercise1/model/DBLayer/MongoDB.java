@@ -11,26 +11,29 @@ import java.util.logging.Logger;
 
 public class MongoDB {
     private MongoClient mongoClient;
-    private MongoCollection <Document> collection;
+    private MongoCollection<Document> collection;
+    private String username;
     private String password;
     private long docCount;
     private boolean connectionError = false;
 
     public MongoDB() {
     }
+
     public MongoDB(String password) {
         this.password = password;
     }
 
-    public void establishDefaultConnection(String password) {
+    public void establishDefaultConnection(String username, String password) {
+        this.username = username;
         this.password = password;
-        String cS = "mongodb+srv://GoodCat:" + password + "@cluster0.jw84w.mongodb.net/shapesDB?retryWrites=true&w=majority";
+        String cS = "mongodb+srv://" + username + ":" + password + "@cluster0.jw84w.mongodb.net/shapesDB?retryWrites=true&w=majority";
         byte[] bytes = cS.getBytes(StandardCharsets.UTF_8);
 
         String utf8EncodedString = new String(bytes, StandardCharsets.UTF_8);
         String db = "shapesDB";
         String cn = "shapes";
-        establishConnection(utf8EncodedString,db,cn);
+        establishConnection(utf8EncodedString, db, cn);
     }
 
     public void establishConnection(String connectionString, String dbName, String collectionName) {
@@ -44,8 +47,6 @@ public class MongoDB {
             connectionError = false;
         } catch (Exception e) {
             connectionError = true;
-            System.out.println("Ошибка соединения: " + e.toString());
-        //    e.printStackTrace();
         }
     }
 
@@ -59,9 +60,9 @@ public class MongoDB {
         return collection;
     }
 
-    public boolean checkConnection(String password) {
-        establishDefaultConnection(password);
-        if(!connectionError) {
+    public boolean checkConnection(String username, String password) {
+        establishDefaultConnection(username, password);
+        if (!connectionError) {
             closeConnection();
             return true;
         }

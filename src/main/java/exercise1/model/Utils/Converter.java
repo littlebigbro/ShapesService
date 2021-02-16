@@ -16,9 +16,8 @@ import org.bson.types.ObjectId;
 
 import java.io.IOException;
 import java.io.StringWriter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.nio.charset.StandardCharsets;
+import java.util.*;
 
 public class Converter {
 
@@ -55,7 +54,7 @@ public class Converter {
         if (shapeType.equalsIgnoreCase(ShapeTypes.CIRCLE.toString())) {
             shapeParams.add(shapeDBObject.getDouble("radius"));
         }
-        return createShapeFactory(shapeType).createFigure(_id.toString(), id,shapeParams);
+        return createShapeFactory(shapeType).createFigure(_id.toString(), id, shapeParams);
     }
 
     public static IShapeFactory createShapeFactory(String factoryName) {
@@ -110,5 +109,19 @@ public class Converter {
             e.printStackTrace();
         }
         return shapes;
+    }
+
+    /**
+     * Ожидается, что в массив байтов преобразована строка в формате
+     * param1=value1;param2=value2;...;paramN=valueN
+     */
+    public static Map<String, String> bytesToMap(byte[] bytes) {
+        Map<String, String> map = new HashMap<>();
+        String[] mapping = new String(bytes, StandardCharsets.UTF_8).split(";");
+        for (String pair : mapping) {
+            String[] params = pair.split("=");
+            map.put(params[0], params[1]);
+        }
+        return map;
     }
 }

@@ -13,13 +13,15 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static com.mongodb.client.model.Updates.set;
 
 @Repository
 public class MongoDBRepository implements IModel {
-    private boolean passwordIsCorrect = false;
+    private boolean authCorrect = false;
     private MongoDB db;
+    private String username;
     private String password;
     private BasicDBObject findQ;
 
@@ -27,25 +29,27 @@ public class MongoDBRepository implements IModel {
         db = new MongoDB();
     }
 
-    public boolean login(String password) {
-        if (db.checkConnection(password)) {
-            this.password = password;
-            passwordIsCorrect = true;
+    public boolean login(Map<String, String> params) {
+        this.username = params.get("username");
+        this.password = params.get("password");
+        if (db.checkConnection(this.username, this.password)) {
+            authCorrect = true;
         } else {
-            passwordIsCorrect = false;
+            logout();
         }
-        return passwordIsCorrect;
+        return authCorrect;
     }
 
     public void logout() {
-        passwordIsCorrect = false;
+        authCorrect = false;
+        username = "";
         password = "";
     }
 
     public boolean insert(Shape shape) {
-        if (passwordIsCorrect) {
+        if (authCorrect) {
             Document document = Converter.ShapeToDocument(shape);
-            db.establishDefaultConnection(password);
+            db.establishDefaultConnection(username, password);
             db.getCollection().insertOne(document);
             db.closeConnection();
             return true;
@@ -54,8 +58,8 @@ public class MongoDBRepository implements IModel {
     }
 
     public int documentCount() {
-        if (passwordIsCorrect) {
-            db.establishDefaultConnection(password);
+        if (authCorrect) {
+            db.establishDefaultConnection(username, password);
             long count = db.getCollection().countDocuments();
             db.closeConnection();
             return Math.toIntExact(count);
@@ -64,9 +68,9 @@ public class MongoDBRepository implements IModel {
 
     public boolean deleteById(String _id) {
         long deletedCount = 0;
-        if (passwordIsCorrect) {
+        if (authCorrect) {
             findQ = new BasicDBObject("_id", new ObjectId(_id));
-            db.establishDefaultConnection(password);
+            db.establishDefaultConnection(username, password);
             deletedCount = db.getCollection().deleteOne(findQ).getDeletedCount();
             db.closeConnection();
         }
@@ -75,8 +79,8 @@ public class MongoDBRepository implements IModel {
 
     public List<Shape> findAll() {
         List<Shape> shapesList = new ArrayList<>();
-        if (passwordIsCorrect) {
-            db.establishDefaultConnection(password);
+        if (authCorrect) {
+            db.establishDefaultConnection(username, password);
             ArrayList<Document> docList = db.getCollection().find().into(new ArrayList<>());
             db.closeConnection();
             if (!docList.isEmpty()) {
@@ -92,9 +96,9 @@ public class MongoDBRepository implements IModel {
 
     public List<Shape> findById(String _id) {
         List<Shape> shapesList = new ArrayList<>();
-        if (passwordIsCorrect) {
+        if (authCorrect) {
             findQ = new BasicDBObject("_id", new ObjectId(_id));
-            db.establishDefaultConnection(password);
+            db.establishDefaultConnection(username, password);
             ArrayList<Document> docList = db.getCollection().find(findQ).into(new ArrayList<>());
             if (!docList.isEmpty()) {
                 for (Document document : docList) {
@@ -109,7 +113,7 @@ public class MongoDBRepository implements IModel {
     }
 
     public boolean updateShape(Shape shape) {
-        if (passwordIsCorrect) {
+        if (authCorrect) {
             Document document = Converter.ShapeToDocument(shape);
             List<Bson> updatedParams = new ArrayList<>();
             if (document.containsKey("id")) {
@@ -124,7 +128,7 @@ public class MongoDBRepository implements IModel {
             if (document.containsKey("points")) {
                 updatedParams.add(set("points", document.get("points")));
             }
-            db.establishDefaultConnection(password);
+            db.establishDefaultConnection(username, password);
             findQ = new BasicDBObject("_id", document.get("_id"));
             db.getCollection().updateOne(findQ, updatedParams);
             db.closeConnection();
@@ -135,9 +139,9 @@ public class MongoDBRepository implements IModel {
 
     public int generateID() {
         int id = 0;
-        if(passwordIsCorrect) {
+        if (authCorrect) {
             Bson sortQ = set("_id", -1);
-            db.establishDefaultConnection(password);
+            db.establishDefaultConnection(username, password);
             ArrayList<Document> docList = db.getCollection().find().limit(1).sort(sortQ).into(new ArrayList<>());
             db.closeConnection();
             if (!docList.isEmpty()) {
@@ -156,19 +160,26 @@ public class MongoDBRepository implements IModel {
         return shape.calculateArea();
     }
 
-    public Shape resizeShape(String json, double scale) {
+    public Shape resizeShape(Map<String, String> params) {
+        String json = params.get("json");
+        double scale = Double.parseDouble(params.get("scale"));
         Shape shape = Converter.jsonToShapes(json).get(0);
         shape.changeSize(scale);
         return shape;
     }
 
-    public Shape moveShape(String json, double x, double y) {
+    public Shape moveShape(Map<String, String> params) {
+        String json = params.get("json");
+        double x = Double.parseDouble(params.get("x"));
+        double y = Double.parseDouble(params.get("y"));
         Shape shape = Converter.jsonToShapes(json).get(0);
         shape.move(x, y);
         return shape;
     }
 
-    public Shape rollShape(String json, double angle) {
+    public Shape rollShape(Map<String, String> params) {
+        String json = params.get("json");
+        double angle = Double.parseDouble(params.get("angle"));
         Shape shape = Converter.jsonToShapes(json).get(0);
         shape.roll(angle);
         return shape;

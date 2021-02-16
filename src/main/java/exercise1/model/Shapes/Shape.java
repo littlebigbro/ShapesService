@@ -29,12 +29,10 @@ public abstract class Shape implements IMovable, IScalebale, IRollable {
     protected List<Double> params;
     protected Point center = new Point();
     protected double radius = 0;
-
     protected String _id;
     protected int id;
     private static int IDCounter;
 
-    //TODO: добавить запись _id из Монго в поле dbId, поправить генерацию поля id
     protected Shape() {
     }
 
@@ -73,6 +71,7 @@ public abstract class Shape implements IMovable, IScalebale, IRollable {
     protected int generateID(int _id) {
         return ++IDCounter;
     }
+
     public String getName() {
         return name;
     }
