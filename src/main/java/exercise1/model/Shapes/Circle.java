@@ -40,6 +40,8 @@ public class Circle extends Shape {
     public void move(double x, double y) {
         this.center.setX(x);
         this.center.setY(y);
+        points.get(0).setX(x);
+        points.get(0).setY(y);
     }
 
     @Override

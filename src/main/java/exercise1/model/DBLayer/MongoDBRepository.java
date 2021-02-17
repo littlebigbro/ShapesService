@@ -2,10 +2,9 @@ package exercise1.model.DBLayer;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
-import com.mongodb.client.result.DeleteResult;
 import exercise1.IMVC.IModel;
+import exercise1.model.Shapes.*;
 import exercise1.model.Utils.Converter;
-import exercise1.model.Shapes.Shape;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
@@ -160,7 +159,7 @@ public class MongoDBRepository implements IModel {
         return shape.calculateArea();
     }
 
-    public Shape resizeShape(Map<String, String> params) {
+    public Shape scaleShape(Map<String, String> params) {
         String json = params.get("json");
         double scale = Double.parseDouble(params.get("scale"));
         Shape shape = Converter.jsonToShapes(json).get(0);
@@ -168,12 +167,26 @@ public class MongoDBRepository implements IModel {
         return shape;
     }
 
+    //TODO: refactor kostil
     public Shape moveShape(Map<String, String> params) {
         String json = params.get("json");
         double x = Double.parseDouble(params.get("x"));
         double y = Double.parseDouble(params.get("y"));
         Shape shape = Converter.jsonToShapes(json).get(0);
-        shape.move(x, y);
+        //kostil
+        if (ShapeTypes.CIRCLE.toString().equalsIgnoreCase(shape.getName())) {
+            Circle circle = (Circle) shape;
+            circle.move(x, y);
+            return circle;
+        } else if (ShapeTypes.TRIANGLE.toString().equalsIgnoreCase(shape.getName())) {
+            Triangle triangle = (Triangle) shape;
+            triangle.move(x, y);
+            return triangle;
+        } else if (ShapeTypes.RECTANGLE.toString().equalsIgnoreCase(shape.getName())) {
+            Rectangle rectangle = (Rectangle) shape;
+            rectangle.move(x, y);
+            return rectangle;
+        }
         return shape;
     }
 

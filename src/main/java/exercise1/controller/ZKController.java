@@ -3,16 +3,11 @@ package exercise1.controller;
 import exercise1.IMVC.IController;
 import exercise1.IMVC.IModel;
 import exercise1.model.DBLayer.MongoDBRepository;
-import exercise1.model.Shapes.Shape;
 import exercise1.model.Utils.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.nio.charset.StandardCharsets;
-import java.util.Map;
 
 @RestController
 public class ZKController implements IController {
@@ -75,9 +70,9 @@ public class ZKController implements IController {
         return mongoDBRepository.calculateArea(json);
     }
 
-    @RequestMapping(value = "resizeShape", method = RequestMethod.POST)
-    public String resizeShape(@RequestBody byte[] bytes) {
-        return Converter.shapeToJSON(mongoDBRepository.resizeShape(Converter.bytesToMap(bytes)));
+    @RequestMapping(value = "scaleShape", method = RequestMethod.POST)
+    public String scaleShape(@RequestBody byte[] bytes) {
+        return Converter.shapeToJSON(mongoDBRepository.scaleShape(Converter.bytesToMap(bytes)));
     }
 
     @RequestMapping(value = "moveShape", method = RequestMethod.POST)
