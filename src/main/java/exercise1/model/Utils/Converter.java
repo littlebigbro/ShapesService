@@ -8,9 +8,7 @@ import exercise1.model.Factories.CircleFactory;
 import exercise1.model.Factories.IShapeFactory;
 import exercise1.model.Factories.RectangleFactory;
 import exercise1.model.Factories.TriangleFactory;
-import exercise1.model.Shapes.Point;
-import exercise1.model.Shapes.Shape;
-import exercise1.model.Shapes.ShapeTypes;
+import exercise1.model.Shapes.*;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
@@ -101,14 +99,27 @@ public class Converter {
     }
 
     public static List<Shape> jsonToShapes(String json) {
-        List<Shape> shapes = new ArrayList<>();
+        List<Shape> tempShapes = new ArrayList<>();
         ObjectMapper mapper = new ObjectMapper();
         try {
-            shapes = Arrays.asList(mapper.readValue(json, Shape[].class));
+            tempShapes = Arrays.asList(mapper.readValue(json, Shape[].class));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return shapes;
+        List<Shape> resultShapes = new ArrayList<>();
+        for(Shape shape : tempShapes) {
+            if (ShapeTypes.CIRCLE.toString().equalsIgnoreCase(shape.getName())) {
+                Circle circle = (Circle) shape;
+                resultShapes.add(circle);
+            } else if (ShapeTypes.TRIANGLE.toString().equalsIgnoreCase(shape.getName())) {
+                Triangle triangle = (Triangle) shape;
+                resultShapes.add(triangle);
+            } else if (ShapeTypes.RECTANGLE.toString().equalsIgnoreCase(shape.getName())) {
+                Rectangle rectangle = (Rectangle) shape;
+                resultShapes.add(rectangle);
+            }
+        }
+        return resultShapes;
     }
 
     /**

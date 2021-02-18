@@ -167,26 +167,12 @@ public class MongoDBRepository implements IModel {
         return shape;
     }
 
-    //TODO: refactor kostil
     public Shape moveShape(Map<String, String> params) {
         String json = params.get("json");
         double x = Double.parseDouble(params.get("x"));
         double y = Double.parseDouble(params.get("y"));
         Shape shape = Converter.jsonToShapes(json).get(0);
-        //kostil
-        if (ShapeTypes.CIRCLE.toString().equalsIgnoreCase(shape.getName())) {
-            Circle circle = (Circle) shape;
-            circle.move(x, y);
-            return circle;
-        } else if (ShapeTypes.TRIANGLE.toString().equalsIgnoreCase(shape.getName())) {
-            Triangle triangle = (Triangle) shape;
-            triangle.move(x, y);
-            return triangle;
-        } else if (ShapeTypes.RECTANGLE.toString().equalsIgnoreCase(shape.getName())) {
-            Rectangle rectangle = (Rectangle) shape;
-            rectangle.move(x, y);
-            return rectangle;
-        }
+        shape.move(x,y);
         return shape;
     }
 
