@@ -58,6 +58,11 @@ public class ZKController implements IController {
         return mongoDBRepository.insert(Converter.jsonToShapes(json).get(0));
     }
 
+    @RequestMapping(value = "getNewId", method = RequestMethod.GET)
+    public int getNewId() {
+        return mongoDBRepository.generateID();
+    }
+
     @RequestMapping(value = "updateShape", method = RequestMethod.POST)
     public boolean updateShape(@RequestBody byte[] bytes) {
         String json = new String(bytes, StandardCharsets.UTF_8);

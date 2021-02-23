@@ -3,7 +3,7 @@ package exercise1.model.DBLayer;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import exercise1.IMVC.IModel;
-import exercise1.model.Shapes.*;
+import exercise1.model.Shapes.Shape;
 import exercise1.model.Utils.Converter;
 import org.bson.Document;
 import org.bson.conversions.Bson;
@@ -139,9 +139,8 @@ public class MongoDBRepository implements IModel {
     public int generateID() {
         int id = 0;
         if (authCorrect) {
-            Bson sortQ = set("_id", -1);
             db.establishDefaultConnection(username, password);
-            ArrayList<Document> docList = db.getCollection().find().limit(1).sort(sortQ).into(new ArrayList<>());
+            ArrayList<Document> docList = db.getCollection().find().limit(1).sort(new Document("_id", -1)).into(new ArrayList<>());
             db.closeConnection();
             if (!docList.isEmpty()) {
                 for (Document document : docList) {

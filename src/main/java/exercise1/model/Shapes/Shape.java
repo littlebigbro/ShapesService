@@ -8,15 +8,14 @@ import exercise1.model.IActions.IMovable;
 import exercise1.model.IActions.IRollable;
 import exercise1.model.IActions.IScalebale;
 import exercise1.model.Utils.Utils;
-import org.bson.types.ObjectId;
 
 import java.util.List;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
 @JsonSubTypes({
-        @JsonSubTypes.Type(value = Triangle.class, name = "Triangle"),
-        @JsonSubTypes.Type(value = Circle.class, name = "Circle"),
-        @JsonSubTypes.Type(value = Rectangle.class, name = "Rectangle"),
+        @JsonSubTypes.Type(value = Triangle.class, name = "TRIANGLE"),
+        @JsonSubTypes.Type(value = Circle.class, name = "CIRCLE"),
+        @JsonSubTypes.Type(value = Rectangle.class, name = "RECTANGLE"),
 })
 
 @JsonAutoDetect
