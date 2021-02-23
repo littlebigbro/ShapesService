@@ -128,7 +128,7 @@ public class MongoDBRepository implements IModel {
                 updatedParams.add(set("points", document.get("points")));
             }
             db.establishDefaultConnection(username, password);
-            findQ = new BasicDBObject("_id", document.get("_id"));
+            findQ = new BasicDBObject("_id", new ObjectId(document.get("_id").toString()));
             db.getCollection().updateOne(findQ, updatedParams);
             db.closeConnection();
             return true;

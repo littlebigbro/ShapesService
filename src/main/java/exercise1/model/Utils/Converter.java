@@ -21,6 +21,7 @@ public class Converter {
 
     public static Document ShapeToDocument(Shape shape) {
         DBObject dbObject = new BasicDBObject();
+        dbObject.put("_id",shape.get_id());
         dbObject.put("id", shape.getId());
         dbObject.put("shapeType", shape.getName());
         if (shape.getRadius() > 0) {
