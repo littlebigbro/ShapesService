@@ -21,7 +21,9 @@ public class Converter {
 
     public static Document ShapeToDocument(Shape shape) {
         DBObject dbObject = new BasicDBObject();
-        dbObject.put("_id",shape.get_id());
+        if (shape.get_id() != null && !shape.get_id().isEmpty()) {
+            dbObject.put("_id", shape.get_id());
+        }
         dbObject.put("id", shape.getId());
         dbObject.put("shapeType", shape.getName());
         if (shape.getRadius() > 0) {
@@ -108,7 +110,7 @@ public class Converter {
             e.printStackTrace();
         }
         List<Shape> resultShapes = new ArrayList<>();
-        for(Shape shape : tempShapes) {
+        for (Shape shape : tempShapes) {
             if (ShapeTypes.CIRCLE.toString().equalsIgnoreCase(shape.getName())) {
                 Circle circle = (Circle) shape;
                 resultShapes.add(circle);

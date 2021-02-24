@@ -43,18 +43,22 @@ public class Rectangle extends Shape {
 
     @Override
     public void roll(double angle) {
+        double radian = Math.toRadians(angle);
         for (Point point : points) {
-            point.setX(center.getX() + (point.getX() - center.getX()) * Math.cos(angle) - (point.getY() - center.getY()) * Math.sin(angle));
-            point.setY(center.getY() + (point.getY() - center.getY()) * Math.cos(angle) + (point.getX() - center.getX()) * Math.sin(angle));
-
+            double tempX = center.getX() + ((point.getX() - center.getX()) * Math.cos(radian)) - ((point.getY() - center.getY()) * Math.sin(radian));
+            double tempY = center.getY() + ((point.getY() - center.getY()) * Math.cos(radian)) + ((point.getX() - center.getX()) * Math.sin(radian));
+            point.setX(tempX);
+            point.setY(tempY);
         }
     }
 
     @Override
     public void changeSize(double scaleFactor) {
         for (Point point : points) {
-            point.setX(center.getX() + scaleFactor * (point.getX() - center.getX()));
-            point.setY(center.getY() + scaleFactor * (point.getY() - center.getY()));
+            double tempX = center.getX() + scaleFactor * (point.getX() - center.getX());
+            double tempY = center.getY() + scaleFactor * (point.getY() - center.getY());
+            point.setX(tempX);
+            point.setY(tempY);
         }
     }
 }
