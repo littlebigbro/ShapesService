@@ -40,7 +40,7 @@ public class ZKController implements IController {
         return mongoDBRepository.documentCount();
     }
 
-    @RequestMapping(value = "getById", method = RequestMethod.GET)
+    @RequestMapping(value = "getById", method = RequestMethod.POST)
     public String getById(@RequestBody byte[] bytes) {
         String _id = new String(bytes, StandardCharsets.UTF_8);
         return Converter.shapesListToJSON(mongoDBRepository.findById(_id));
