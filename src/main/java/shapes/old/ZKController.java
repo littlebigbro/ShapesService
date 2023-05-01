@@ -2,12 +2,7 @@ package shapes.old;
 
 public class ZKController {
 /*
-    @Autowired
-    private MongoDBRepository mongoDBRepository;
 
-    public ZKController(IModel model) {
-        this.mongoDBRepository = (MongoDBRepository) model;
-    }
 
     @Override
     @RequestMapping(value = "auth", method = RequestMethod.POST)

@@ -18,10 +18,10 @@
     </parent>
 
     <dependencies>
-<!--        <dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-rest</artifactId>
-        </dependency>-->
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
 
         <!--DataBase support-->
         <dependency>
@@ -33,7 +33,6 @@
             <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
         </dependency>
-
 <!--        <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>

@@ -8,12 +8,10 @@ import java.io.Serializable;
 public class ShapeType implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name ="shapetype_id")
+    @Column(name = "shapetype_id")
+    @SequenceGenerator(name = "shapeTypeIdSeq", sequenceName = "shapetype_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "shapeTypeIdSeq")
     private int shapeTypeId;
-
-    @OneToOne(mappedBy = "shapeType")
-    private Shape shape;
 
     @Column(name = "systemname")
     private String systemName;
@@ -35,14 +33,6 @@ public class ShapeType implements Serializable {
 
     public void setShapeTypeId(int shapeTypeId) {
         this.shapeTypeId = shapeTypeId;
-    }
-
-    public Shape getShape() {
-        return shape;
-    }
-
-    public void setShape(Shape shape) {
-        this.shape = shape;
     }
 
     public String getSystemName() {

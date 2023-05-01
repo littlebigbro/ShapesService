@@ -1,37 +1,39 @@
 package shapes.domain;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
-import java.util.Date;
-import java.util.List;
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "shape")
-public class Shape {
+public class Shape implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "shape_id")
+    @SequenceGenerator(name = "shapeIdSeq", sequenceName = "shape_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "shapeIdSeq")
     private int shapeId;
 
-    @OneToOne()
-    @JoinColumn(name = "shapetype_id", referencedColumnName = "shapetype_id")
-    private ShapeType shapeType;
-
-    @OneToOne(mappedBy = "shape")
-    private RadiusInfo radiusInfo;
-
+    @CreationTimestamp
     @Column(name = "created")
-    private Date created;
+    private LocalDateTime created;
 
+    @UpdateTimestamp
     @Column(name = "updated")
-    private Date updated;
+    private LocalDateTime updated;
 
     @Column(name = "deleted")
     private boolean deleted;
 
-    @OneToMany(mappedBy = "parentShape")
-    private List<Point> points;
-
     public Shape() {
+    }
+
+    public Shape(LocalDateTime created, LocalDateTime updated, boolean deleted) {
+        this.created = created;
+        this.updated = updated;
+        this.deleted = deleted;
     }
 
     public int getShapeId() {
@@ -42,43 +44,19 @@ public class Shape {
         this.shapeId = shapeId;
     }
 
-    public List<Point> getPoints() {
-        return points;
-    }
-
-    public void setPoints(List<Point> points) {
-        this.points = points;
-    }
-
-    public ShapeType getShapeType() {
-        return shapeType;
-    }
-
-    public void setShapeType(ShapeType shapeType) {
-        this.shapeType = shapeType;
-    }
-
-    public RadiusInfo getRadiusInfo() {
-        return radiusInfo;
-    }
-
-    public void setRadiusInfo(RadiusInfo radiusInfo) {
-        this.radiusInfo = radiusInfo;
-    }
-
-    public Date getCreated() {
+    public LocalDateTime getCreated() {
         return created;
     }
 
-    public void setCreated(Date created) {
+    public void setCreated(LocalDateTime created) {
         this.created = created;
     }
 
-    public Date getUpdated() {
+    public LocalDateTime getUpdated() {
         return updated;
     }
 
-    public void setUpdated(Date updated) {
+    public void setUpdated(LocalDateTime updated) {
         this.updated = updated;
     }
 

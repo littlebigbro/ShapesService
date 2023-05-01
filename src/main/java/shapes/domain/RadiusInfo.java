@@ -1,23 +1,25 @@
 package shapes.domain;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "radius_info")
-public class RadiusInfo {
+public class RadiusInfo implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name ="radius_id")
+    @Column(name = "radius_id")
+    @SequenceGenerator(name = "radiusIdSeq", sequenceName = "radius_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "radiusIdSeq")
     private int radiusId;
-
-    @OneToOne()
-    @JoinColumn(name = "shape_id", referencedColumnName = "shape_id")
-    private Shape shape;
 
     @Column(name = "radius")
     private double radius;
 
     public RadiusInfo() {
+    }
+
+    public RadiusInfo(double radius) {
+        this.radius = radius;
     }
 
     public int getRadiusId() {
@@ -26,14 +28,6 @@ public class RadiusInfo {
 
     public void setRadiusId(int radiusId) {
         this.radiusId = radiusId;
-    }
-
-    public Shape getShape() {
-        return shape;
-    }
-
-    public void setShape(Shape shape) {
-        this.shape = shape;
     }
 
     public double getRadius() {

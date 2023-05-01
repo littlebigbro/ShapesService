@@ -1,18 +1,16 @@
 package shapes.domain;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "point")
-public class Point {
+public class Point implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "point_id")
+    @SequenceGenerator(name = "pointIdSeq", sequenceName = "point_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pointIdSeq")
     private int pointId;
-
-    @ManyToOne
-    @JoinColumn(name = "shape_id", referencedColumnName = "shape_id")
-    private Shape parentShape;
 
     @Column(name = "x")
     private double x;
@@ -49,14 +47,6 @@ public class Point {
 
     public void setY(double y) {
         this.y = y;
-    }
-
-    public Shape getParentShape() {
-        return parentShape;
-    }
-
-    public void setParentShape(Shape parentShape) {
-        this.parentShape = parentShape;
     }
 
     @Override
