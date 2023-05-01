@@ -1,5 +1,9 @@
 package shapes.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -7,6 +11,10 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "shape")
 public class Shape implements Serializable {
@@ -26,45 +34,4 @@ public class Shape implements Serializable {
 
     @Column(name = "deleted")
     private boolean deleted;
-
-    public Shape() {
-    }
-
-    public Shape(LocalDateTime created, LocalDateTime updated, boolean deleted) {
-        this.created = created;
-        this.updated = updated;
-        this.deleted = deleted;
-    }
-
-    public int getShapeId() {
-        return shapeId;
-    }
-
-    public void setShapeId(int shapeId) {
-        this.shapeId = shapeId;
-    }
-
-    public LocalDateTime getCreated() {
-        return created;
-    }
-
-    public void setCreated(LocalDateTime created) {
-        this.created = created;
-    }
-
-    public LocalDateTime getUpdated() {
-        return updated;
-    }
-
-    public void setUpdated(LocalDateTime updated) {
-        this.updated = updated;
-    }
-
-    public boolean isDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(boolean deleted) {
-        this.deleted = deleted;
-    }
 }

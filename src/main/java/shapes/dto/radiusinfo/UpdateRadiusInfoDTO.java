@@ -1,4 +1,4 @@
-package shapes.dto.shapetype;
+package shapes.dto.radiusinfo;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,8 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ShapeTypeDTO {
-    private int shapeTypeId;
-    private String systemName;
-    private String name;
+public class UpdateRadiusInfoDTO {
+    private int radiusInfoId;
+    private double radius;
 }

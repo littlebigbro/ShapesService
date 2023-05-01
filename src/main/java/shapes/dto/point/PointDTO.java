@@ -1,4 +1,4 @@
-package shapes.dto.shapetype;
+package shapes.dto.point;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,8 +9,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ShapeTypeDTO {
-    private int shapeTypeId;
-    private String systemName;
-    private String name;
+public class PointDTO {
+    private int pointId;
+    private double x;
+    private double y;
 }

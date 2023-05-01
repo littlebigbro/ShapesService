@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ShapeTypeDTO {
+public class UpdateShapeTypeDTO {
     private int shapeTypeId;
     private String systemName;
     private String name;
