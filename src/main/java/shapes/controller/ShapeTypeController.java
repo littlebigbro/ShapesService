@@ -19,7 +19,7 @@ public class ShapeTypeController {
         this.shapeTypeService = shapeTypeService;
     }
 
-    @GetMapping("/getAll")
+    @GetMapping("/all")
     public List<ShapeType> getAll() {
         return shapeTypeService.getAll();
     }
@@ -29,13 +29,13 @@ public class ShapeTypeController {
         return shapeTypeService.getById(id);
     }
 
-    @PostMapping("/create")
+    @PostMapping()
     public ResponseEntity<HttpStatus> createShapeType(@RequestBody ShapeType shapeType) {
         shapeTypeService.save(shapeType);
         return ResponseEntity.ok(HttpStatus.CREATED);
     }
 
-    @PutMapping("/update")
+    @PutMapping()
     public ResponseEntity<HttpStatus> updateShapeType(@RequestBody ShapeType shapeType) {
         shapeTypeService.save(shapeType);
         return ResponseEntity.ok(HttpStatus.OK);

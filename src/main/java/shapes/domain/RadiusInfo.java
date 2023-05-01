@@ -1,5 +1,6 @@
 package shapes.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,4 +24,13 @@ public class RadiusInfo implements Serializable {
 
     @Column(name = "radius")
     private double radius;
+
+    @JsonIgnore
+    @OneToOne()
+    @JoinColumn(name = "shape_id")
+    private Shape shape;
+
+    public void setShape(Shape shape) {
+        this.shape = shape;
+    }
 }

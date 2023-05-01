@@ -1,5 +1,6 @@
 package shapes.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,6 +26,17 @@ public class Point implements Serializable {
     private double x;
     @Column(name = "y")
     private double y;
+
+    @JsonIgnore
+    @ManyToOne(cascade = {
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.PERSIST,
+            CascadeType.REFRESH
+    },
+            fetch = FetchType.EAGER)
+    @JoinColumn(name = "shape_id")
+    private Shape shape;
 
     @Override
     public String toString() {

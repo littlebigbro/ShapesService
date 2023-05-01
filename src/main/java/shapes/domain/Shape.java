@@ -10,6 +10,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -34,4 +35,28 @@ public class Shape implements Serializable {
 
     @Column(name = "deleted")
     private boolean deleted;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "shapetype_id")
+    private ShapeType shapeType;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "shape")
+    private List<Point> points;
+
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "shape")
+    private RadiusInfo radiusInfo;
+
+    public void setRadiusInfo(RadiusInfo radiusInfo) {
+        if (radiusInfo != null) {
+            radiusInfo.setShape(this);
+        }
+        this.radiusInfo = radiusInfo;
+    }
+
+    public void setPoints(List<Point> points) {
+        if (points != null) {
+            points.forEach(point -> point.setShape(this));
+        }
+        this.points = points;
+    }
 }
