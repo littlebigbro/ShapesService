@@ -28,7 +28,6 @@ public class Rectangle extends Shape {
         points.sort(new ClockwiseComparator(center));
     }
 
-    @Override
     public void move(double x, double y) {
         double dX = x - this.center.getX();
         double dY = y - this.center.getY();
@@ -40,7 +39,6 @@ public class Rectangle extends Shape {
         this.center.setY(y);
     }
 
-    @Override
     public void roll(double angle) {
         double radian = Math.toRadians(angle);
         for (Point point : points) {
@@ -51,7 +49,6 @@ public class Rectangle extends Shape {
         }
     }
 
-    @Override
     public void changeSize(double scaleFactor) {
         for (Point point : points) {
             double tempX = center.getX() + scaleFactor * (point.getX() - center.getX());

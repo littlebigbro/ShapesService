@@ -30,12 +30,10 @@ public class Circle extends Shape {
         this.radius = params.get(2);
     }
 
-    @Override
     public double calculateArea() {
         return Utils.roundDouble(Math.PI * radius * radius);
     }
 
-    @Override
     public void move(double x, double y) {
         this.center.setX(x);
         this.center.setY(y);
@@ -43,12 +41,10 @@ public class Circle extends Shape {
         points.get(0).setY(y);
     }
 
-    @Override
     public void changeSize(double scaleFactor) {
         this.radius *= scaleFactor;
     }
 
-    @Override
     public void roll(double angle) {
     }
 }

@@ -1,4 +1,4 @@
-package shapes.dto.shapetype;
+package shapes.models.dto.shapetype;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UpdateShapeTypeDTO {
+public class ShapeTypeDTO {
     private int shapeTypeId;
     private String systemName;
     private String name;

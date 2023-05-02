@@ -1,43 +1,41 @@
 package shapes.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import shapes.domain.ShapeType;
+import shapes.models.dto.shapetype.CreateShapeTypeDTO;
+import shapes.models.dto.shapetype.ShapeTypeDTO;
+import shapes.models.dto.shapetype.UpdateShapeTypeDTO;
 import shapes.services.ShapeTypeService;
 
 import java.util.List;
 
+@AllArgsConstructor
 @RestController
 @RequestMapping("/shapeType")
 public class ShapeTypeController {
     private final ShapeTypeService shapeTypeService;
 
-    @Autowired
-    public ShapeTypeController(ShapeTypeService shapeTypeService) {
-        this.shapeTypeService = shapeTypeService;
-    }
-
     @GetMapping("/all")
-    public List<ShapeType> getAll() {
+    public List<ShapeTypeDTO> getAll() {
         return shapeTypeService.getAll();
     }
 
     @GetMapping("/{id}")
-    public ShapeType getShapeType(@PathVariable("id") int id) {
+    public ShapeTypeDTO getShapeType(@PathVariable("id") int id) {
         return shapeTypeService.getById(id);
     }
 
     @PostMapping()
-    public ResponseEntity<HttpStatus> createShapeType(@RequestBody ShapeType shapeType) {
-        shapeTypeService.save(shapeType);
+    public ResponseEntity<HttpStatus> createShapeType(@RequestBody CreateShapeTypeDTO shapeType) {
+        shapeTypeService.createShapeType(shapeType);
         return ResponseEntity.ok(HttpStatus.CREATED);
     }
 
     @PutMapping()
-    public ResponseEntity<HttpStatus> updateShapeType(@RequestBody ShapeType shapeType) {
-        shapeTypeService.save(shapeType);
+    public ResponseEntity<HttpStatus> updateShapeType(@RequestBody UpdateShapeTypeDTO shapeType) {
+        shapeTypeService.updateShapeType(shapeType);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 

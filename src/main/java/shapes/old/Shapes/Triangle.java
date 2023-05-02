@@ -28,7 +28,6 @@ public class Triangle extends Shape {
         points.sort(new ClockwiseComparator(center));
     }
 
-    @Override
     public void move(double x, double y) {
         double dX = x - this.center.getX();
         double dY = y - this.center.getY();
@@ -40,7 +39,6 @@ public class Triangle extends Shape {
         this.center.setY(y);
     }
 
-    @Override
     public void roll(double angle) {
 //        X = x0 + (x - x0) * cos(a) - (y - y0) * sin(a);
 //        Y = y0 + (y - y0) * cos(a) + (x - x0) * sin(a);
@@ -54,7 +52,7 @@ public class Triangle extends Shape {
         }
     }
 
-    @Override
+
     public void changeSize(double scaleFactor) {
         for (Point point : points) {
             double tempX = center.getX() + scaleFactor * (point.getX() - center.getX());

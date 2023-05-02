@@ -1,4 +1,4 @@
-package shapes.domain;
+package shapes.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

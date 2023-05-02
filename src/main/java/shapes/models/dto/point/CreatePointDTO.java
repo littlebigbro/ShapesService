@@ -1,4 +1,4 @@
-package shapes.dto.radiusinfo;
+package shapes.models.dto.point;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,6 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateRadiusInfoDTO {
-    private double radius;
+public class CreatePointDTO {
+    private double x;
+    private double y;
 }

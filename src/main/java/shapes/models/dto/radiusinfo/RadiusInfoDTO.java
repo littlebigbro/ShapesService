@@ -1,4 +1,4 @@
-package shapes.dto.radiusinfo;
+package shapes.models.dto.radiusinfo;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package shapes.domain;
+package shapes.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;

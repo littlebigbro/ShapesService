@@ -1,23 +1,11 @@
 package shapes.old.Shapes;
 
-import shapes.old.IActions.IMovable;
-import shapes.old.IActions.IRollable;
-import shapes.old.IActions.IScalebale;
 import shapes.old.utils.Utils;
 
 import java.util.List;
 
-/*@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
-@JsonSubTypes({
-        @JsonSubTypes.Type(value = Triangle.class, name = "TRIANGLE"),
-        @JsonSubTypes.Type(value = Circle.class, name = "CIRCLE"),
-        @JsonSubTypes.Type(value = Rectangle.class, name = "RECTANGLE"),
-})*/
-
-//@JsonAutoDetect
-public abstract class Shape implements IMovable, IScalebale, IRollable {
+public abstract class Shape {
     private static final long serialVersionUID = 1L;
-//    @JsonProperty("shapeType")
     protected String name;
     protected String ruName;
     protected List<Point> points;

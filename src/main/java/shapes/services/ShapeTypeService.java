@@ -1,43 +1,20 @@
 package shapes.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import shapes.domain.ShapeType;
-import shapes.repositories.ShapeTypeRepository;
+import shapes.models.dto.shapetype.CreateShapeTypeDTO;
+import shapes.models.dto.shapetype.ShapeTypeDTO;
+import shapes.models.dto.shapetype.UpdateShapeTypeDTO;
 
 import java.util.List;
-import java.util.Optional;
 
-@Service
-public class ShapeTypeService {
-    private final ShapeTypeRepository shapeTypeRepository;
+public interface ShapeTypeService {
 
-    @Autowired
-    public ShapeTypeService(ShapeTypeRepository shapeTypeRepository) {
-        this.shapeTypeRepository = shapeTypeRepository;
-    }
+    List<ShapeTypeDTO> getAll();
 
-    @Transactional
-    public List<ShapeType> getAll() {
-        return shapeTypeRepository.findAll();
-    }
+    ShapeTypeDTO getById(int id);
 
-    @Transactional
-    public ShapeType getById(int id) {
-        Optional<ShapeType> optional = shapeTypeRepository.findById(id);
-        return optional.orElse(null);
-    }
+    void createShapeType(CreateShapeTypeDTO shapeTypeDTO);
 
-    @Transactional
-    public void save(ShapeType shapeType) {
-        shapeTypeRepository.save(shapeType);
-    }
+    void updateShapeType(UpdateShapeTypeDTO shapeTypeDTO);
 
-    @Transactional
-    public void deleteById(int id) {
-        if (shapeTypeRepository.existsById(id)) {
-            shapeTypeRepository.deleteById(id);
-        }
-    }
+    void deleteById(int id);
 }

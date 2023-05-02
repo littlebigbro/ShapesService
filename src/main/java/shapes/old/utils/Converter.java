@@ -1,10 +1,6 @@
 package shapes.old.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import shapes.old.Factories.CircleFactory;
-import shapes.old.Factories.IShapeFactory;
-import shapes.old.Factories.RectangleFactory;
-import shapes.old.Factories.TriangleFactory;
 import shapes.old.Shapes.*;
 
 import java.io.IOException;
@@ -13,57 +9,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 public class Converter {
-
-/*    public static Document ShapeToDocument(Shape shape) {
-        DBObject dbObject = new BasicDBObject();
-        if (shape.get_id() != null && !shape.get_id().isEmpty()) {
-            dbObject.put("_id", shape.get_id());
-        }
-        dbObject.put("id", shape.getId());
-        dbObject.put("shapeType", shape.getName());
-        if (shape.getRadius() > 0) {
-            dbObject.put("radius", shape.getRadius());
-        }
-        BasicDBList pointsList = new BasicDBList();
-        for (Point point : shape.getPoints()) {
-            DBObject dbPoint = new BasicDBObject();
-            dbPoint.put("x", point.getX());
-            dbPoint.put("y", point.getY());
-            pointsList.add(dbPoint);
-        }
-        dbObject.put("points", pointsList);
-        return Document.parse(dbObject.toString());
-    }
-
-    public static Shape DBObjectToShape(DBObject dbObject) {
-        BasicDBObject shapeDBObject = (BasicDBObject) dbObject;
-        ObjectId _id = (ObjectId) shapeDBObject.get("_id");
-        int id = shapeDBObject.getInt("id");
-        String shapeType = shapeDBObject.getString("shapeType");
-        List<Double> shapeParams = new ArrayList<>();
-        BasicDBList shapePointsList = (BasicDBList) shapeDBObject.get("points");
-        for (Object object : shapePointsList) {
-            BasicDBObject pointDBObject = (BasicDBObject) object;
-            shapeParams.add(pointDBObject.getDouble("x"));
-            shapeParams.add(pointDBObject.getDouble("y"));
-        }
-        if (shapeType.equalsIgnoreCase(ShapeTypes.CIRCLE.toString())) {
-            shapeParams.add(shapeDBObject.getDouble("radius"));
-        }
-        return createShapeFactory(shapeType).createFigure(_id.toString(), id, shapeParams);
-    }*/
-
-    public static IShapeFactory createShapeFactory(String factoryName) {
-        if (ShapeTypes.CIRCLE.toString().equalsIgnoreCase(factoryName)) {
-            return new CircleFactory();
-        } else if (ShapeTypes.TRIANGLE.toString().equalsIgnoreCase(factoryName)) {
-            return new TriangleFactory();
-        } else if (ShapeTypes.RECTANGLE.toString().equalsIgnoreCase(factoryName)) {
-            return new RectangleFactory();
-        } else {
-            throw new RuntimeException(factoryName + " неизвестная фигура");
-        }
-    }
 
     public static String shapeToJSON(Shape shape) {
         StringWriter writer = new StringWriter();
