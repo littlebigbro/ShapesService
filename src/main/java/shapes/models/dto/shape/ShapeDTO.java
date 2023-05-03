@@ -6,9 +6,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import shapes.models.dto.point.PointDTO;
 import shapes.models.dto.radiusinfo.RadiusInfoDTO;
-import shapes.models.dto.shapetype.ShapeTypeDTO;
+import shapes.models.dto.shapetype.ShapeTypeForShapeDTO;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -17,9 +17,9 @@ import java.util.List;
 @AllArgsConstructor
 public class ShapeDTO {
     private int shapeId;
-    private Date created;
-    private Date updated;
-    private ShapeTypeDTO shapeType;
+    private LocalDateTime created;
+    private LocalDateTime updated;
+    private ShapeTypeForShapeDTO shapeType;
     private List<PointDTO> points;
     private RadiusInfoDTO radiusInfo;
 }

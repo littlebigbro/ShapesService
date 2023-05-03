@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import shapes.models.dto.point.CreatePointDTO;
 import shapes.models.dto.radiusinfo.CreateRadiusInfoDTO;
-import shapes.models.dto.shapetype.ShapeTypeDTO;
+import shapes.models.dto.shapetype.ShapeTypeForShapeDTO;
 
 import java.util.List;
 
