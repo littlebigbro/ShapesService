@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.jetbrains.annotations.NotNull;
 
 @Getter
 @Setter
@@ -12,9 +13,11 @@ import lombok.Setter;
 @AllArgsConstructor
 public class UpdateRadiusInfoDTO {
 
+    @NotNull
     @ApiModelProperty(value = "id радиуса в базе данных", required = true)
-    private int radiusInfoId;
+    private Long radiusInfoId;
 
+    @NotNull
     @ApiModelProperty(value = "Радиус", required = true)
-    private double radius;
+    private Double radius;
 }

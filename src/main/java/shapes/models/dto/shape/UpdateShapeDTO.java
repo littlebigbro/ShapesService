@@ -20,8 +20,9 @@ import java.util.List;
 @AllArgsConstructor
 public class UpdateShapeDTO {
 
+    @NotNull
     @ApiModelProperty(value = "id фигуры в базе данных", required = true)
-    private int shapeId;
+    private Long shapeId;
 
     @NotNull
     @ApiModelProperty(value = "Дата создания фигуры", required = true)

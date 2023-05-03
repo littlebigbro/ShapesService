@@ -16,16 +16,18 @@ import java.io.Serializable;
 @Entity
 @Table(name = "point")
 public class Point implements Serializable {
+
     @Id
     @Column(name = "point_id")
     @SequenceGenerator(name = "pointIdSeq", sequenceName = "point_id_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pointIdSeq")
-    private int pointId;
+    private Long pointId;
 
     @Column(name = "x")
-    private double x;
+    private Double x;
+
     @Column(name = "y")
-    private double y;
+    private Double y;
 
     @JsonIgnore
     @ManyToOne(cascade = {

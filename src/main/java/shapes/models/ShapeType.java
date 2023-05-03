@@ -22,7 +22,7 @@ public class ShapeType implements Serializable {
     @Column(name = "shapetype_id")
     @SequenceGenerator(name = "shapeTypeIdSeq", sequenceName = "shapetype_id_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "shapeTypeIdSeq")
-    private int shapeTypeId;
+    private Long shapeTypeId;
 
     @Column(name = "systemname")
     private String systemName;

@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.jetbrains.annotations.NotNull;
 
 @Getter
 @Setter
@@ -12,12 +13,15 @@ import lombok.Setter;
 @AllArgsConstructor
 public class PointDTO {
 
+    @NotNull
     @ApiModelProperty(value = "id точки в базе данных", required = true)
-    private int pointId;
+    private Long pointId;
 
+    @NotNull
     @ApiModelProperty(value = "Координата X", required = true)
-    private double x;
+    private Double x;
 
+    @NotNull
     @ApiModelProperty(value = "Координата Y", required = true)
-    private double y;
+    private Double y;
 }

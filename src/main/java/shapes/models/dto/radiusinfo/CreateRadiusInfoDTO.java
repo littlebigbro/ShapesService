@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.jetbrains.annotations.NotNull;
 
 @Getter
 @Setter
@@ -12,6 +13,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class CreateRadiusInfoDTO {
 
+    @NotNull
     @ApiModelProperty(value = "Радиус", required = true)
-    private double radius;
+    private Double radius;
 }

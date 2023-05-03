@@ -15,8 +15,9 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class ShapeTypeDTO {
 
+    @NotNull
     @ApiModelProperty(value = "id типа фигуры в базе данных", required = true)
-    private int shapeTypeId;
+    private Long shapeTypeId;
 
     @NotNull
     @ApiModelProperty(value = "Системное наименование типа фигуры", required = true)

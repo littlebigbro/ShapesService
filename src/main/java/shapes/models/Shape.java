@@ -19,11 +19,12 @@ import java.util.List;
 @Entity
 @Table(name = "shape")
 public class Shape implements Serializable {
+
     @Id
     @Column(name = "shape_id")
     @SequenceGenerator(name = "shapeIdSeq", sequenceName = "shape_id_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "shapeIdSeq")
-    private int shapeId;
+    private Long shapeId;
 
     @CreationTimestamp
     @Column(name = "created")
@@ -34,7 +35,7 @@ public class Shape implements Serializable {
     private LocalDateTime updated;
 
     @Column(name = "deleted")
-    private boolean deleted;
+    private Boolean deleted;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "shapetype_id")

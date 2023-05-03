@@ -16,14 +16,15 @@ import java.io.Serializable;
 @Entity
 @Table(name = "radius_info")
 public class RadiusInfo implements Serializable {
+
     @Id
     @Column(name = "radius_id")
     @SequenceGenerator(name = "radiusIdSeq", sequenceName = "radius_id_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "radiusIdSeq")
-    private int radiusInfoId;
+    private Long radiusInfoId;
 
     @Column(name = "radius")
-    private double radius;
+    private Double radius;
 
     @JsonIgnore
     @OneToOne()

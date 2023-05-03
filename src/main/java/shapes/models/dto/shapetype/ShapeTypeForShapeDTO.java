@@ -13,8 +13,9 @@ import org.jetbrains.annotations.NotNull;
 @AllArgsConstructor
 public class ShapeTypeForShapeDTO {
 
+    @NotNull
     @ApiModelProperty(value = "id типа фигуры в базе данных", required = true)
-    private int shapeTypeId;
+    private Long shapeTypeId;
 
     @NotNull
     @ApiModelProperty(value = "Системное наименование типа фигуры", required = true)
