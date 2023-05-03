@@ -1,5 +1,8 @@
 package shapes.controller;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,28 +21,63 @@ import java.util.List;
 public class ShapesController implements BaseController {
     private final ShapesService shapesService;
 
+    @ApiOperation(
+            value = "Получение всех фигур",
+            notes = "Используется для получения всех фигур из базы данных"
+    )
+    @ApiResponse(code = 200, message = "OK")
     @GetMapping("/all")
     public ResponseEntity<List<ShapeDTO>> getAll() {
         return shapesService.getAll();
     }
 
+    @ApiOperation(
+            value = "Получение фигуры",
+            notes = "Используется для получения фигуры по id из базы данных"
+    )
+    @ApiResponses(
+            value = {
+                    @ApiResponse(code = 200, message = "OK"),
+                    @ApiResponse(code = 404, message = "Фигура не найдена")
+            }
+    )
     @GetMapping("/{id}")
     public ResponseEntity<ShapeDTO> getById(@PathVariable("id") int id) throws NotFoundException {
         return shapesService.getById(id);
     }
 
+    @ApiOperation(
+            value = "Создание фигуры",
+            notes = "Используется для создания фигуры и сохранения её в базу данных"
+    )
+    @ApiResponse(code = 201, message = "Фигура создана")
     @PostMapping()
     public ResponseEntity<HttpStatus> createShape(@RequestBody CreateShapeDTO shape) {
         return shapesService.createShape(shape);
     }
 
+    @ApiOperation(
+            value = "Обновление фигуры",
+            notes = "Используется для обновления фигуры в базе данных"
+    )
+    @ApiResponse(code = 200, message = "OK")
     @PutMapping()
     public ResponseEntity<HttpStatus> updateShape(@RequestBody UpdateShapeDTO shape) {
         return shapesService.updateShape(shape);
     }
 
+    @ApiOperation(
+            value = "Удаление фигуры",
+            notes = "Используется для удаления фигуры по id из базы данных"
+    )
+    @ApiResponses(
+            value = {
+                    @ApiResponse(code = 204, message = "Фигура удалена"),
+                    @ApiResponse(code = 404, message = "Фигура не найдена")
+            }
+    )
     @DeleteMapping("/{id}")
-    public ResponseEntity<HttpStatus> deleteShape(@PathVariable("id") int id) throws NotFoundException{
+    public ResponseEntity<HttpStatus> deleteShape(@PathVariable("id") int id) throws NotFoundException {
         return shapesService.deleteById(id);
     }
 }

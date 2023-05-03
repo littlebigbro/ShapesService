@@ -1,6 +1,6 @@
 package shapes.old.utils;
 
-import shapes.old.Shapes.Point;
+import shapes.models.Point;
 
 import java.util.Comparator;
 
