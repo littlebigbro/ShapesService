@@ -1,5 +1,6 @@
 package shapes.old.Shapes;
 
+import shapes.models.Point;
 import shapes.old.utils.Utils;
 
 import java.util.List;
@@ -16,19 +17,6 @@ public abstract class Shape {
     protected int id;
     private static int IDCounter;
 
-    protected Shape() {
-    }
-
-    protected Shape(List<Double> params) {
-        this.id = generateID();
-        this.params = params;
-    }
-
-    protected Shape(String _id, int id, List<Double> params) {
-        this._id = _id;
-        this.id = id;
-        this.params = params;
-    }
 
     public double calculateArea() {
         //Формула площади Гаусса
@@ -47,55 +35,37 @@ public abstract class Shape {
         return Utils.roundDouble(Math.abs((a + b - c - d) / 2));
     }
 
-    protected int generateID() {
-        return ++IDCounter;
-    }
-
-    protected int generateID(int _id) {
-        return ++IDCounter;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getRuName() {
-        return ruName;
-    }
-
-    public Point getCenter() {
-        return center;
-    }
-
-    public double getRadius() {
-        return radius;
-    }
-
-    public List<Point> getPoints() {
-        return points;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String get_id() {
-        return _id;
-    }
-
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getRuName()).append(" c id = ").append(getId()).append(", и точками: ");
-        for (int i = 0; i < points.size(); i++) {
-            sb.append("x = ").append(points.get(i).getX()).append(", y = ").append(points.get(i).getY());
-            if (i + 1 != points.size()) {
-                sb.append(";");
-            }
+    public void move(double x, double y) {
+        double dX = x - this.center.getX();
+        double dY = y - this.center.getY();
+        for (Point point : points) {
+            point.setX(point.getX() + dX);
+            point.setY(point.getY() + dY);
         }
-        return sb.toString();
+        this.center.setX(x);
+        this.center.setY(y);
+    }
+
+    public void roll(double angle) {
+//        X = x0 + (x - x0) * cos(a) - (y - y0) * sin(a);
+//        Y = y0 + (y - y0) * cos(a) + (x - x0) * sin(a);
+//          где, (x0, y0) — центр, точка вокруг которой нужно вращать
+        double radian = Math.toRadians(angle);
+        for (Point point : points) {
+            double tempX = center.getX() + ((point.getX() - center.getX()) * Math.cos(radian)) - ((point.getY() - center.getY()) * Math.sin(radian));
+            double tempY = center.getY() + ((point.getY() - center.getY()) * Math.cos(radian)) + ((point.getX() - center.getX()) * Math.sin(radian));
+            point.setX(tempX);
+            point.setY(tempY);
+        }
+    }
+
+
+    public void changeSize(double scaleFactor) {
+        for (Point point : points) {
+            double tempX = center.getX() + scaleFactor * (point.getX() - center.getX());
+            double tempY = center.getY() + scaleFactor * (point.getY() - center.getY());
+            point.setX(tempX);
+            point.setY(tempY);
+        }
     }
 }
