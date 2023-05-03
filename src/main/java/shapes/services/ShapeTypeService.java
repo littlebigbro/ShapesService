@@ -13,11 +13,11 @@ public interface ShapeTypeService {
 
     ResponseEntity<List<ShapeTypeDTO>> getAll();
 
-    ResponseEntity<ShapeTypeDTO> getById(int id) throws NotFoundException;
+    ResponseEntity<ShapeTypeDTO> getById(long id) throws NotFoundException;
 
     ResponseEntity<HttpStatus> createShapeType(CreateShapeTypeDTO shapeTypeDTO);
 
     ResponseEntity<HttpStatus> updateShapeType(UpdateShapeTypeDTO shapeTypeDTO);
 
-    ResponseEntity<HttpStatus> deleteById(int id) throws NotFoundException;
+    ResponseEntity<HttpStatus> deleteById(long id) throws NotFoundException;
 }

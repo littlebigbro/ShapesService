@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import shapes.models.ShapeType;
 
 @Repository
-public interface ShapeTypeRepository extends JpaRepository<ShapeType, Integer> {
+public interface ShapeTypeRepository extends JpaRepository<ShapeType, Long> {
 }

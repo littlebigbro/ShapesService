@@ -34,7 +34,7 @@ public class ShapeTypeServiceImpl implements ShapeTypeService {
     }
 
     @Override
-    public ResponseEntity<ShapeTypeDTO> getById(int id) throws NotFoundException {
+    public ResponseEntity<ShapeTypeDTO> getById(long id) throws NotFoundException {
         ShapeType shapeType = shapeTypeRepository.findById(id).orElseThrow(() -> new NotFoundException(id, ShapeType.class));
         ShapeTypeDTO shapeTypeDTO = ShapeTypesMapper.MAPPER.mapToShapeTypeDTO(shapeType);
         return new ResponseEntity<>(shapeTypeDTO, HttpStatus.OK);
@@ -58,7 +58,7 @@ public class ShapeTypeServiceImpl implements ShapeTypeService {
 
     @Transactional
     @Override
-    public ResponseEntity<HttpStatus> deleteById(int id) throws NotFoundException {
+    public ResponseEntity<HttpStatus> deleteById(long id) throws NotFoundException {
         if (!shapeTypeRepository.existsById(id)) {
             throw new NotFoundException(id, ShapeType.class);
         }

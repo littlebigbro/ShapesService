@@ -1,4 +1,4 @@
-package shapes.old.utils;
+package shapes.utils;
 
 import shapes.models.Point;
 

@@ -41,7 +41,7 @@ public class ShapeTypeController implements BaseController {
             }
     )
     @GetMapping("/{id}")
-    public ResponseEntity<ShapeTypeDTO> getShapeType(@PathVariable("id") int id) throws NotFoundException {
+    public ResponseEntity<ShapeTypeDTO> getShapeType(@PathVariable("id") long id) throws NotFoundException {
         return shapeTypeService.getById(id);
     }
 
@@ -78,7 +78,7 @@ public class ShapeTypeController implements BaseController {
             }
     )
     @DeleteMapping("/{id}")
-    public ResponseEntity<HttpStatus> deleteShapeType(@PathVariable("id") int id) throws NotFoundException {
+    public ResponseEntity<HttpStatus> deleteShapeType(@PathVariable("id") long id) throws NotFoundException {
         shapeTypeService.deleteById(id);
         return ResponseEntity.ok(HttpStatus.OK);
     }

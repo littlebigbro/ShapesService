@@ -8,12 +8,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import shapes.exceptions.NotFoundException;
+import shapes.models.dto.action.MoveDTO;
+import shapes.models.dto.action.RollDTO;
+import shapes.models.dto.action.ScaleDTO;
 import shapes.models.dto.shape.CreateShapeDTO;
 import shapes.models.dto.shape.ShapeDTO;
 import shapes.models.dto.shape.UpdateShapeDTO;
 import shapes.services.ShapesService;
 
 import java.util.List;
+import java.util.Map;
 
 @AllArgsConstructor
 @RestController
@@ -42,7 +46,7 @@ public class ShapesController implements BaseController {
             }
     )
     @GetMapping("/{id}")
-    public ResponseEntity<ShapeDTO> getById(@PathVariable("id") int id) throws NotFoundException {
+    public ResponseEntity<ShapeDTO> getById(@PathVariable("id") long id) throws NotFoundException {
         return shapesService.getById(id);
     }
 
@@ -77,7 +81,67 @@ public class ShapesController implements BaseController {
             }
     )
     @DeleteMapping("/{id}")
-    public ResponseEntity<HttpStatus> deleteShape(@PathVariable("id") int id) throws NotFoundException {
+    public ResponseEntity<HttpStatus> deleteShape(@PathVariable("id") long id) throws NotFoundException {
         return shapesService.deleteById(id);
+    }
+
+    @ApiOperation(
+            value = "Расчет площади фигуры",
+            notes = "Используется для расчета площади фигуры"
+    )
+    @ApiResponses(
+            value = {
+                    @ApiResponse(code = 200, message = ""),
+                    @ApiResponse(code = 404, message = "Фигура не найдена")
+            }
+    )
+    @GetMapping("/area/{id}")
+    public ResponseEntity<Map<String, Double>> calculateArea(@PathVariable("id") long id) throws NotFoundException {
+        return shapesService.calculateArea(id);
+    }
+
+    @ApiOperation(
+            value = "Поворот фигуры",
+            notes = "Используется для поворота фигуры относительно её центра"
+    )
+    @ApiResponses(
+            value = {
+                    @ApiResponse(code = 200, message = ""),
+                    @ApiResponse(code = 404, message = "Фигура не найдена")
+            }
+    )
+    @PostMapping("/roll")
+    public ResponseEntity<ShapeDTO> roll(@RequestBody RollDTO rollDTO) throws NotFoundException {
+        return shapesService.roll(rollDTO);
+    }
+
+    @ApiOperation(
+            value = "Перемещение фигуры",
+            notes = "Используется для перемещение фигуры относительно её центра"
+    )
+    @ApiResponses(
+            value = {
+                    @ApiResponse(code = 200, message = ""),
+                    @ApiResponse(code = 404, message = "Фигура не найдена")
+            }
+    )
+    @PostMapping("/move")
+    public ResponseEntity<ShapeDTO> move(@RequestBody MoveDTO moveDTO) throws NotFoundException {
+        return shapesService.move(moveDTO);
+    }
+
+    @ApiOperation(
+            value = "Масштабирование фигуры",
+            notes = "Используется для изменения масштаба фигуры относительно её центра"
+    )
+    @ApiResponses(
+            value = {
+                    @ApiResponse(code = 200, message = ""),
+                    @ApiResponse(code = 404, message = "Фигура не найдена")
+            }
+    )
+    @PostMapping("/scale")
+    public ResponseEntity<ShapeDTO> scale(@RequestBody ScaleDTO scaleDTO) throws NotFoundException {
+        return shapesService.scale(scaleDTO);
     }
 }
