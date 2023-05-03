@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import shapes.exceptions.NotFoundException;
 import shapes.models.dto.shape.CreateShapeDTO;
 import shapes.models.dto.shape.ShapeDTO;
 import shapes.models.dto.shape.UpdateShapeDTO;
@@ -14,34 +15,31 @@ import java.util.List;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/shapes")
-public class ShapesController {
+public class ShapesController implements BaseController {
     private final ShapesService shapesService;
 
     @GetMapping("/all")
-    public List<ShapeDTO> getAll() {
+    public ResponseEntity<List<ShapeDTO>> getAll() {
         return shapesService.getAll();
     }
 
     @GetMapping("/{id}")
-    public ShapeDTO getById(@PathVariable("id") int id) {
+    public ResponseEntity<ShapeDTO> getById(@PathVariable("id") int id) throws NotFoundException {
         return shapesService.getById(id);
     }
 
     @PostMapping()
     public ResponseEntity<HttpStatus> createShape(@RequestBody CreateShapeDTO shape) {
-        shapesService.createShape(shape);
-        return ResponseEntity.ok(HttpStatus.CREATED);
+        return shapesService.createShape(shape);
     }
 
     @PutMapping()
     public ResponseEntity<HttpStatus> updateShape(@RequestBody UpdateShapeDTO shape) {
-        shapesService.updateShape(shape);
-        return ResponseEntity.ok(HttpStatus.OK);
+        return shapesService.updateShape(shape);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<HttpStatus> deleteShape(@PathVariable("id") int id) {
-        shapesService.deleteById(id);
-        return ResponseEntity.ok(HttpStatus.OK);
+    public ResponseEntity<HttpStatus> deleteShape(@PathVariable("id") int id) throws NotFoundException{
+        return shapesService.deleteById(id);
     }
 }

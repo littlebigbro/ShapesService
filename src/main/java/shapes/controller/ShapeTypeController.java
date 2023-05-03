@@ -1,9 +1,11 @@
 package shapes.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import shapes.exceptions.NotFoundException;
 import shapes.models.dto.shapetype.CreateShapeTypeDTO;
 import shapes.models.dto.shapetype.ShapeTypeDTO;
 import shapes.models.dto.shapetype.UpdateShapeTypeDTO;
@@ -14,16 +16,17 @@ import java.util.List;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/shapeType")
-public class ShapeTypeController {
+public class ShapeTypeController implements BaseController {
     private final ShapeTypeService shapeTypeService;
 
+    @Operation()
     @GetMapping("/all")
-    public List<ShapeTypeDTO> getAll() {
+    public ResponseEntity<List<ShapeTypeDTO>> getAll() {
         return shapeTypeService.getAll();
     }
 
     @GetMapping("/{id}")
-    public ShapeTypeDTO getShapeType(@PathVariable("id") int id) {
+    public ResponseEntity<ShapeTypeDTO> getShapeType(@PathVariable("id") int id) throws NotFoundException {
         return shapeTypeService.getById(id);
     }
 
@@ -40,7 +43,7 @@ public class ShapeTypeController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<HttpStatus> deleteShapeType(@PathVariable("id") int id) {
+    public ResponseEntity<HttpStatus> deleteShapeType(@PathVariable("id") int id) throws NotFoundException {
         shapeTypeService.deleteById(id);
         return ResponseEntity.ok(HttpStatus.OK);
     }

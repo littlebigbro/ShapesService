@@ -1,8 +1,11 @@
 package shapes.services.impl;
 
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import shapes.exceptions.NotFoundException;
 import shapes.mappers.ShapeTypesMapper;
 import shapes.models.ShapeType;
 import shapes.models.dto.shapetype.CreateShapeTypeDTO;
@@ -12,7 +15,6 @@ import shapes.repositories.ShapeTypeRepository;
 import shapes.services.ShapeTypeService;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -22,42 +24,45 @@ public class ShapeTypeServiceImpl implements ShapeTypeService {
     private final ShapeTypeRepository shapeTypeRepository;
 
     @Override
-    public List<ShapeTypeDTO> getAll() {
+    public ResponseEntity<List<ShapeTypeDTO>> getAll() {
         List<ShapeType> shapes = shapeTypeRepository.findAll();
-        return shapes.stream()
-                .map(ShapeTypesMapper.MAPPER::mapToShapeTypeDTO)
-                .collect(Collectors.toList());
+        return new ResponseEntity<>(
+                shapes.stream()
+                        .map(ShapeTypesMapper.MAPPER::mapToShapeTypeDTO)
+                        .collect(Collectors.toList()),
+                HttpStatus.OK);
     }
 
     @Override
-    public ShapeTypeDTO getById(int id) {
-        Optional<ShapeType> shapeType = shapeTypeRepository.findById(id);
-        if (shapeType.isPresent()) {
-            return ShapeTypesMapper.MAPPER.mapToShapeTypeDTO(shapeType.get());
-        }
-        //todo: throw exception;
-        return null;
+    public ResponseEntity<ShapeTypeDTO> getById(int id) throws NotFoundException {
+        ShapeType shapeType = shapeTypeRepository.findById(id).orElseThrow(() -> new NotFoundException(id, ShapeType.class));
+        ShapeTypeDTO shapeTypeDTO = ShapeTypesMapper.MAPPER.mapToShapeTypeDTO(shapeType);
+        return new ResponseEntity<>(shapeTypeDTO, HttpStatus.OK);
     }
 
     @Transactional
     @Override
-    public void createShapeType(CreateShapeTypeDTO shapeTypeDTO) {
+    public ResponseEntity<HttpStatus> createShapeType(CreateShapeTypeDTO shapeTypeDTO) {
         ShapeType shapeType = ShapeTypesMapper.MAPPER.mapToShapeType(shapeTypeDTO);
         shapeTypeRepository.save(shapeType);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @Transactional
     @Override
-    public void updateShapeType(UpdateShapeTypeDTO shapeTypeDTO) {
+    public ResponseEntity<HttpStatus> updateShapeType(UpdateShapeTypeDTO shapeTypeDTO) {
         ShapeType shapeType = ShapeTypesMapper.MAPPER.mapToShapeType(shapeTypeDTO);
         shapeTypeRepository.save(shapeType);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @Transactional
     @Override
-    public void deleteById(int id) {
-        if (shapeTypeRepository.existsById(id)) {
-            shapeTypeRepository.deleteById(id);
+    public ResponseEntity<HttpStatus> deleteById(int id) throws NotFoundException {
+        if (!shapeTypeRepository.existsById(id)) {
+            throw new NotFoundException(id, ShapeType.class);
         }
+        shapeTypeRepository.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

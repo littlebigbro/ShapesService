@@ -11,16 +11,19 @@ import shapes.models.dto.shape.UpdateShapeDTO;
 @Mapper(componentModel = "spring")
 public interface ShapesMapper {
     ShapesMapper MAPPER = Mappers.getMapper(ShapesMapper.class);
+
     // Out
     @Mapping(target = "shapeType", source = "shapeType")
     @Mapping(target = "points", source = "points")
     @Mapping(target = "radiusInfo", source = "radiusInfo")
     ShapeDTO mapToShapeDTO(Shape shape);
+
     //Update
     @Mapping(target = "shapeType", source = "shapeType")
     @Mapping(target = "points", source = "points")
     @Mapping(target = "radiusInfo", source = "radiusInfo")
     Shape mapToShape(UpdateShapeDTO shapeDTO);
+
     //Create
     @Mapping(target = "shapeType", source = "shapeType")
     @Mapping(target = "points", source = "points")

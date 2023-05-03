@@ -1,5 +1,8 @@
 package shapes.services;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import shapes.exceptions.NotFoundException;
 import shapes.models.dto.shape.CreateShapeDTO;
 import shapes.models.dto.shape.ShapeDTO;
 import shapes.models.dto.shape.UpdateShapeDTO;
@@ -8,13 +11,13 @@ import java.util.List;
 
 public interface ShapesService {
 
-    List<ShapeDTO> getAll();
+    ResponseEntity<List<ShapeDTO>> getAll();
 
-    ShapeDTO getById(int id);
+    ResponseEntity<ShapeDTO> getById(int id) throws NotFoundException;
 
-    void createShape(CreateShapeDTO shapeDTO);
+    ResponseEntity<HttpStatus> createShape(CreateShapeDTO shapeDTO);
 
-    void updateShape(UpdateShapeDTO shapeDTO);
+    ResponseEntity<HttpStatus> updateShape(UpdateShapeDTO shapeDTO);
 
-    void deleteById(int id);
+    ResponseEntity<HttpStatus> deleteById(int id) throws NotFoundException;
 }

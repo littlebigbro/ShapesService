@@ -15,7 +15,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CreateShapeDTO {
-    private ShapeTypeDTO shapeType;
+
+    private ShapeTypeForShapeDTO shapeType;
     private List<CreatePointDTO> points;
     private CreateRadiusInfoDTO radiusInfo;
 }
