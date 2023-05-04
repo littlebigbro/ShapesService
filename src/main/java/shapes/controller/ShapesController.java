@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import shapes.exceptions.NotFoundException;
+import shapes.models.dto.action.CalculatedAreaDTO;
 import shapes.models.dto.action.MoveDTO;
 import shapes.models.dto.action.RollDTO;
 import shapes.models.dto.action.ScaleDTO;
@@ -17,7 +18,6 @@ import shapes.models.dto.shape.UpdateShapeDTO;
 import shapes.services.ShapesService;
 
 import java.util.List;
-import java.util.Map;
 
 @AllArgsConstructor
 @RestController
@@ -96,7 +96,7 @@ public class ShapesController implements BaseController {
             }
     )
     @GetMapping("/area/{id}")
-    public ResponseEntity<Map<String, Double>> calculateArea(@PathVariable("id") long id) throws NotFoundException {
+    public ResponseEntity<CalculatedAreaDTO> calculateArea(@PathVariable("id") long id) throws NotFoundException {
         return shapesService.calculateArea(id);
     }
 

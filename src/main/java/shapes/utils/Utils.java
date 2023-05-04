@@ -4,6 +4,7 @@ import shapes.models.Point;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Collection;
 import java.util.List;
 
 public class Utils {
@@ -23,6 +24,7 @@ public class Utils {
         center.setY(centerY / points.size());
         return center;
     }
+
     /**
      * Возвращает округленное число типа double в формате #.##
      */
@@ -32,11 +34,11 @@ public class Utils {
                 .doubleValue();
     }
 
-    public static boolean isNotEmpty(List<?> lst) {
-        return !isEmpty(lst);
+    public static boolean collectionIsNotEmpty(Collection<?> collection) {
+        return !collectionIsEmpty(collection);
     }
 
-    public static boolean isEmpty(List<?> lst) {
-        return lst == null || lst.isEmpty();
+    public static boolean collectionIsEmpty(Collection<?> collection) {
+        return collection == null || collection.isEmpty();
     }
 }

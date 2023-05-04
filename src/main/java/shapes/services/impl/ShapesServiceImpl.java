@@ -9,6 +9,7 @@ import shapes.exceptions.NotFoundException;
 import shapes.mappers.ShapesMapper;
 import shapes.models.Point;
 import shapes.models.Shape;
+import shapes.models.dto.action.CalculatedAreaDTO;
 import shapes.models.dto.action.MoveDTO;
 import shapes.models.dto.action.RollDTO;
 import shapes.models.dto.action.ScaleDTO;
@@ -20,9 +21,7 @@ import shapes.services.ShapesService;
 import shapes.utils.ClockwiseComparator;
 import shapes.utils.Utils;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -75,11 +74,11 @@ public class ShapesServiceImpl implements ShapesService {
     }
 
     @Override
-    public ResponseEntity<Map<String, Double>> calculateArea(long id) throws NotFoundException {
+    public ResponseEntity<CalculatedAreaDTO> calculateArea(long id) throws NotFoundException {
         Shape shape = shapesRepository.findById(id).orElseThrow(() -> new NotFoundException(id, Shape.class));
         List<Point> points = shape.getPoints();
         Double resultArea = 0.0;
-        if (Utils.isNotEmpty(points)) {
+        if (Utils.collectionIsNotEmpty(points)) {
             int pointsSize = points.size();
             if (pointsSize == 1) {
                 // значит круг
@@ -107,9 +106,7 @@ public class ShapesServiceImpl implements ShapesService {
                 resultArea = Utils.roundDouble(Math.abs((a + b - c - d) / 2));
             }
         }
-        Map<String, Double> result = new HashMap<>();
-        result.put("calculatedArea", resultArea);
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        return new ResponseEntity<>(new CalculatedAreaDTO(resultArea), HttpStatus.OK);
     }
 
     @Override

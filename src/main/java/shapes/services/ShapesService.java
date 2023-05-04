@@ -3,6 +3,7 @@ package shapes.services;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import shapes.exceptions.NotFoundException;
+import shapes.models.dto.action.CalculatedAreaDTO;
 import shapes.models.dto.action.MoveDTO;
 import shapes.models.dto.action.RollDTO;
 import shapes.models.dto.action.ScaleDTO;
@@ -11,7 +12,6 @@ import shapes.models.dto.shape.ShapeDTO;
 import shapes.models.dto.shape.UpdateShapeDTO;
 
 import java.util.List;
-import java.util.Map;
 
 public interface ShapesService {
 
@@ -25,7 +25,7 @@ public interface ShapesService {
 
     ResponseEntity<HttpStatus> deleteById(long id) throws NotFoundException;
 
-    ResponseEntity<Map<String, Double>> calculateArea(long id) throws NotFoundException;
+    ResponseEntity<CalculatedAreaDTO> calculateArea(long id) throws NotFoundException;
 
     ResponseEntity<ShapeDTO> roll(RollDTO rollDTO) throws NotFoundException;
 

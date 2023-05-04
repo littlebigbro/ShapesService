@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import shapes.models.dto.point.CreatePointDTO;
-import shapes.models.dto.radiusinfo.CreateRadiusInfoDTO;
+import shapes.models.dto.point.PointDTO;
+import shapes.models.dto.radiusinfo.RadiusInfoDTO;
 import shapes.models.dto.shapetype.ShapeTypeForShapeDTO;
 
 import java.time.LocalDateTime;
@@ -38,9 +38,9 @@ public class ShapeDTO {
 
     @NotNull
     @ApiModelProperty(value = "Точки фигуры", required = true)
-    private List<CreatePointDTO> points;
+    private List<PointDTO> points;
 
     @Nullable
     @ApiModelProperty(value = "Информация о радиусе фигуры")
-    private CreateRadiusInfoDTO radiusInfo;
+    private RadiusInfoDTO radiusInfo;
 }
