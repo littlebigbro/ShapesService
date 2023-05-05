@@ -6,9 +6,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import shapes.exceptions.NotFoundException;
+import shapes.exceptions.ShapeValidationException;
 import shapes.mappers.ShapesMapper;
 import shapes.models.Point;
 import shapes.models.Shape;
+import shapes.models.ShapeType;
 import shapes.models.dto.action.CalculatedAreaDTO;
 import shapes.models.dto.action.MoveDTO;
 import shapes.models.dto.action.RollDTO;
@@ -16,7 +18,9 @@ import shapes.models.dto.action.ScaleDTO;
 import shapes.models.dto.shape.CreateShapeDTO;
 import shapes.models.dto.shape.ShapeDTO;
 import shapes.models.dto.shape.UpdateShapeDTO;
+import shapes.repositories.ShapeTypeRepository;
 import shapes.repositories.ShapesRepository;
+import shapes.responses.ValidationErrorResponse;
 import shapes.services.ShapesService;
 import shapes.utils.ClockwiseComparator;
 import shapes.utils.Utils;
@@ -29,6 +33,7 @@ import java.util.stream.Collectors;
 @Transactional(readOnly = true)
 public class ShapesServiceImpl implements ShapesService {
     private final ShapesRepository shapesRepository;
+    private final ShapeTypeRepository shapeTypeRepository;
 
     @Override
     public ResponseEntity<List<ShapeDTO>> getAll() {
@@ -49,18 +54,20 @@ public class ShapesServiceImpl implements ShapesService {
 
     @Transactional
     @Override
-    public ResponseEntity<HttpStatus> createShape(CreateShapeDTO shapeDTO) {
+    public ResponseEntity<ValidationErrorResponse> createShape(CreateShapeDTO shapeDTO) throws NotFoundException, ShapeValidationException {
         Shape shape = ShapesMapper.MAPPER.mapToShape(shapeDTO);
+        checkShape(shape);
         shapesRepository.save(shape);
-        return ResponseEntity.ok(HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @Transactional
     @Override
-    public ResponseEntity<HttpStatus> updateShape(UpdateShapeDTO shapeDTO) {
+    public ResponseEntity<ValidationErrorResponse> updateShape(UpdateShapeDTO shapeDTO) throws NotFoundException, ShapeValidationException {
         Shape shape = ShapesMapper.MAPPER.mapToShape(shapeDTO);
+        checkShape(shape);
         shapesRepository.save(shape);
-        return ResponseEntity.ok(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @Transactional
@@ -167,5 +174,17 @@ public class ShapesServiceImpl implements ShapesService {
             }
         }
         return new ResponseEntity<>(ShapesMapper.MAPPER.mapToShapeDTO(shape), HttpStatus.OK);
+    }
+
+    private void checkShape(Shape shape) throws NotFoundException, ShapeValidationException {
+        Long shapeTypeId = shape.getShapeType().getShapeTypeId();
+        ShapeType shapeType = shapeTypeRepository.findById(shapeTypeId)
+                .orElseThrow(() -> new NotFoundException(shapeTypeId, ShapeType.class));
+        int shapePointsCount = shape.getPoints().size();
+        if (shapeType.getPointsCount() != shapePointsCount) {
+            String message = String.format("Количество точек [%s] переданных в json не соответствует выбранному типу фигуры [%s]",
+                    shapePointsCount, shapeType.getName());
+            throw new ShapeValidationException(message);
+        }
     }
 }

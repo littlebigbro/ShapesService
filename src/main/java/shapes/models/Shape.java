@@ -1,9 +1,6 @@
 package shapes.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -34,16 +31,15 @@ public class Shape implements Serializable {
     @Column(name = "updated")
     private LocalDateTime updated;
 
-    @Column(name = "deleted")
-    private Boolean deleted;
-
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "shapetype_id")
     private ShapeType shapeType;
 
+    @Setter(AccessLevel.NONE)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "shape")
     private List<Point> points;
 
+    @Setter(AccessLevel.NONE)
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "shape")
     private RadiusInfo radiusInfo;
 

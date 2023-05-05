@@ -12,8 +12,10 @@ import shapes.models.dto.shapetype.CreateShapeTypeDTO;
 import shapes.models.dto.shapetype.ShapeTypeDTO;
 import shapes.models.dto.shapetype.UpdateShapeTypeDTO;
 import shapes.repositories.ShapeTypeRepository;
+import shapes.responses.ValidationErrorResponse;
 import shapes.services.ShapeTypeService;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -42,7 +44,7 @@ public class ShapeTypeServiceImpl implements ShapeTypeService {
 
     @Transactional
     @Override
-    public ResponseEntity<HttpStatus> createShapeType(CreateShapeTypeDTO shapeTypeDTO) {
+    public ResponseEntity<ValidationErrorResponse> createShapeType(@Valid CreateShapeTypeDTO shapeTypeDTO) {
         ShapeType shapeType = ShapeTypesMapper.MAPPER.mapToShapeType(shapeTypeDTO);
         shapeTypeRepository.save(shapeType);
         return new ResponseEntity<>(HttpStatus.CREATED);
@@ -50,7 +52,7 @@ public class ShapeTypeServiceImpl implements ShapeTypeService {
 
     @Transactional
     @Override
-    public ResponseEntity<HttpStatus> updateShapeType(UpdateShapeTypeDTO shapeTypeDTO) {
+    public ResponseEntity<ValidationErrorResponse> updateShapeType(@Valid UpdateShapeTypeDTO shapeTypeDTO) {
         ShapeType shapeType = ShapeTypesMapper.MAPPER.mapToShapeType(shapeTypeDTO);
         shapeTypeRepository.save(shapeType);
         return new ResponseEntity<>(HttpStatus.OK);

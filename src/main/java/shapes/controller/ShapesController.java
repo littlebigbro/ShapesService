@@ -1,13 +1,16 @@
 package shapes.controller;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import shapes.exceptions.NotFoundException;
+import shapes.exceptions.ShapeValidationException;
 import shapes.models.dto.action.CalculatedAreaDTO;
 import shapes.models.dto.action.MoveDTO;
 import shapes.models.dto.action.RollDTO;
@@ -15,13 +18,16 @@ import shapes.models.dto.action.ScaleDTO;
 import shapes.models.dto.shape.CreateShapeDTO;
 import shapes.models.dto.shape.ShapeDTO;
 import shapes.models.dto.shape.UpdateShapeDTO;
+import shapes.responses.ValidationErrorResponse;
 import shapes.services.ShapesService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @AllArgsConstructor
 @RestController
 @RequestMapping("/shapes")
+@Api(value = "Контроллер фигур")
 public class ShapesController implements BaseController {
     private final ShapesService shapesService;
 
@@ -56,7 +62,11 @@ public class ShapesController implements BaseController {
     )
     @ApiResponse(code = 201, message = "Фигура создана")
     @PostMapping()
-    public ResponseEntity<HttpStatus> createShape(@RequestBody CreateShapeDTO shape) {
+    public ResponseEntity<ValidationErrorResponse> createShape(@RequestBody @Valid CreateShapeDTO shape, BindingResult bindingResult) throws NotFoundException, ShapeValidationException {
+        if (bindingResult.hasErrors()) {
+            ValidationErrorResponse response = new ValidationErrorResponse(bindingResult.getFieldErrors());
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
         return shapesService.createShape(shape);
     }
 
@@ -66,7 +76,11 @@ public class ShapesController implements BaseController {
     )
     @ApiResponse(code = 200, message = "OK")
     @PutMapping()
-    public ResponseEntity<HttpStatus> updateShape(@RequestBody UpdateShapeDTO shape) {
+    public ResponseEntity<ValidationErrorResponse> updateShape(@RequestBody @Valid UpdateShapeDTO shape, BindingResult bindingResult) throws NotFoundException, ShapeValidationException {
+        if (bindingResult.hasErrors()) {
+            ValidationErrorResponse response = new ValidationErrorResponse(bindingResult.getFieldErrors());
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
         return shapesService.updateShape(shape);
     }
 

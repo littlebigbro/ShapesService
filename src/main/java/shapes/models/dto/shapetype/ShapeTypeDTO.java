@@ -5,33 +5,34 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.jetbrains.annotations.NotNull;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ShapeTypeDTO {
+public class ShapeTypeDTO implements ShapeTypeFieldNames {
 
     @NotNull
-    @ApiModelProperty(value = "id типа фигуры в базе данных", required = true)
+    @ApiModelProperty(value = SHAPE_TYPE_ID, required = true)
     private Long shapeTypeId;
 
     @NotNull
-    @ApiModelProperty(value = "Системное наименование типа фигуры", required = true)
+    @ApiModelProperty(value = SYSTEM_NAME, required = true)
     private String systemName;
 
     @NotNull
-    @ApiModelProperty(value = "Наименование типа фигуры", required = true)
+    @ApiModelProperty(value = NAME, required = true)
     private String name;
 
-    @NotNull
-    @ApiModelProperty(value = "Дата создания типа фигуры", required = true)
+    @ApiModelProperty(value = CREATED, required = true)
     private LocalDateTime created;
 
-    @NotNull
-    @ApiModelProperty(value = "Дата обновления типа фигуры", required = true)
+    @ApiModelProperty(value = UPDATED, required = true)
     private LocalDateTime updated;
+
+    @ApiModelProperty(value = POINTS_COUNT, required = true)
+    private Integer pointsCount;
 }

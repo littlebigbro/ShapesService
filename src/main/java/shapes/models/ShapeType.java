@@ -8,6 +8,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -24,10 +26,12 @@ public class ShapeType implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "shapeTypeIdSeq")
     private Long shapeTypeId;
 
-    @Column(name = "systemname")
+    @NotEmpty(message = "Системное наименование должно быть заполнено")
+    @Column(name = "systemname", unique = true, nullable = false)
     private String systemName;
 
-    @Column(name = "name")
+    @NotEmpty(message = "Наименование должно быть заполнено")
+    @Column(name = "name", unique = true, nullable = false)
     private String name;
 
     @CreationTimestamp
@@ -37,4 +41,8 @@ public class ShapeType implements Serializable {
     @UpdateTimestamp
     @Column(name = "updated")
     private LocalDateTime updated;
+
+    @Min(value = 1, message = "Количество точек должно быть больше 0")
+    @Column(name = "points_count", unique = true)
+    private Integer pointsCount;
 }

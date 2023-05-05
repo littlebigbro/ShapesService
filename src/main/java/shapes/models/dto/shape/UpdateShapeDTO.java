@@ -1,15 +1,15 @@
 package shapes.models.dto.shape;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import shapes.models.dto.point.UpdatePointDTO;
 import shapes.models.dto.shapetype.ShapeTypeForShapeDTO;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -35,7 +35,7 @@ public class UpdateShapeDTO {
     @ApiModelProperty(value = "Точки фигуры", required = true)
     private List<UpdatePointDTO> points;
 
-    @Nullable
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     @ApiModelProperty(value = "Информация о радиусе фигуры")
     private UpdatePointDTO radiusInfo;
 }

@@ -6,13 +6,16 @@ import io.swagger.annotations.ApiResponses;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import shapes.exceptions.NotFoundException;
 import shapes.models.dto.shapetype.CreateShapeTypeDTO;
 import shapes.models.dto.shapetype.ShapeTypeDTO;
 import shapes.models.dto.shapetype.UpdateShapeTypeDTO;
+import shapes.responses.ValidationErrorResponse;
 import shapes.services.ShapeTypeService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @AllArgsConstructor
@@ -51,9 +54,12 @@ public class ShapeTypeController implements BaseController {
     )
     @ApiResponse(code = 201, message = "Тип фигуры создан")
     @PostMapping()
-    public ResponseEntity<HttpStatus> createShapeType(@RequestBody CreateShapeTypeDTO shapeType) {
-        shapeTypeService.createShapeType(shapeType);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    public ResponseEntity<ValidationErrorResponse> createShapeType(@RequestBody @Valid CreateShapeTypeDTO shapeType, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            ValidationErrorResponse response = new ValidationErrorResponse(bindingResult.getFieldErrors());
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
+        return shapeTypeService.createShapeType(shapeType);
     }
 
     @ApiOperation(
@@ -62,9 +68,12 @@ public class ShapeTypeController implements BaseController {
     )
     @ApiResponse(code = 200, message = "OK")
     @PutMapping()
-    public ResponseEntity<HttpStatus> updateShapeType(@RequestBody UpdateShapeTypeDTO shapeType) {
-        shapeTypeService.updateShapeType(shapeType);
-        return ResponseEntity.ok(HttpStatus.OK);
+    public ResponseEntity<ValidationErrorResponse> updateShapeType(@RequestBody @Valid UpdateShapeTypeDTO shapeType, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            ValidationErrorResponse response = new ValidationErrorResponse(bindingResult.getFieldErrors());
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
+        return shapeTypeService.updateShapeType(shapeType);
     }
 
     @ApiOperation(

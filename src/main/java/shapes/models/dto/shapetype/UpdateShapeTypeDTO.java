@@ -5,29 +5,36 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.jetbrains.annotations.NotNull;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UpdateShapeTypeDTO {
+public class UpdateShapeTypeDTO implements ShapeTypeFieldNames {
 
-    @NotNull
-    @ApiModelProperty(value = "id типа фигуры в базе данных", required = true)
+    @NotNull(message = "Атрибут shapeTypeId " + SHAPE_TYPE_ID + " обязателен для заполнения")
+    @ApiModelProperty(value = SHAPE_TYPE_ID, required = true)
     private Long shapeTypeId;
 
-    @NotNull
-    @ApiModelProperty(value = "Системное наименование типа фигуры", required = true)
+    @NotBlank(message = "Атрибут systemName " + SYSTEM_NAME + " обязателен для заполнения")
+    @ApiModelProperty(value = SYSTEM_NAME, required = true)
     private String systemName;
 
-    @NotNull
-    @ApiModelProperty(value = "Наименование типа фигуры", required = true)
+    @NotBlank(message = "Атрибут name " + NAME + " обязателен для заполнения")
+    @ApiModelProperty(value = NAME, required = true)
     private String name;
 
-    @NotNull
-    @ApiModelProperty(value = "Дата создания типа фигуры", required = true)
+    @NotNull(message = "Атрибут created " + CREATED + " обязателен для заполнения")
+    @ApiModelProperty(value = CREATED, required = true)
     private LocalDateTime created;
+
+    @NotNull(message = "Атрибут pointsCount " + POINTS_COUNT + " обязателен для заполнения")
+    @Min(value = 1, message = POINTS_COUNT + " должно быть больше 0")
+    @ApiModelProperty(value = POINTS_COUNT, required = true)
+    private Integer pointsCount;
 }
