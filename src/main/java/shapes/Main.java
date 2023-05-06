@@ -16,11 +16,11 @@ import springfox.documentation.spring.web.plugins.Docket;
 * + 2) подключить spring jpa
 * + 3) использовать dto
 * +-4) добавить тесты и jacoco
-* ++5) добавить checkstyle
+* + 5) добавить checkstyle
 * + 6) прикрутить swagger
-* 7) Добавить проверку на корректность входящих данных
+* +-7) Добавить проверку на корректность входящих данных
 * + 8) Прикрутить действия над фигурами (поворот, перемещение, масштабирование, расчет площади)
-* 9) Создать readme.md
+* + 9) Создать readme.md
 * */
 @SpringBootApplication
 public class Main {
