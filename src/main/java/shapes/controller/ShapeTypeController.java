@@ -68,7 +68,10 @@ public class ShapeTypeController implements BaseController {
     )
     @ApiResponse(code = 200, message = "OK")
     @PutMapping()
-    public ResponseEntity<ValidationErrorResponse> updateShapeType(@RequestBody @Valid UpdateShapeTypeDTO shapeType, BindingResult bindingResult) {
+    public ResponseEntity<ValidationErrorResponse> updateShapeType(
+            @RequestBody @Valid UpdateShapeTypeDTO shapeType,
+            BindingResult bindingResult
+    ) throws NotFoundException {
         if (bindingResult.hasErrors()) {
             ValidationErrorResponse response = new ValidationErrorResponse(bindingResult.getFieldErrors());
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);

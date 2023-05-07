@@ -18,7 +18,7 @@ public interface ShapeTypeService {
 
     ResponseEntity<ValidationErrorResponse> createShapeType(CreateShapeTypeDTO shapeTypeDTO);
 
-    ResponseEntity<ValidationErrorResponse> updateShapeType(UpdateShapeTypeDTO shapeTypeDTO);
+    ResponseEntity<ValidationErrorResponse> updateShapeType(UpdateShapeTypeDTO shapeTypeDTO) throws NotFoundException;
 
     ResponseEntity<HttpStatus> deleteById(long id) throws NotFoundException;
 }

@@ -9,8 +9,8 @@ import shapes.models.dto.shape.ShapeDTO;
 import shapes.models.dto.shape.UpdateShapeDTO;
 
 @Mapper(componentModel = "spring")
-public interface ShapesMapper {
-    ShapesMapper MAPPER = Mappers.getMapper(ShapesMapper.class);
+public interface ShapeMapper {
+    ShapeMapper MAPPER = Mappers.getMapper(ShapeMapper.class);
 
     // Out
     @Mapping(target = "shapeType", source = "shapeType")

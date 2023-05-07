@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import shapes.exceptions.NotFoundException;
 import shapes.exceptions.ShapeValidationException;
-import shapes.mappers.ShapesMapper;
+import shapes.mappers.ShapeMapper;
 import shapes.models.Point;
 import shapes.models.Shape;
 import shapes.models.ShapeType;
@@ -40,7 +40,7 @@ public class ShapesServiceImpl implements ShapesService {
         List<Shape> shapes = shapesRepository.findAll();
         return new ResponseEntity<>(
                 shapes.stream()
-                        .map(ShapesMapper.MAPPER::mapToShapeDTO)
+                        .map(ShapeMapper.MAPPER::mapToShapeDTO)
                         .collect(Collectors.toList()),
                 HttpStatus.OK);
     }
@@ -48,27 +48,41 @@ public class ShapesServiceImpl implements ShapesService {
     @Override
     public ResponseEntity<ShapeDTO> getById(long id) throws NotFoundException {
         Shape shape = shapesRepository.findById(id).orElseThrow(() -> new NotFoundException(id, Shape.class));
-        ShapeDTO shapeDTO = ShapesMapper.MAPPER.mapToShapeDTO(shape);
+        ShapeDTO shapeDTO = ShapeMapper.MAPPER.mapToShapeDTO(shape);
         return new ResponseEntity<>(shapeDTO, HttpStatus.OK);
     }
 
     @Transactional
     @Override
     public ResponseEntity<ValidationErrorResponse> createShape(CreateShapeDTO shapeDTO) throws NotFoundException, ShapeValidationException {
-        Shape shape = ShapesMapper.MAPPER.mapToShape(shapeDTO);
+        Shape shape = ShapeMapper.MAPPER.mapToShape(shapeDTO);
         checkShape(shape);
         shapesRepository.save(shape);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    //todo: поправить сейчас не работает
     @Transactional
     @Override
     public ResponseEntity<ValidationErrorResponse> updateShape(UpdateShapeDTO shapeDTO) throws NotFoundException, ShapeValidationException {
-        Shape shape = ShapesMapper.MAPPER.mapToShape(shapeDTO);
+        Shape receivedShape = ShapeMapper.MAPPER.mapToShape(shapeDTO);
+        Long shapeId = receivedShape.getShapeId();
+        Shape shape = shapesRepository.findById(shapeId).orElseThrow(() -> new NotFoundException(shapeId, Shape.class));
+        updateShapeByReceivedShape(shape, receivedShape);
         checkShape(shape);
         shapesRepository.save(shape);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    private void updateShapeByReceivedShape(Shape shape, Shape receivedShape) {
+        if (receivedShape.getShapeType() != null) {
+            shape.setShapeType(receivedShape.getShapeType());
+        }
+        if (receivedShape.getPoints() != null) {
+            shape.setPoints(receivedShape.getPoints());
+        }
+        if (receivedShape.getRadiusInfo() != null) {
+            shape.setRadiusInfo(receivedShape.getRadiusInfo());
+        }
     }
 
     @Transactional
@@ -134,7 +148,7 @@ public class ShapesServiceImpl implements ShapesService {
                 point.setY(tempY);
             }
         }
-        return new ResponseEntity<>(ShapesMapper.MAPPER.mapToShapeDTO(shape), HttpStatus.OK);
+        return new ResponseEntity<>(ShapeMapper.MAPPER.mapToShapeDTO(shape), HttpStatus.OK);
     }
 
     @Override
@@ -151,7 +165,7 @@ public class ShapesServiceImpl implements ShapesService {
             point.setX(point.getX() + dX);
             point.setY(point.getY() + dY);
         }
-        return new ResponseEntity<>(ShapesMapper.MAPPER.mapToShapeDTO(shape), HttpStatus.OK);
+        return new ResponseEntity<>(ShapeMapper.MAPPER.mapToShapeDTO(shape), HttpStatus.OK);
     }
 
     @Override
@@ -174,7 +188,7 @@ public class ShapesServiceImpl implements ShapesService {
                 point.setY(tempY);
             }
         }
-        return new ResponseEntity<>(ShapesMapper.MAPPER.mapToShapeDTO(shape), HttpStatus.OK);
+        return new ResponseEntity<>(ShapeMapper.MAPPER.mapToShapeDTO(shape), HttpStatus.OK);
     }
 
     private void checkShape(Shape shape) throws NotFoundException, ShapeValidationException {

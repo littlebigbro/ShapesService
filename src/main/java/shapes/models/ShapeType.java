@@ -10,6 +10,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -42,6 +43,7 @@ public class ShapeType implements Serializable {
     @Column(name = "updated")
     private LocalDateTime updated;
 
+    @NotNull(message = "Количество точек должно быть заполнено")
     @Min(value = 1, message = "Количество точек должно быть больше 0")
     @Column(name = "points_count", unique = true)
     private Integer pointsCount;

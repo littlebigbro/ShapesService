@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import shapes.models.dto.fieldNames.ShapeFieldNames;
 import shapes.models.dto.point.UpdatePointDTO;
+import shapes.models.dto.radiusinfo.UpdateRadiusInfoDTO;
 import shapes.models.dto.shapetype.ShapeTypeForShapeDTO;
 
 import javax.validation.constraints.NotNull;
@@ -33,5 +34,5 @@ public class UpdateShapeDTO implements ShapeFieldNames {
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @ApiModelProperty(value = RADIUS_INFO)
-    private UpdatePointDTO radiusInfo;
+    private UpdateRadiusInfoDTO radiusInfo;
 }
