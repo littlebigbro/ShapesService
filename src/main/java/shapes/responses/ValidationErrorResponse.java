@@ -20,7 +20,7 @@ public class ValidationErrorResponse {
     public ValidationErrorResponse(List<FieldError> errors) {
         this.timestamp = LocalDateTime.now();
         this.errorMessages = errors.stream()
-                .map((error) -> {
+                .map(error -> {
                     Map<String, String> m = new HashMap<>();
                     String defaultMessage = Objects.toString(error.getDefaultMessage(), "%s");
                     m.put("errormessage", String.format(defaultMessage, error.getField()));
