@@ -50,6 +50,7 @@ public class ShapeTypeServiceImpl implements ShapeTypeService {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    //todo: поправить сейчас не работает
     @Transactional
     @Override
     public ResponseEntity<ValidationErrorResponse> updateShapeType(@Valid UpdateShapeTypeDTO shapeTypeDTO) {

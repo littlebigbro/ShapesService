@@ -61,6 +61,7 @@ public class ShapesServiceImpl implements ShapesService {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    //todo: поправить сейчас не работает
     @Transactional
     @Override
     public ResponseEntity<ValidationErrorResponse> updateShape(UpdateShapeDTO shapeDTO) throws NotFoundException, ShapeValidationException {
@@ -180,11 +181,14 @@ public class ShapesServiceImpl implements ShapesService {
         Long shapeTypeId = shape.getShapeType().getShapeTypeId();
         ShapeType shapeType = shapeTypeRepository.findById(shapeTypeId)
                 .orElseThrow(() -> new NotFoundException(shapeTypeId, ShapeType.class));
-        int shapePointsCount = shape.getPoints().size();
-        if (shapeType.getPointsCount() != shapePointsCount) {
-            String message = String.format("Количество точек [%s] переданных в json не соответствует выбранному типу фигуры [%s]",
-                    shapePointsCount, shapeType.getName());
-            throw new ShapeValidationException(message);
+        List<Point> shapePoints = shape.getPoints();
+        if (Utils.collectionIsNotEmpty(shapePoints)) {
+            int shapePointsCount = shapePoints.size();
+            if (shapeType.getPointsCount() != shapePointsCount) {
+                String message = String.format("Количество точек [%s] переданных в json не соответствует выбранному типу фигуры [%s]",
+                        shapePointsCount, shapeType.getName());
+                throw new ShapeValidationException(message);
+            }
         }
     }
 }

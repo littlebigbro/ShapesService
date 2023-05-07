@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import shapes.models.dto.fieldNames.ShapeFieldNames;
 
 import javax.validation.constraints.NotNull;
 
@@ -12,13 +13,13 @@ import javax.validation.constraints.NotNull;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class RollDTO {
+public class RollDTO implements ShapeFieldNames {
 
-    @NotNull
+    @NotNull(message = "Атрибут shapeId (" + SHAPE_ID + ") обязателен для заполнения")
     @ApiModelProperty(value = "id фигуры в базе данных", required = true)
     private Long shapeId;
 
-    @NotNull
-    @ApiModelProperty(value = "Угол поворота", required = true)
+    @NotNull(message = "Атрибут angle (угол поворота) обязателен для заполнения")
+    @ApiModelProperty(value = "угол поворота", required = true)
     private Double angle;
 }

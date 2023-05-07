@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import shapes.models.dto.fieldNames.ShapeFieldNames;
 import shapes.models.dto.point.PointDTO;
 import shapes.models.dto.radiusinfo.RadiusInfoDTO;
 import shapes.models.dto.shapetype.ShapeTypeForShapeDTO;
@@ -17,24 +18,24 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ShapeDTO {
+public class ShapeDTO implements ShapeFieldNames {
 
-    @ApiModelProperty(value = "id фигуры в базе данных", required = true)
+    @ApiModelProperty(value = SHAPE_ID, required = true)
     private Long shapeId;
 
-    @ApiModelProperty(value = "Дата создания фигуры", required = true)
+    @ApiModelProperty(value = CREATED, required = true)
     private LocalDateTime created;
 
-    @ApiModelProperty(value = "Дата обновления фигуры", required = true)
+    @ApiModelProperty(value = UPDATED, required = true)
     private LocalDateTime updated;
 
-    @ApiModelProperty(value = "Тип фигуры", required = true)
+    @ApiModelProperty(value = SHAPE_TYPE, required = true)
     private ShapeTypeForShapeDTO shapeType;
 
-    @ApiModelProperty(value = "Точки фигуры", required = true)
+    @ApiModelProperty(value = POINTS, required = true)
     private List<PointDTO> points;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @ApiModelProperty(value = "Информация о радиусе фигуры")
+    @ApiModelProperty(value = RADIUS_INFO)
     private RadiusInfoDTO radiusInfo;
 }

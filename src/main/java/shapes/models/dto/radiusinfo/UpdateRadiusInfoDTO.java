@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import shapes.models.dto.fieldNames.RadiusInfoFieldNames;
 
 import javax.validation.constraints.NotNull;
 
@@ -12,13 +13,13 @@ import javax.validation.constraints.NotNull;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UpdateRadiusInfoDTO {
+public class UpdateRadiusInfoDTO implements RadiusInfoFieldNames {
 
-    @NotNull
-    @ApiModelProperty(value = "id радиуса в базе данных", required = true)
+    @NotNull(message = "Атрибут radiusInfoId (" + RADIUS_INFO_ID + ") обязателен для заполнения")
+    @ApiModelProperty(value = RADIUS_INFO_ID, required = true)
     private Long radiusInfoId;
 
-    @NotNull
-    @ApiModelProperty(value = "Радиус", required = true)
+    @NotNull(message = "Атрибут radius (" + RADIUS + ") обязателен для заполнения")
+    @ApiModelProperty(value = RADIUS, required = true)
     private Double radius;
 }

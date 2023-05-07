@@ -6,36 +6,32 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import shapes.models.dto.fieldNames.ShapeFieldNames;
 import shapes.models.dto.point.UpdatePointDTO;
 import shapes.models.dto.shapetype.ShapeTypeForShapeDTO;
 
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UpdateShapeDTO {
+public class UpdateShapeDTO implements ShapeFieldNames {
 
-    @NotNull
-    @ApiModelProperty(value = "id фигуры в базе данных", required = true)
+    @NotNull(message = "Атрибут shapeId (" + SHAPE_ID + ") обязателен для заполнения")
+    @ApiModelProperty(value = SHAPE_ID, required = true)
     private Long shapeId;
 
-    @NotNull
-    @ApiModelProperty(value = "Дата создания фигуры", required = true)
-    private LocalDateTime created;
-
-    @NotNull
-    @ApiModelProperty(value = "Тип фигуры", required = true)
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @ApiModelProperty(value = SHAPE_TYPE)
     private ShapeTypeForShapeDTO shapeType;
 
-    @NotNull
-    @ApiModelProperty(value = "Точки фигуры", required = true)
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @ApiModelProperty(value = POINTS)
     private List<UpdatePointDTO> points;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @ApiModelProperty(value = "Информация о радиусе фигуры")
+    @ApiModelProperty(value = RADIUS_INFO)
     private UpdatePointDTO radiusInfo;
 }

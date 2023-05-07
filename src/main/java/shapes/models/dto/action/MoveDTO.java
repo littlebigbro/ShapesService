@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import shapes.models.dto.fieldNames.PointFieldNames;
+import shapes.models.dto.fieldNames.ShapeFieldNames;
 
 import javax.validation.constraints.NotNull;
 
@@ -12,17 +14,17 @@ import javax.validation.constraints.NotNull;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MoveDTO {
+public class MoveDTO implements ShapeFieldNames, PointFieldNames {
 
-    @NotNull
-    @ApiModelProperty(value = "id фигуры в базе данных", required = true)
+    @NotNull(message = "Атрибут shapeId (" + SHAPE_ID + ") обязателен для заполнения")
+    @ApiModelProperty(value = SHAPE_ID, required = true)
     private Long shapeId;
 
-    @NotNull
-    @ApiModelProperty(value = "Координата X", required = true)
+    @NotNull(message = "Атрибут x (" + X_NAME + ") обязателен для заполнения")
+    @ApiModelProperty(value = X_NAME, required = true)
     private Double x;
 
-    @NotNull
-    @ApiModelProperty(value = "Координата Y", required = true)
+    @NotNull(message = "Атрибут y (" + Y_NAME + ") обязателен для заполнения")
+    @ApiModelProperty(value = Y_NAME, required = true)
     private Double y;
 }

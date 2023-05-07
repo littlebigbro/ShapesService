@@ -5,19 +5,20 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import shapes.models.dto.fieldNames.PointFieldNames;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PointDTO {
+public class PointDTO implements PointFieldNames {
 
-    @ApiModelProperty(value = "id точки в базе данных", required = true)
+    @ApiModelProperty(value = POINT_ID, required = true)
     private Long pointId;
 
-    @ApiModelProperty(value = "Координата X", required = true)
+    @ApiModelProperty(value = X_NAME, required = true)
     private Double x;
 
-    @ApiModelProperty(value = "Координата Y", required = true)
+    @ApiModelProperty(value = Y_NAME, required = true)
     private Double y;
 }

@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import shapes.models.dto.fieldNames.ShapeFieldNames;
 
 import javax.validation.constraints.NotNull;
 
@@ -12,13 +13,13 @@ import javax.validation.constraints.NotNull;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ScaleDTO {
+public class ScaleDTO implements ShapeFieldNames {
 
-    @NotNull
-    @ApiModelProperty(value = "id фигуры в базе данных", required = true)
+    @NotNull(message = "Атрибут shapeId (" + SHAPE_ID + ") обязателен для заполнения")
+    @ApiModelProperty(value = SHAPE_ID, required = true)
     private Long shapeId;
 
-    @NotNull
-    @ApiModelProperty(value = "Коэффициент масштабирования", required = true)
+    @NotNull(message = "Атрибут scaleFactor (коэффициент масштабирования) обязателен для заполнения")
+    @ApiModelProperty(value = "коэффициент масштабирования", required = true)
     private Double scaleFactor;
 }

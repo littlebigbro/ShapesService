@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import shapes.models.dto.fieldNames.PointFieldNames;
 
 import javax.validation.constraints.NotNull;
 
@@ -12,13 +13,13 @@ import javax.validation.constraints.NotNull;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreatePointDTO {
+public class CreatePointDTO implements PointFieldNames {
 
-    @NotNull
-    @ApiModelProperty(value = "Координата X", required = true)
+    @NotNull(message = "Атрибут x (" + X_NAME + ") обязателен для заполнения")
+    @ApiModelProperty(value = X_NAME, required = true)
     private Double x;
 
-    @NotNull
-    @ApiModelProperty(value = "Координата Y", required = true)
+    @NotNull(message = "Атрибут y (" + Y_NAME + ") обязателен для заполнения")
+    @ApiModelProperty(value = Y_NAME, required = true)
     private Double y;
 }

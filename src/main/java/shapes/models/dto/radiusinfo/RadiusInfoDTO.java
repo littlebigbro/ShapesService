@@ -5,16 +5,17 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import shapes.models.dto.fieldNames.RadiusInfoFieldNames;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class RadiusInfoDTO {
+public class RadiusInfoDTO implements RadiusInfoFieldNames {
 
-    @ApiModelProperty(value = "id радиуса в базе данных", required = true)
+    @ApiModelProperty(value = RADIUS_INFO_ID, required = true)
     private Long radiusInfoId;
 
-    @ApiModelProperty(value = "Радиус", required = true)
+    @ApiModelProperty(value = RADIUS, required = true)
     private Double radius;
 }
