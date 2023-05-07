@@ -10,7 +10,6 @@ import shapes.models.dto.point.PointDTO;
 import shapes.models.dto.radiusinfo.RadiusInfoDTO;
 import shapes.models.dto.shapetype.ShapeTypeForShapeDTO;
 
-import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -20,23 +19,18 @@ import java.util.List;
 @AllArgsConstructor
 public class ShapeDTO {
 
-    @NotNull
     @ApiModelProperty(value = "id фигуры в базе данных", required = true)
     private Long shapeId;
 
-    @NotNull
     @ApiModelProperty(value = "Дата создания фигуры", required = true)
     private LocalDateTime created;
 
-    @NotNull
     @ApiModelProperty(value = "Дата обновления фигуры", required = true)
     private LocalDateTime updated;
 
-    @NotNull
     @ApiModelProperty(value = "Тип фигуры", required = true)
     private ShapeTypeForShapeDTO shapeType;
 
-    @NotNull
     @ApiModelProperty(value = "Точки фигуры", required = true)
     private List<PointDTO> points;
 

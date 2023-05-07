@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
 @Getter
@@ -23,6 +24,7 @@ public class RadiusInfo implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "radiusIdSeq")
     private Long radiusInfoId;
 
+    @NotEmpty(message = "Радиус должен быть заполнен")
     @Column(name = "radius")
     private Double radius;
 

@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Getter
@@ -15,15 +14,12 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class ShapeTypeDTO implements ShapeTypeFieldNames {
 
-    @NotNull
     @ApiModelProperty(value = SHAPE_TYPE_ID, required = true)
     private Long shapeTypeId;
 
-    @NotNull
     @ApiModelProperty(value = SYSTEM_NAME, required = true)
     private String systemName;
 
-    @NotNull
     @ApiModelProperty(value = NAME, required = true)
     private String name;
 

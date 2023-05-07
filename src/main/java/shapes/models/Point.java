@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
 @Getter
@@ -23,9 +24,11 @@ public class Point implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pointIdSeq")
     private Long pointId;
 
+    @NotEmpty(message = "Координата X должна быть заполнена")
     @Column(name = "x")
     private Double x;
 
+    @NotEmpty(message = "Координата Y должна быть заполнена")
     @Column(name = "y")
     private Double y;
 
