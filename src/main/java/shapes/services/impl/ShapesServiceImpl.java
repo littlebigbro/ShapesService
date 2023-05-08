@@ -34,13 +34,14 @@ import java.util.stream.Collectors;
 public class ShapesServiceImpl implements ShapesService {
     private final ShapesRepository shapesRepository;
     private final ShapeTypeRepository shapeTypeRepository;
+    private final ShapeMapper mapper;
 
     @Override
     public ResponseEntity<List<ShapeDTO>> getAll() {
         List<Shape> shapes = shapesRepository.findAll();
         return new ResponseEntity<>(
                 shapes.stream()
-                        .map(ShapeMapper.MAPPER::mapToShapeDTO)
+                        .map(mapper::mapToShapeDTO)
                         .collect(Collectors.toList()),
                 HttpStatus.OK);
     }
@@ -48,14 +49,14 @@ public class ShapesServiceImpl implements ShapesService {
     @Override
     public ResponseEntity<ShapeDTO> getById(long id) throws NotFoundException {
         Shape shape = shapesRepository.findById(id).orElseThrow(() -> new NotFoundException(id, Shape.class));
-        ShapeDTO shapeDTO = ShapeMapper.MAPPER.mapToShapeDTO(shape);
+        ShapeDTO shapeDTO = mapper.mapToShapeDTO(shape);
         return new ResponseEntity<>(shapeDTO, HttpStatus.OK);
     }
 
     @Transactional
     @Override
     public ResponseEntity<ValidationErrorResponse> createShape(CreateShapeDTO shapeDTO) throws NotFoundException, ShapeValidationException {
-        Shape shape = ShapeMapper.MAPPER.mapToShape(shapeDTO);
+        Shape shape = mapper.mapToShape(shapeDTO);
         checkShape(shape);
         shapesRepository.save(shape);
         return new ResponseEntity<>(HttpStatus.CREATED);
@@ -64,7 +65,7 @@ public class ShapesServiceImpl implements ShapesService {
     @Transactional
     @Override
     public ResponseEntity<ValidationErrorResponse> updateShape(UpdateShapeDTO shapeDTO) throws NotFoundException, ShapeValidationException {
-        Shape receivedShape = ShapeMapper.MAPPER.mapToShape(shapeDTO);
+        Shape receivedShape = mapper.mapToShape(shapeDTO);
         Long shapeId = receivedShape.getShapeId();
         Shape shape = shapesRepository.findById(shapeId).orElseThrow(() -> new NotFoundException(shapeId, Shape.class));
         updateShapeByReceivedShape(shape, receivedShape);
@@ -148,7 +149,7 @@ public class ShapesServiceImpl implements ShapesService {
                 point.setY(tempY);
             }
         }
-        return new ResponseEntity<>(ShapeMapper.MAPPER.mapToShapeDTO(shape), HttpStatus.OK);
+        return new ResponseEntity<>(mapper.mapToShapeDTO(shape), HttpStatus.OK);
     }
 
     @Override
@@ -165,7 +166,7 @@ public class ShapesServiceImpl implements ShapesService {
             point.setX(point.getX() + dX);
             point.setY(point.getY() + dY);
         }
-        return new ResponseEntity<>(ShapeMapper.MAPPER.mapToShapeDTO(shape), HttpStatus.OK);
+        return new ResponseEntity<>(mapper.mapToShapeDTO(shape), HttpStatus.OK);
     }
 
     @Override
@@ -188,7 +189,7 @@ public class ShapesServiceImpl implements ShapesService {
                 point.setY(tempY);
             }
         }
-        return new ResponseEntity<>(ShapeMapper.MAPPER.mapToShapeDTO(shape), HttpStatus.OK);
+        return new ResponseEntity<>(mapper.mapToShapeDTO(shape), HttpStatus.OK);
     }
 
     private void checkShape(Shape shape) throws NotFoundException, ShapeValidationException {

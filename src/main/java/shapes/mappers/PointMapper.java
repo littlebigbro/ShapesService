@@ -13,8 +13,10 @@ public interface PointMapper {
 
     // Out
     PointDTO mapToPointDTO(Point point);
+
     //Update
     Point mapToPoint(UpdatePointDTO pointDTO);
+
     //Create
     Point mapToPoint(CreatePointDTO pointDTO);
 }
