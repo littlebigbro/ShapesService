@@ -24,6 +24,6 @@ public class ClockwiseComparator implements Comparator<Point> {
     }
 
     private double getAngle(Point point) {
-        return Math.atan2(point.getY() - center.getY(), point.getX() - center.getX());
+        return Utils.roundDouble(Math.atan2(point.getY() - center.getY(), point.getX() - center.getX()));
     }
 }

@@ -1,10 +1,7 @@
 package shapes.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -14,6 +11,7 @@ import java.io.Serializable;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(of = {"x", "y"})
 @Entity
 @Table(name = "point")
 public class Point implements Serializable {
@@ -42,9 +40,4 @@ public class Point implements Serializable {
             fetch = FetchType.EAGER)
     @JoinColumn(name = "shape_id")
     private Shape shape;
-
-    @Override
-    public String toString() {
-        return String.format("Точка с id = %s имеет координаты: x = %s, y = %s}", pointId, x, y);
-    }
 }

@@ -8,6 +8,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -55,5 +56,26 @@ public class Shape implements Serializable {
             points.forEach(point -> point.setShape(this));
         }
         this.points = points;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Shape shape = (Shape) o;
+        return shapeId.equals(shape.shapeId)
+                && Objects.equals(shapeType, shape.shapeType)
+                && points.size() == shape.points.size()
+                && Objects.equals(points, shape.points)
+                && Objects.equals(radiusInfo, shape.radiusInfo);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(shapeId, shapeType, points, radiusInfo);
     }
 }
