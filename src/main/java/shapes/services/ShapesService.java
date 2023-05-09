@@ -2,7 +2,6 @@ package shapes.services;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import shapes.exceptions.NotFoundException;
 import shapes.exceptions.ShapeValidationException;
 import shapes.models.dto.action.CalculatedAreaDTO;
 import shapes.models.dto.action.MoveDTO;
@@ -19,19 +18,19 @@ public interface ShapesService {
 
     ResponseEntity<List<ShapeDTO>> getAll();
 
-    ResponseEntity<ShapeDTO> getById(long id) throws NotFoundException;
+    ResponseEntity<ShapeDTO> getById(long id);
 
-    ResponseEntity<ValidationErrorResponse> createShape(CreateShapeDTO shapeDTO) throws NotFoundException, ShapeValidationException;
+    ResponseEntity<ValidationErrorResponse> createShape(CreateShapeDTO shapeDTO) throws ShapeValidationException;
 
-    ResponseEntity<ValidationErrorResponse> updateShape(UpdateShapeDTO shapeDTO) throws NotFoundException, ShapeValidationException;
+    ResponseEntity<ValidationErrorResponse> updateShape(UpdateShapeDTO shapeDTO) throws ShapeValidationException;
 
-    ResponseEntity<HttpStatus> deleteById(long id) throws NotFoundException;
+    ResponseEntity<HttpStatus> deleteById(long id);
 
-    ResponseEntity<CalculatedAreaDTO> calculateArea(long id) throws NotFoundException;
+    ResponseEntity<CalculatedAreaDTO> calculateArea(long id);
 
-    ResponseEntity<ShapeDTO> roll(RollDTO rollDTO) throws NotFoundException;
+    ResponseEntity<ShapeDTO> roll(RollDTO rollDTO);
 
-    ResponseEntity<ShapeDTO> move(MoveDTO moveDTO) throws NotFoundException;
+    ResponseEntity<ShapeDTO> move(MoveDTO moveDTO);
 
-    ResponseEntity<ShapeDTO> scale(ScaleDTO scaleDTO) throws NotFoundException;
+    ResponseEntity<ShapeDTO> scale(ScaleDTO scaleDTO);
 }

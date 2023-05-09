@@ -36,8 +36,8 @@ public class ShapeTypeServiceImpl implements ShapeTypeService {
     }
 
     @Override
-    public ResponseEntity<ShapeTypeDTO> getById(long id) throws NotFoundException {
-        ShapeType shapeType = shapeTypeRepository.findById(id).orElseThrow(() -> new NotFoundException(id, ShapeType.class));
+    public ResponseEntity<ShapeTypeDTO> getById(long id) {
+        ShapeType shapeType = shapeTypeRepository.findById(id).orElseThrow(() -> new NotFoundException(NotFoundException.SHAPE_TYPE_NOT_FOUND_MSG, id));
         ShapeTypeDTO shapeTypeDTO = ShapeTypeMapper.MAPPER.mapToShapeTypeDTO(shapeType);
         return new ResponseEntity<>(shapeTypeDTO, HttpStatus.OK);
     }
@@ -52,9 +52,9 @@ public class ShapeTypeServiceImpl implements ShapeTypeService {
 
     @Transactional
     @Override
-    public ResponseEntity<ValidationErrorResponse> updateShapeType(@Valid UpdateShapeTypeDTO shapeTypeDTO) throws NotFoundException {
+    public ResponseEntity<ValidationErrorResponse> updateShapeType(@Valid UpdateShapeTypeDTO shapeTypeDTO) {
         Long shapeTypeId = shapeTypeDTO.getShapeTypeId();
-        ShapeType updatedShapeType = shapeTypeRepository.findById(shapeTypeId).orElseThrow(() -> new NotFoundException(shapeTypeId, ShapeType.class));
+        ShapeType updatedShapeType = shapeTypeRepository.findById(shapeTypeId).orElseThrow(() -> new NotFoundException(NotFoundException.SHAPE_TYPE_NOT_FOUND_MSG, shapeTypeId));
         updateShapeTypeByDTO(updatedShapeType, shapeTypeDTO);
         shapeTypeRepository.save(updatedShapeType);
         return new ResponseEntity<>(HttpStatus.OK);
@@ -74,9 +74,9 @@ public class ShapeTypeServiceImpl implements ShapeTypeService {
 
     @Transactional
     @Override
-    public ResponseEntity<HttpStatus> deleteById(long id) throws NotFoundException {
+    public ResponseEntity<HttpStatus> deleteById(long id) {
         if (!shapeTypeRepository.existsById(id)) {
-            throw new NotFoundException(id, ShapeType.class);
+            throw new NotFoundException(NotFoundException.SHAPE_TYPE_NOT_FOUND_MSG, id);
         }
         shapeTypeRepository.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

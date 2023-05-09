@@ -2,7 +2,6 @@ package shapes.services;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import shapes.exceptions.NotFoundException;
 import shapes.models.dto.shapetype.CreateShapeTypeDTO;
 import shapes.models.dto.shapetype.ShapeTypeDTO;
 import shapes.models.dto.shapetype.UpdateShapeTypeDTO;
@@ -14,11 +13,11 @@ public interface ShapeTypeService {
 
     ResponseEntity<List<ShapeTypeDTO>> getAll();
 
-    ResponseEntity<ShapeTypeDTO> getById(long id) throws NotFoundException;
+    ResponseEntity<ShapeTypeDTO> getById(long id);
 
     ResponseEntity<ValidationErrorResponse> createShapeType(CreateShapeTypeDTO shapeTypeDTO);
 
-    ResponseEntity<ValidationErrorResponse> updateShapeType(UpdateShapeTypeDTO shapeTypeDTO) throws NotFoundException;
+    ResponseEntity<ValidationErrorResponse> updateShapeType(UpdateShapeTypeDTO shapeTypeDTO);
 
-    ResponseEntity<HttpStatus> deleteById(long id) throws NotFoundException;
+    ResponseEntity<HttpStatus> deleteById(long id);
 }

@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import shapes.exceptions.NotFoundException;
 import shapes.exceptions.ShapeValidationException;
 import shapes.models.dto.action.CalculatedAreaDTO;
 import shapes.models.dto.action.MoveDTO;
@@ -52,7 +51,7 @@ public class ShapesController implements BaseController {
             }
     )
     @GetMapping("/{id}")
-    public ResponseEntity<ShapeDTO> getById(@PathVariable("id") long id) throws NotFoundException {
+    public ResponseEntity<ShapeDTO> getById(@PathVariable("id") long id) {
         return shapesService.getById(id);
     }
 
@@ -62,7 +61,7 @@ public class ShapesController implements BaseController {
     )
     @ApiResponse(code = 201, message = "Фигура создана")
     @PostMapping()
-    public ResponseEntity<ValidationErrorResponse> createShape(@RequestBody @Valid CreateShapeDTO shape, BindingResult bindingResult) throws NotFoundException, ShapeValidationException {
+    public ResponseEntity<ValidationErrorResponse> createShape(@RequestBody @Valid CreateShapeDTO shape, BindingResult bindingResult) throws ShapeValidationException {
         if (bindingResult.hasErrors()) {
             ValidationErrorResponse response = new ValidationErrorResponse(bindingResult.getFieldErrors());
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
@@ -76,7 +75,7 @@ public class ShapesController implements BaseController {
     )
     @ApiResponse(code = 200, message = "OK")
     @PutMapping()
-    public ResponseEntity<ValidationErrorResponse> updateShape(@RequestBody @Valid UpdateShapeDTO shape, BindingResult bindingResult) throws NotFoundException, ShapeValidationException {
+    public ResponseEntity<ValidationErrorResponse> updateShape(@RequestBody @Valid UpdateShapeDTO shape, BindingResult bindingResult) throws ShapeValidationException {
         if (bindingResult.hasErrors()) {
             ValidationErrorResponse response = new ValidationErrorResponse(bindingResult.getFieldErrors());
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
@@ -95,7 +94,7 @@ public class ShapesController implements BaseController {
             }
     )
     @DeleteMapping("/{id}")
-    public ResponseEntity<HttpStatus> deleteShape(@PathVariable("id") long id) throws NotFoundException {
+    public ResponseEntity<HttpStatus> deleteShape(@PathVariable("id") long id) {
         return shapesService.deleteById(id);
     }
 
@@ -110,7 +109,7 @@ public class ShapesController implements BaseController {
             }
     )
     @GetMapping("/area/{id}")
-    public ResponseEntity<CalculatedAreaDTO> calculateArea(@PathVariable("id") long id) throws NotFoundException {
+    public ResponseEntity<CalculatedAreaDTO> calculateArea(@PathVariable("id") long id) {
         return shapesService.calculateArea(id);
     }
 
@@ -125,7 +124,7 @@ public class ShapesController implements BaseController {
             }
     )
     @PostMapping("/roll")
-    public ResponseEntity<ShapeDTO> roll(@RequestBody RollDTO rollDTO) throws NotFoundException {
+    public ResponseEntity<ShapeDTO> roll(@RequestBody RollDTO rollDTO) {
         return shapesService.roll(rollDTO);
     }
 
@@ -140,7 +139,7 @@ public class ShapesController implements BaseController {
             }
     )
     @PostMapping("/move")
-    public ResponseEntity<ShapeDTO> move(@RequestBody MoveDTO moveDTO) throws NotFoundException {
+    public ResponseEntity<ShapeDTO> move(@RequestBody MoveDTO moveDTO) {
         return shapesService.move(moveDTO);
     }
 
@@ -155,7 +154,7 @@ public class ShapesController implements BaseController {
             }
     )
     @PostMapping("/scale")
-    public ResponseEntity<ShapeDTO> scale(@RequestBody ScaleDTO scaleDTO) throws NotFoundException {
+    public ResponseEntity<ShapeDTO> scale(@RequestBody ScaleDTO scaleDTO) {
         return shapesService.scale(scaleDTO);
     }
 }

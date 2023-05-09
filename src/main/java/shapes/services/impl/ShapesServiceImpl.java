@@ -23,10 +23,11 @@ import shapes.repositories.ShapesRepository;
 import shapes.responses.ValidationErrorResponse;
 import shapes.services.ShapesService;
 import shapes.utils.ClockwiseComparator;
-import shapes.utils.Utils;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static shapes.utils.Utils.*;
 
 @Service
 @AllArgsConstructor
@@ -47,15 +48,15 @@ public class ShapesServiceImpl implements ShapesService {
     }
 
     @Override
-    public ResponseEntity<ShapeDTO> getById(long id) throws NotFoundException {
-        Shape shape = shapesRepository.findById(id).orElseThrow(() -> new NotFoundException(id, Shape.class));
+    public ResponseEntity<ShapeDTO> getById(long id) {
+        Shape shape = shapesRepository.findById(id).orElseThrow(() -> new NotFoundException(NotFoundException.SHAPE_NOT_FOUND_MSG, id));
         ShapeDTO shapeDTO = mapper.mapToShapeDTO(shape);
         return new ResponseEntity<>(shapeDTO, HttpStatus.OK);
     }
 
     @Transactional
     @Override
-    public ResponseEntity<ValidationErrorResponse> createShape(CreateShapeDTO shapeDTO) throws NotFoundException, ShapeValidationException {
+    public ResponseEntity<ValidationErrorResponse> createShape(CreateShapeDTO shapeDTO) throws ShapeValidationException {
         Shape shape = mapper.mapToShape(shapeDTO);
         checkShape(shape);
         shapesRepository.save(shape);
@@ -64,10 +65,10 @@ public class ShapesServiceImpl implements ShapesService {
 
     @Transactional
     @Override
-    public ResponseEntity<ValidationErrorResponse> updateShape(UpdateShapeDTO shapeDTO) throws NotFoundException, ShapeValidationException {
+    public ResponseEntity<ValidationErrorResponse> updateShape(UpdateShapeDTO shapeDTO) throws ShapeValidationException {
         Shape receivedShape = mapper.mapToShape(shapeDTO);
         Long shapeId = receivedShape.getShapeId();
-        Shape shape = shapesRepository.findById(shapeId).orElseThrow(() -> new NotFoundException(shapeId, Shape.class));
+        Shape shape = shapesRepository.findById(shapeId).orElseThrow(() -> new NotFoundException(NotFoundException.SHAPE_NOT_FOUND_MSG, shapeId));
         updateShapeByReceivedShape(shape, receivedShape);
         checkShape(shape);
         shapesRepository.save(shape);
@@ -88,27 +89,28 @@ public class ShapesServiceImpl implements ShapesService {
 
     @Transactional
     @Override
-    public ResponseEntity<HttpStatus> deleteById(long id) throws NotFoundException {
+    public ResponseEntity<HttpStatus> deleteById(long id) {
         if (!shapesRepository.existsById(id)) {
-            throw new NotFoundException(id, Shape.class);
+            throw new NotFoundException(NotFoundException.SHAPE_NOT_FOUND_MSG, id);
         }
         shapesRepository.deleteById(id);
-        return ResponseEntity.ok(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @Override
-    public ResponseEntity<CalculatedAreaDTO> calculateArea(long id) throws NotFoundException {
-        Shape shape = shapesRepository.findById(id).orElseThrow(() -> new NotFoundException(id, Shape.class));
+    public ResponseEntity<CalculatedAreaDTO> calculateArea(long id) {
+        Shape shape = shapesRepository.findById(id).orElseThrow(() -> new NotFoundException(NotFoundException.SHAPE_NOT_FOUND_MSG, id));
         List<Point> points = shape.getPoints();
         Double resultArea = 0.0;
-        if (Utils.collectionIsNotEmpty(points)) {
+        if (collectionIsNotEmpty(points)) {
             int pointsSize = points.size();
             if (pointsSize == 1) {
                 // значит круг
                 Double radius = shape.getRadiusInfo().getRadius();
-                resultArea = Utils.roundDouble(Math.PI * radius * radius);
+                resultArea = roundDouble(Math.PI * radius * radius);
             } else {
                 //Формула площади Гаусса
+                points.sort(new ClockwiseComparator(calculateCenter(points)));
                 Point firstPoint = points.get(0);
                 Point lastPoint = points.get(pointsSize - 1);
                 double a = 0;
@@ -126,25 +128,32 @@ public class ShapesServiceImpl implements ShapesService {
                     Point pointY = points.get(i);
                     c += pointX.getX() * pointY.getY();
                 }
-                resultArea = Utils.roundDouble(Math.abs((a + b - c - d) / 2));
+                resultArea = roundDouble(Math.abs((a + b - c - d) / 2));
             }
         }
         return new ResponseEntity<>(new CalculatedAreaDTO(resultArea), HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<ShapeDTO> roll(RollDTO rollDTO) throws NotFoundException {
+    public ResponseEntity<ShapeDTO> roll(RollDTO rollDTO) {
         Long shapeId = rollDTO.getShapeId();
         Double angle = rollDTO.getAngle();
-        Shape shape = shapesRepository.findById(shapeId).orElseThrow(() -> new NotFoundException(shapeId, Shape.class));
+        Shape shape = shapesRepository.findById(shapeId).orElseThrow(() -> new NotFoundException(NotFoundException.SHAPE_NOT_FOUND_MSG, shapeId));
         List<Point> points = shape.getPoints();
-        if (points.size() > 2) {
-            Point center = Utils.calculateCenter(points);
+        if (points.size() > 1) {
+            Point center = calculateCenter(points);
             points.sort(new ClockwiseComparator(center));
             double radian = Math.toRadians(angle);
+            Double centerX = center.getX();
+            Double centerY = center.getY();
+            double cos = roundDouble(Math.cos(radian));
+            double sin = roundDouble(Math.sin(radian));
+
             for (Point point : points) {
-                double tempX = center.getX() + ((point.getX() - center.getX()) * Math.cos(radian)) - ((point.getY() - center.getY()) * Math.sin(radian));
-                double tempY = center.getY() + ((point.getY() - center.getY()) * Math.cos(radian)) + ((point.getX() - center.getX()) * Math.sin(radian));
+                Double x = point.getX();
+                Double y = point.getY();
+                double tempX = centerX + roundDouble((x - centerX) * cos) - roundDouble((y - centerY) * sin);
+                double tempY = centerY + roundDouble((y - centerY) * cos) + roundDouble((x - centerX) * sin);
                 point.setX(tempX);
                 point.setY(tempY);
             }
@@ -153,13 +162,13 @@ public class ShapesServiceImpl implements ShapesService {
     }
 
     @Override
-    public ResponseEntity<ShapeDTO> move(MoveDTO moveDTO) throws NotFoundException {
+    public ResponseEntity<ShapeDTO> move(MoveDTO moveDTO) {
         Long shapeId = moveDTO.getShapeId();
         Double x = moveDTO.getX();
         Double y = moveDTO.getY();
-        Shape shape = shapesRepository.findById(shapeId).orElseThrow(() -> new NotFoundException(shapeId, Shape.class));
+        Shape shape = shapesRepository.findById(shapeId).orElseThrow(() -> new NotFoundException(NotFoundException.SHAPE_NOT_FOUND_MSG, shapeId));
         List<Point> points = shape.getPoints();
-        Point center = Utils.calculateCenter(points);
+        Point center = calculateCenter(points);
         double dX = x - center.getX();
         double dY = y - center.getY();
         for (Point point : points) {
@@ -170,21 +179,23 @@ public class ShapesServiceImpl implements ShapesService {
     }
 
     @Override
-    public ResponseEntity<ShapeDTO> scale(ScaleDTO scaleDTO) throws NotFoundException {
+    public ResponseEntity<ShapeDTO> scale(ScaleDTO scaleDTO) {
         Long shapeId = scaleDTO.getShapeId();
         Double scaleFactor = scaleDTO.getScaleFactor();
-        Shape shape = shapesRepository.findById(shapeId).orElseThrow(() -> new NotFoundException(shapeId, Shape.class));
+        Shape shape = shapesRepository.findById(shapeId).orElseThrow(() -> new NotFoundException(NotFoundException.SHAPE_NOT_FOUND_MSG, shapeId));
         List<Point> points = shape.getPoints();
-        Point center = Utils.calculateCenter(points);
-        points.sort(new ClockwiseComparator(center));
         if (points.size() == 1) {
             Double radius = shape.getRadiusInfo().getRadius();
-            Double newRadius = Utils.roundDouble(radius * scaleFactor);
+            Double newRadius = roundDouble(radius * scaleFactor);
             shape.getRadiusInfo().setRadius(newRadius);
         } else {
+            Point center = calculateCenter(points);
+            points.sort(new ClockwiseComparator(center));
+            Double centerX = center.getX();
+            Double centerY = center.getY();
             for (Point point : points) {
-                double tempX = center.getX() + scaleFactor * (point.getX() - center.getX());
-                double tempY = center.getY() + scaleFactor * (point.getY() - center.getY());
+                double tempX = centerX + roundDouble(scaleFactor * (point.getX() - centerX));
+                double tempY = centerY + roundDouble(scaleFactor * (point.getY() - centerY));
                 point.setX(tempX);
                 point.setY(tempY);
             }
@@ -192,12 +203,12 @@ public class ShapesServiceImpl implements ShapesService {
         return new ResponseEntity<>(mapper.mapToShapeDTO(shape), HttpStatus.OK);
     }
 
-    private void checkShape(Shape shape) throws NotFoundException, ShapeValidationException {
+    private void checkShape(Shape shape) throws ShapeValidationException {
         Long shapeTypeId = shape.getShapeType().getShapeTypeId();
         ShapeType shapeType = shapeTypeRepository.findById(shapeTypeId)
-                .orElseThrow(() -> new NotFoundException(shapeTypeId, ShapeType.class));
+                .orElseThrow(() -> new NotFoundException(NotFoundException.SHAPE_TYPE_NOT_FOUND_MSG, shapeTypeId));
         List<Point> shapePoints = shape.getPoints();
-        if (Utils.collectionIsNotEmpty(shapePoints)) {
+        if (collectionIsNotEmpty(shapePoints)) {
             int shapePointsCount = shapePoints.size();
             if (shapeType.getPointsCount() != shapePointsCount) {
                 String message = String.format("Количество точек [%s] переданных в json не соответствует выбранному типу фигуры [%s]",

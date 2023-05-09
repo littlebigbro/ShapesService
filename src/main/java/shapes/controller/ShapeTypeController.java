@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import shapes.exceptions.NotFoundException;
 import shapes.models.dto.shapetype.CreateShapeTypeDTO;
 import shapes.models.dto.shapetype.ShapeTypeDTO;
 import shapes.models.dto.shapetype.UpdateShapeTypeDTO;
@@ -44,7 +43,7 @@ public class ShapeTypeController implements BaseController {
             }
     )
     @GetMapping("/{id}")
-    public ResponseEntity<ShapeTypeDTO> getShapeType(@PathVariable("id") long id) throws NotFoundException {
+    public ResponseEntity<ShapeTypeDTO> getShapeType(@PathVariable("id") long id) {
         return shapeTypeService.getById(id);
     }
 
@@ -68,10 +67,7 @@ public class ShapeTypeController implements BaseController {
     )
     @ApiResponse(code = 200, message = "OK")
     @PutMapping()
-    public ResponseEntity<ValidationErrorResponse> updateShapeType(
-            @RequestBody @Valid UpdateShapeTypeDTO shapeType,
-            BindingResult bindingResult
-    ) throws NotFoundException {
+    public ResponseEntity<ValidationErrorResponse> updateShapeType(@RequestBody @Valid UpdateShapeTypeDTO shapeType, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             ValidationErrorResponse response = new ValidationErrorResponse(bindingResult.getFieldErrors());
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
@@ -90,7 +86,7 @@ public class ShapeTypeController implements BaseController {
             }
     )
     @DeleteMapping("/{id}")
-    public ResponseEntity<HttpStatus> deleteShapeType(@PathVariable("id") long id) throws NotFoundException {
+    public ResponseEntity<HttpStatus> deleteShapeType(@PathVariable("id") long id) {
         shapeTypeService.deleteById(id);
         return ResponseEntity.ok(HttpStatus.OK);
     }

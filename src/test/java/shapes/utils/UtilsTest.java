@@ -7,7 +7,6 @@ import shapes.models.Point;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -40,8 +39,8 @@ public class UtilsTest {
     public void calculateCenterOnePointTest() {
         Point point = new Point(0L, 1.0, 1.0, null);
         Point falsePoint = new Point(1L, 2.0, 1.0, null);
-        Set<Point> pointSet = Collections.singleton(point);
-        Point center = Utils.calculateCenter(new ArrayList<>(pointSet));
+        List<Point> pointSet = Collections.singletonList(point);
+        Point center = Utils.calculateCenter(pointSet);
 
         assertEquals(point, center);
         assertNotEquals(falsePoint, center);
