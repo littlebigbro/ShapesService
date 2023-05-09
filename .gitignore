@@ -1,11 +1,4 @@
-target/
-!.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
-
-### IntelliJ IDEA ###
-.idea
-*.iws
+/.idea/
 *.iml
-*.ipr
-
+/target/
+/src/main/resources/application.properties
