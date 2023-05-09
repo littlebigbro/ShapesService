@@ -1,5 +1,5 @@
 # Shapes Backend
-
+[![codecov](https://codecov.io/gh/littlebigbro/ShapesService/branch/main/graph/badge.svg?token=T1STVGWTGQ)](https://codecov.io/gh/littlebigbro/ShapesService)<br/>
 REST API приложение по взаимодействию с фигурами.</br>
 В приложении реализованы:
 1. CRUD для типов фигур
