@@ -37,7 +37,8 @@ public class ShapeTypeServiceImpl implements ShapeTypeService {
 
     @Override
     public ResponseEntity<ShapeTypeDTO> getById(long id) {
-        ShapeType shapeType = shapeTypeRepository.findById(id).orElseThrow(() -> new NotFoundException(NotFoundException.SHAPE_TYPE_NOT_FOUND_MSG, id));
+        ShapeType shapeType = shapeTypeRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException(NotFoundException.SHAPE_TYPE_NOT_FOUND_MSG, id));
         ShapeTypeDTO shapeTypeDTO = ShapeTypeMapper.MAPPER.mapToShapeTypeDTO(shapeType);
         return new ResponseEntity<>(shapeTypeDTO, HttpStatus.OK);
     }
@@ -54,7 +55,8 @@ public class ShapeTypeServiceImpl implements ShapeTypeService {
     @Override
     public ResponseEntity<ValidationErrorResponse> updateShapeType(@Valid UpdateShapeTypeDTO shapeTypeDTO) {
         Long shapeTypeId = shapeTypeDTO.getShapeTypeId();
-        ShapeType updatedShapeType = shapeTypeRepository.findById(shapeTypeId).orElseThrow(() -> new NotFoundException(NotFoundException.SHAPE_TYPE_NOT_FOUND_MSG, shapeTypeId));
+        ShapeType updatedShapeType = shapeTypeRepository.findById(shapeTypeId)
+                .orElseThrow(() -> new NotFoundException(NotFoundException.SHAPE_TYPE_NOT_FOUND_MSG, shapeTypeId));
         updateShapeTypeByDTO(updatedShapeType, shapeTypeDTO);
         shapeTypeRepository.save(updatedShapeType);
         return new ResponseEntity<>(HttpStatus.OK);
