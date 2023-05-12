@@ -19,7 +19,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/shapeType")
+@RequestMapping(value = "/shapeType")
 public class ShapeTypeController implements BaseController {
     private final ShapeTypeService shapeTypeService;
 
@@ -27,7 +27,7 @@ public class ShapeTypeController implements BaseController {
             value = "Получение всех типов фигур",
             notes = "Используется для получения всех типов фигур из базы данных")
     @ApiResponse(code = 200, message = "ОК")
-    @GetMapping("/all")
+    @GetMapping(value = "/all")
     public ResponseEntity<List<ShapeTypeDTO>> getAll() {
         return shapeTypeService.getAll();
     }
@@ -42,7 +42,7 @@ public class ShapeTypeController implements BaseController {
                     @ApiResponse(code = 404, message = "Тип фигуры не найден")
             }
     )
-    @GetMapping("/{id}")
+    @GetMapping(value = "/{id}")
     public ResponseEntity<ShapeTypeDTO> getShapeType(@PathVariable("id") long id) {
         return shapeTypeService.getById(id);
     }
@@ -52,7 +52,7 @@ public class ShapeTypeController implements BaseController {
             notes = "Используется для создания типа фигуры и сохранения её в базу данных"
     )
     @ApiResponse(code = 201, message = "Тип фигуры создан")
-    @PostMapping()
+    @PostMapping
     public ResponseEntity<ValidationErrorResponse> createShapeType(@RequestBody @Valid CreateShapeTypeDTO shapeType, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             ValidationErrorResponse response = new ValidationErrorResponse(bindingResult.getFieldErrors());
@@ -66,7 +66,7 @@ public class ShapeTypeController implements BaseController {
             notes = "Используется для обновления типа фигуры в базе данных"
     )
     @ApiResponse(code = 200, message = "OK")
-    @PutMapping()
+    @PutMapping
     public ResponseEntity<ValidationErrorResponse> updateShapeType(@RequestBody @Valid UpdateShapeTypeDTO shapeType, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             ValidationErrorResponse response = new ValidationErrorResponse(bindingResult.getFieldErrors());
@@ -85,9 +85,8 @@ public class ShapeTypeController implements BaseController {
                     @ApiResponse(code = 404, message = "Тип фигуры не найден")
             }
     )
-    @DeleteMapping("/{id}")
+    @DeleteMapping(value = "/{id}")
     public ResponseEntity<HttpStatus> deleteShapeType(@PathVariable("id") long id) {
-        shapeTypeService.deleteById(id);
-        return ResponseEntity.ok(HttpStatus.OK);
+        return shapeTypeService.deleteById(id);
     }
 }
