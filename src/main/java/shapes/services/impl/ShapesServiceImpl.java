@@ -23,6 +23,7 @@ import shapes.repositories.ShapesRepository;
 import shapes.responses.ValidationErrorResponse;
 import shapes.services.ShapesService;
 import shapes.utils.ClockwiseComparator;
+import shapes.utils.PointsByIdComparator;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -157,6 +158,7 @@ public class ShapesServiceImpl implements ShapesService {
                 point.setX(tempX);
                 point.setY(tempY);
             }
+            points.sort(new PointsByIdComparator());
         }
         return new ResponseEntity<>(mapper.mapToShapeDTO(shape), HttpStatus.OK);
     }
@@ -175,6 +177,7 @@ public class ShapesServiceImpl implements ShapesService {
             point.setX(point.getX() + dX);
             point.setY(point.getY() + dY);
         }
+        points.sort(new PointsByIdComparator());
         return new ResponseEntity<>(mapper.mapToShapeDTO(shape), HttpStatus.OK);
     }
 
@@ -199,6 +202,7 @@ public class ShapesServiceImpl implements ShapesService {
                 point.setX(tempX);
                 point.setY(tempY);
             }
+            points.sort(new PointsByIdComparator());
         }
         return new ResponseEntity<>(mapper.mapToShapeDTO(shape), HttpStatus.OK);
     }

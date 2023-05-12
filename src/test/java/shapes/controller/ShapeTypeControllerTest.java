@@ -1,5 +1,6 @@
 package shapes.controller;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +12,14 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import shapes.models.dto.shapetype.CreateShapeTypeDTO;
+import shapes.models.dto.shapetype.ShapeTypeDTO;
 import shapes.models.dto.shapetype.UpdateShapeTypeDTO;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static java.nio.charset.StandardCharsets.UTF_8;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -24,18 +28,20 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @TestPropertySource("/application-test.properties")
-@Sql(scripts = "/create-shapetype.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
-@Sql(scripts = "/delete-shapetype.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+@Sql(scripts = "/sql/create-shapetype.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+@Sql(scripts = "/sql/delete-shapetype.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 public class ShapeTypeControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
     @Autowired
-    private ShapeTypeController shapeTypeController;
+    private ShapeTypeController controller;
+    @Autowired
+    private ObjectMapper mapper;
 
     @Test
     public void controllerIsNotNull() {
-        assertNotNull(shapeTypeController);
+        assertNotNull(controller);
     }
 
     @Test
@@ -47,9 +53,16 @@ public class ShapeTypeControllerTest {
                 .andReturn();
 
         String body = mvcResult.getResponse().getContentAsString(UTF_8);
+        List<ShapeTypeDTO> shapeTypes = Arrays.asList(mapper.readValue(body, ShapeTypeDTO[].class));
         assertTrue(body.contains("circle"));
         assertTrue(body.contains("rectangle"));
         assertTrue(body.contains("triangle"));
+        assertEquals(1L, shapeTypes.get(0).getShapeTypeId());
+        assertEquals("circle", shapeTypes.get(0).getSystemName());
+        assertEquals(2L, shapeTypes.get(1).getShapeTypeId());
+        assertEquals("triangle", shapeTypes.get(1).getSystemName());
+        assertEquals(3L, shapeTypes.get(2).getShapeTypeId());
+        assertEquals("rectangle", shapeTypes.get(2).getSystemName());
     }
 
     @Test
@@ -61,14 +74,15 @@ public class ShapeTypeControllerTest {
                 .andReturn();
 
         String body = mvcResult.getResponse().getContentAsString(UTF_8);
-        assertTrue(body.contains("circle"));
+        ShapeTypeDTO shapeTypeDTO = mapper.readValue(body, ShapeTypeDTO.class);
+        assertEquals(1L, shapeTypeDTO.getShapeTypeId());
+        assertEquals("circle", shapeTypeDTO.getSystemName());
     }
 
     @Test
     public void failCreateShapeTypeTest() throws Exception {
-        ObjectMapper objectMapper = new ObjectMapper();
         CreateShapeTypeDTO dto = new CreateShapeTypeDTO();
-        String json = objectMapper.writeValueAsString(dto);
+        String json = mapper.writeValueAsString(dto);
         MockHttpServletRequestBuilder post = post("/shapeType")
                 .contentType("application/json")
                 .content(json);
@@ -84,9 +98,8 @@ public class ShapeTypeControllerTest {
 
     @Test
     public void successfulCreateShapeTypeTest() throws Exception {
-        ObjectMapper objectMapper = new ObjectMapper();
         CreateShapeTypeDTO dto = new CreateShapeTypeDTO("test", "test", 5);
-        String json = objectMapper.writeValueAsString(dto);
+        String json = mapper.writeValueAsString(dto);
         MockHttpServletRequestBuilder post = post("/shapeType")
                 .contentType("application/json")
                 .content(json);
@@ -97,9 +110,8 @@ public class ShapeTypeControllerTest {
 
     @Test
     public void failUpdateShapeTypeTest() throws Exception {
-        ObjectMapper objectMapper = new ObjectMapper();
         UpdateShapeTypeDTO dto = new UpdateShapeTypeDTO();
-        String json = objectMapper.writeValueAsString(dto);
+        String json = mapper.writeValueAsString(dto);
         MockHttpServletRequestBuilder put = put("/shapeType")
                 .contentType("application/json")
                 .content(json);
@@ -115,9 +127,8 @@ public class ShapeTypeControllerTest {
 
     @Test
     public void failUpdateShapeTypeNotFoundTest() throws Exception {
-        ObjectMapper objectMapper = new ObjectMapper();
         UpdateShapeTypeDTO dto = new UpdateShapeTypeDTO(0L, "test", "test", 7);
-        String json = objectMapper.writeValueAsString(dto);
+        String json = mapper.writeValueAsString(dto);
         MockHttpServletRequestBuilder put = put("/shapeType")
                 .contentType("application/json")
                 .content(json);
@@ -127,15 +138,14 @@ public class ShapeTypeControllerTest {
                 .andExpect(status().isNotFound())
                 .andReturn();
         String body = mvcResult.getResponse().getContentAsString(UTF_8);
-        assertTrue(body.contains("\"message\":\"Тип фигуры с id = 0 не найден\""));
+        JsonNode jsonNode = mapper.readTree(body);
+        assertEquals("Тип фигуры с id = 0 не найден", jsonNode.get("message").asText());
     }
-
 
     @Test
     public void successfulUpdateShapeTypeTest() throws Exception {
-        ObjectMapper objectMapper = new ObjectMapper();
         UpdateShapeTypeDTO dto = new UpdateShapeTypeDTO(3L, "test", "test", 6);
-        String json = objectMapper.writeValueAsString(dto);
+        String json = mapper.writeValueAsString(dto);
         MockHttpServletRequestBuilder put = put("/shapeType")
                 .contentType("application/json")
                 .content(json);
@@ -158,6 +168,7 @@ public class ShapeTypeControllerTest {
                 .andExpect(status().isNotFound())
                 .andReturn();
         String body = mvcResult.getResponse().getContentAsString(UTF_8);
-        assertTrue(body.contains("\"message\":\"Тип фигуры с id = 0 не найден\""));
+        JsonNode jsonNode = mapper.readTree(body);
+        assertEquals("Тип фигуры с id = 0 не найден", jsonNode.get("message").asText());
     }
 }

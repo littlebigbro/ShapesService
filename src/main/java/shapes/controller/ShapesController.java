@@ -35,7 +35,7 @@ public class ShapesController implements BaseController {
             notes = "Используется для получения всех фигур из базы данных"
     )
     @ApiResponse(code = 200, message = "OK")
-    @GetMapping("/all")
+    @GetMapping(value = "/all")
     public ResponseEntity<List<ShapeDTO>> getAll() {
         return shapesService.getAll();
     }
@@ -50,7 +50,7 @@ public class ShapesController implements BaseController {
                     @ApiResponse(code = 404, message = "Фигура не найдена")
             }
     )
-    @GetMapping("/{id}")
+    @GetMapping(value = "/{id}")
     public ResponseEntity<ShapeDTO> getById(@PathVariable("id") long id) {
         return shapesService.getById(id);
     }
@@ -60,7 +60,7 @@ public class ShapesController implements BaseController {
             notes = "Используется для создания фигуры и сохранения её в базу данных"
     )
     @ApiResponse(code = 201, message = "Фигура создана")
-    @PostMapping()
+    @PostMapping
     public ResponseEntity<ValidationErrorResponse> createShape(@RequestBody @Valid CreateShapeDTO shape, BindingResult bindingResult) throws ShapeValidationException {
         if (bindingResult.hasErrors()) {
             ValidationErrorResponse response = new ValidationErrorResponse(bindingResult.getFieldErrors());
@@ -74,7 +74,7 @@ public class ShapesController implements BaseController {
             notes = "Используется для обновления фигуры в базе данных"
     )
     @ApiResponse(code = 200, message = "OK")
-    @PutMapping()
+    @PutMapping
     public ResponseEntity<ValidationErrorResponse> updateShape(@RequestBody @Valid UpdateShapeDTO shape, BindingResult bindingResult) throws ShapeValidationException {
         if (bindingResult.hasErrors()) {
             ValidationErrorResponse response = new ValidationErrorResponse(bindingResult.getFieldErrors());
@@ -93,7 +93,7 @@ public class ShapesController implements BaseController {
                     @ApiResponse(code = 404, message = "Фигура не найдена")
             }
     )
-    @DeleteMapping("/{id}")
+    @DeleteMapping(value = "/{id}")
     public ResponseEntity<HttpStatus> deleteShape(@PathVariable("id") long id) {
         return shapesService.deleteById(id);
     }
@@ -108,7 +108,7 @@ public class ShapesController implements BaseController {
                     @ApiResponse(code = 404, message = "Фигура не найдена")
             }
     )
-    @GetMapping("/area/{id}")
+    @GetMapping(value = "/area/{id}")
     public ResponseEntity<CalculatedAreaDTO> calculateArea(@PathVariable("id") long id) {
         return shapesService.calculateArea(id);
     }
@@ -123,7 +123,7 @@ public class ShapesController implements BaseController {
                     @ApiResponse(code = 404, message = "Фигура не найдена")
             }
     )
-    @PostMapping("/roll")
+    @PostMapping(value = "/roll")
     public ResponseEntity<ShapeDTO> roll(@RequestBody RollDTO rollDTO) {
         return shapesService.roll(rollDTO);
     }
@@ -138,7 +138,7 @@ public class ShapesController implements BaseController {
                     @ApiResponse(code = 404, message = "Фигура не найдена")
             }
     )
-    @PostMapping("/move")
+    @PostMapping(value = "/move")
     public ResponseEntity<ShapeDTO> move(@RequestBody MoveDTO moveDTO) {
         return shapesService.move(moveDTO);
     }
@@ -153,7 +153,7 @@ public class ShapesController implements BaseController {
                     @ApiResponse(code = 404, message = "Фигура не найдена")
             }
     )
-    @PostMapping("/scale")
+    @PostMapping(value = "/scale")
     public ResponseEntity<ShapeDTO> scale(@RequestBody ScaleDTO scaleDTO) {
         return shapesService.scale(scaleDTO);
     }
